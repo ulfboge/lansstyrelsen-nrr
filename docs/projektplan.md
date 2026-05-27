@@ -1,198 +1,192 @@
-# Projektplan – Naturrestaureringsuppdraget
-## Länsstyrelsen i Södermanlands län, 2026–2027
+# Projektplan – Genomförande av naturrestaureringsförordningen (NRF)
+## Länsstyrelsen i Södermanlands län, Naturskyddsenheten
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Datum:** 2026-05-27  
-**Uppdragsgivare:** Länsstyrelsen i Södermanlands län, Natur- och landsbygdsavdelningen  
-**Projektledning:** Naturvårdsenheten  
+**Uppdragsgivare:** Länsstyrelsen i Södermanlands län – Naturskyddsenheten  
+**Referens:** 2451-2026  
 
 ---
 
-## 1. Bakgrund och syfte
+## 1. Bakgrund och uppdrag
 
-EU:s naturrestaureringsförordning (NRR, förordning 2024/1991) trädde i kraft 2024 och
-ställer bindande krav på EU:s medlemsstater att restaurera försämrade ekosystem.
-Sverige ska lämna en **nationell restaureringsplan** till EU-kommissionen senast
-**1 september 2026**.
+Länsstyrelserna har ett **regeringsuppdrag** att implementera EU:s
+naturrestaureringsförordning (NRF, förordning 2024/1991) regionalt.
+Uppdraget innebär att länsstyrelsen ska:
 
-Naturvårdsverket slutredovisade sitt underlagsarbete den 26 februari 2026.
-Länsstyrelserna ansvarar för regional implementering — att omsätta nationella mål
-till konkreta åtgärder i länet.
+- Bedöma statusen för **livsmiljötyper** i beslutade Natura 2000-områden
+- Bedöma arealen för olika livsmiljötyper
+- Klassificera om status för dessa är i **gott, icke gott eller okänt tillstånd**
 
-**Syftet med detta uppdrag** är att:
-- Kartlägga och bedöma bevarandestatus för habitattyper i länets Natura 2000-områden
-- Identifiera restaureringsbehov och prioritera åtgärder
-- Leverera underlag till den nationella restaureringsplanen
-- Bygga en geodatainfrastruktur för löpande uppföljning 2026–2027
+Resultaten rapporteras till **Naturvårdsverket** som samordnar den nationella
+nivån. Det är Naturvårdsverket — inte länsstyrelserna — som ansvarar för
+rapporteringen vidare till EU-kommissionen.
+
+Tjänsten är placerad på **Naturskyddsenheten** (ca 15 personer), som ingår i
+Naturavdelningen och arbetar med myndighetsutövning kring skydd och bevarande
+av naturvärden i Södermanlands län.
 
 ---
 
-## 2. Mål och leveranser
+## 2. Mål
 
-### Primära leveranser (före 1 september 2026)
+### Primärt mål
+Genomföra länsstyrelsens del av NRF-uppdraget: statusbedömning av livsmiljötyper
+i länets beslutade Natura 2000-områden med klassificering per habitattyp.
+
+### Delmål
+1. Etablera en fungerande arbetsprocess för statusbedömning (GIS + fält)
+2. Producera en bedömning av areal och tillstånd per livsmiljötyp och objekt
+3. Identifiera och prioritera objekt med störst restaureringsbehov
+4. Säkerställa samverkan med berörda aktörer (internt, kommuner, markägare, NV)
+5. Leverera underlag till Naturvårdsverket i tid
+
+---
+
+## 3. Leveranser
 
 | # | Leverans | Format | Mottagare |
 |---|----------|--------|-----------|
-| L1 | Kartskikt: Natura 2000-habitat med preliminär bevarandestatus | File GDB + WFS | Naturvårdsverket, intern |
-| L2 | Prioriteringstabell: restaureringsbehov per habitat × objekt | Excel / CSV | Naturvårdsenheten |
-| L3 | Länsöversikt: area per status och habitatkodserie | Rapport + kartor | Länsledning, NV |
-| L4 | Underlag till nationell restaureringsplan | Word / PDF | Naturvårdsverket |
-
-### Sekundära leveranser (2026–2027)
-
-| # | Leverans | Format | Mottagare |
-|---|----------|--------|-----------|
-| L5 | Fältinventeringsresultat: uppdaterade habitatbedömningar | File GDB | Naturvårdsenheten |
-| L6 | Åtgärdsplan per prioriterade objekt | Word / PDF | Kommuner, länsledning |
-| L7 | Interaktiv dashboard / webbkarta | ArcGIS Online / Power BI | Internt + publikt |
-| L8 | Slutrapport med metodik och rekommendationer | PDF | Länsledning, NV, EU |
+| L1 | Statusbedömning: areal och tillstånd per livsmiljötyp × Natura 2000-objekt | GDB / Excel | Naturvårdsverket, intern |
+| L2 | Kartor: livsmiljötyper med statusklassificering i Södermanland | ArcGIS Pro / PDF | Naturskyddsenheten, länsledning |
+| L3 | Prioriteringslista: objekt med restaureringsbehov | Excel / Word | Naturskyddsenheten |
+| L4 | Åtgärdsförslag per prioriterat objekt | Word | Markägare, kommuner, NV |
+| L5 | Intern dokumentation av metodik och datamodell | Markdown / Word | Naturskyddsenheten |
 
 ---
 
-## 3. Avgränsningar
+## 4. Avgränsningar
 
 - Geografiskt scope: **Södermanlands län** (länskod D / 04)
-- Primärt fokus: **Natura 2000-områden** (SCI och SPA)
-- Habitattyper enligt bilaga I i art- och habitatdirektivet
-- Bedömningsskala: preliminär (pipeline-heuristik) → reviderad efter fältinventering
-- Projektion: **SWEREF 99 TM (EPSG:3006)** för alla geodatalager
+- Objekt: **beslutade Natura 2000-områden** (SCI och SPA)
+- Livsmiljötyper enligt bilaga I i art- och habitatdirektivet
+- Statusklassificering: **gott / icke gott / okänt** (NRF-terminologi)
+- Projektion: SWEREF 99 TM (EPSG:3006) för alla geodatalager
 
 ---
 
-## 4. Organisation och ansvar
+## 5. Organisation
 
 | Roll | Ansvar |
 |------|--------|
-| Naturvårdsenheten (uppdragsgivare) | Strategisk styrning, godkännande av leveranser, kontakt NV |
-| Projektmedarbetare (GIS/analys) | Pipeline, geodataarbete, kartproduktion, rapportering |
-| Projektmedarbetare (fält/inventering) | Fältinventering, datainmatning, artobservationer |
-| GIS-enheten / Geodatasamordning | ArcGIS Enterprise-åtkomst, publicering av karttjänster |
-| Naturvårdsverket | Nationell samordning, mottagare av underlag |
+| Naturskyddshandläggare (projektansvar) | Projektledning, GIS-analys, samverkan, rapportering |
+| Naturskyddsenheten (kollegor) | Expertbidrag, fältsamarbete, intern förankring |
+| Naturvårdsenheten | Nära samverkan – förvaltning och skötsel av naturreservat |
+| GIS-enheten / Geodatasamordning | ArcGIS Enterprise-åtkomst, karttjänster |
+| Chef (Stefan Henriksson) | Styrning, prioritering, eskalering |
+| Naturvårdsverket | Nationell samordning, mottagare av bedömningsunderlag |
+| Kommuner i länet | Dialog om lokala restaureringsinsatser |
+| Markägare | Samverkan kring åtgärder på privat mark |
 
 ---
 
-## 5. Tidsplan
+## 6. Tidsplan
 
-Tidsplanen är anpassad mot EU-deadlinen **1 september 2026** som fast slutpunkt
-för de primära leveranserna.
+### Fas 1 – Uppstart och orientering
 
-### Fas 1 – Uppstart (juni 2026)
+| Aktivitet | Klart |
+|-----------|-------|
+| Systemåtkomst: ArcGIS Pro, ArcGIS Enterprise, SharePoint, NNK | Mån 1 |
+| Genomgång av NRF-uppdraget och NV:s vägledning | Mån 1 |
+| Möten med kollegor, GIS-enheten och chef | Mån 1 |
+| Inventering av befintliga data och karteringsunderlag för länet | Mån 1 |
+| Genomgång av NNK (Nationell Naturtypskartering) för Södermanland | Mån 1–2 |
 
-| Aktivitet | Ansvar | Klart |
-|-----------|--------|-------|
-| Systemåtkomst: ArcGIS Pro, ArcGIS Enterprise, SharePoint | IT / GIS-enheten | 2026-06-15 |
-| Orientering NRR-förordningen och NV:s nationella underlag | Projektmedarbetare | 2026-06-15 |
-| Kontaktmöten: Naturvårdsenheten, GIS-enheten, NV | Projektledning | 2026-06-20 |
-| Konfigurera geodatainfrastruktur (File GDB, projektion) | GIS/analys | 2026-06-20 |
-| Körning av befintlig pipeline (`natura-2000`) mot aktuell data | GIS/analys | 2026-06-30 |
+### Fas 2 – Datainsamling och GIS-analys
 
-### Fas 2 – Datainsamling och GIS-analys (juni–juli 2026)
+| Aktivitet | Klart |
+|-----------|-------|
+| Hämta och kvalitetssäkra Natura 2000-gränser (SCI/SPA) | Mån 2 |
+| Hämta naturtypskartan för Södermanland (Naturtypskartan_D) | Mån 2 |
+| Komplettera med TUVA (betesmark), VISS (vatten), VMI (våtmark) | Mån 2–3 |
+| Beräkna areal per livsmiljötyp och Natura 2000-objekt | Mån 3 |
+| Initial statusklassificering baserad på karteringsdata | Mån 3 |
+| Identifiera objekt med `okant`-status som kräver fältkontroll | Mån 3 |
 
-| Aktivitet | Ansvar | Klart |
-|-----------|--------|-------|
-| Hämta och förbereda NV Natura 2000 SCI/SPA (steg 1–2 i pipeline) | GIS/analys | 2026-07-01 |
-| Hämta naturtypskartan Södermanland (Naturtypskartan_D) | GIS/analys | 2026-07-01 |
-| Aktivera och hämta TUVA (betesmark) via Jordbruksverket | GIS/analys | 2026-07-10 |
-| Aktivera och hämta VISS (vattenförekomster) | GIS/analys | 2026-07-10 |
-| Hämta VMI (våtmarksinventeringen) | GIS/analys | 2026-07-10 |
-| Köra prioritetsanalys med initiala betyg (steg 3) | GIS/analys | 2026-07-15 |
-| Producera länsöversikt med area per status (steg 11) | GIS/analys | 2026-07-20 |
-| Exportera till ArcGIS Pro (steg 10, `.gdb` + `.lyrx`) | GIS/analys | 2026-07-20 |
+### Fas 3 – Fältinventering (löpande)
 
-### Fas 3 – Fältinventering (juni–september 2026, löpande)
+| Aktivitet | Klart |
+|-----------|-------|
+| Planera fältinsatser utifrån prioriteringslista | Mån 2 |
+| Fältbesök och habitatbedömningar i prioriterade objekt | Mån 2–6 |
+| Datainmatning i NNK och/eller GIS-databas | Löpande |
+| Revidera statusklassificering efter fältdata | Löpande |
 
-| Aktivitet | Ansvar | Klart |
-|-----------|--------|-------|
-| Planera fältinsatser: prioritera objekt med `okant`-status | Fält + GIS | 2026-06-30 |
-| Fältinventering omgång 1 (prioriterade A-objekt) | Fält | 2026-08-01 |
-| Datainmatning omgång 1 → uppdatera `assessment_template` | Fält + GIS | 2026-08-10 |
-| Fältinventering omgång 2 (B-objekt, komplettering) | Fält | 2026-08-25 |
-| Datainmatning omgång 2 | Fält + GIS | 2026-08-30 |
+### Fas 4 – Samverkan och åtgärdsplanering
 
-### Fas 4 – Reviderad analys och kartor (augusti 2026)
+| Aktivitet | Klart |
+|-----------|-------|
+| Intern förankring av prioriteringar med Naturskyddsenheten | Mån 4 |
+| Dialog med berörda markägare om restaureringsåtgärder | Mån 4–6 |
+| Samverkan med kommuner, Skogsstyrelsen, HaV, Jordbruksverket | Löpande |
+| Utarbeta åtgärdsförslag per prioriterat objekt (L4) | Mån 5–6 |
 
-| Aktivitet | Ansvar | Klart |
-|-----------|--------|-------|
-| Uppdatera prioritetsanalys med fältdata (ersätt defaultvärden) | GIS/analys | 2026-08-10 |
-| Köra om pipeline med reviderade betyg (steg 3–11) | GIS/analys | 2026-08-12 |
-| Kartproduktion: tematiska kartor per habitatkodserie | GIS/analys | 2026-08-20 |
-| QA/validering av geometrier och attribut | GIS/analys | 2026-08-22 |
+### Fas 5 – Rapportering och leverans
 
-### Fas 5 – Rapportering och leverans (augusti–september 2026)
+| Aktivitet | Klart |
+|-----------|-------|
+| Sammanställa statusbedömning (L1) | Mån 6 |
+| Producera kartor och länsöversikt (L2) | Mån 6 |
+| Leverera underlag till Naturvårdsverket | Mån 7 |
+| Dokumentera metodik (L5) | Mån 7 |
 
-| Aktivitet | Ansvar | Klart |
-|-----------|--------|-------|
-| Delrapport: länsöversikt + prioriteringar (L2, L3) | Projektmedarbetare | 2026-08-20 |
-| Slutleverans kartskikt till NV (L1) | GIS/analys | 2026-08-25 |
-| Underlag till nationell restaureringsplan (L4) | Projektmedarbetare | 2026-08-28 |
-| **EU-deadline: nationell restaureringsplan** | NV / Sverige | **2026-09-01** |
-
-### Fas 6 – Fortsatt arbete (oktober 2026–2027)
-
-| Aktivitet | Period |
-|-----------|--------|
-| Fördjupad fältinventering (B- och C-objekt) | Höst 2026 |
-| Åtgärdsplan per prioriterade objekt (L6) | Q4 2026 |
-| Webbkarta / Power BI-dashboard (L7) | Q4 2026 – Q1 2027 |
-| Uppföljning och revidering av bedömningar | Löpande |
-| Slutrapport (L8) | Q2 2027 |
+> Notera: Naturvårdsverket ansvarar för att förmedla underlagen vidare
+> till EU-kommissionen. Länsstyrelsens leverans går till NV.
 
 ---
 
-## 6. Datakällor
+## 7. Arbetsprocess för statusbedömning
 
-Se `docs/datakallor.md` för fullständig lista med licenser och API-information.
+Statusklassificering per livsmiljötyp × Natura 2000-objekt görs i tre steg:
 
-Prioritetsordning för datainsamling:
+**Steg 1 – Karteringsdata (GIS)**
+Arealbedömning baseras på Naturtypskartan (NNK), Natura 2000-gränser
+och kompletterande källor (TUVA, VMI, VISS). Initial status sätts till
+`okant` om fältdata saknas.
 
-| Prioritet | Källa | Typ | Metod |
-|-----------|-------|-----|-------|
-| 1 | Naturvårdsverket – Natura 2000 SCI/SPA | Vektorgräns | Automatisk (pipeline) |
-| 1 | Naturvårdsverket – Naturtypskartan D | Habitatvektor | Automatisk (pipeline) |
-| 2 | Jordbruksverket – TUVA (betesmark) | Vektorytor | Manuell export |
-| 2 | VISS – vattenförekomster | Vektorytor | Manuell export / API |
-| 2 | VMI – våtmarksinventering | Vektorytor | Manuell katalogval |
-| 3 | SLU Artdatabanken – artobservationer | Punkter | API (Artportalen) |
-| 3 | Lantmäteriet – administrativa gränser | Vektor | Automatisk (CC0) |
-| 3 | SMHI – hydrologi | Raster/vektor | API |
+**Steg 2 – Fältkontroll**
+Objekt med `okant`-status och hög ekologisk prioritet besöks i fält.
+Bedömning dokumenteras i `data/templates/assessment_template_sodermanland.csv`
+med fälten: kondition, osäkerhet, bedömare, datum, föreslagen åtgärd.
 
----
-
-## 7. Verktyg och infrastruktur
-
-| Kategori | Verktyg | Syfte |
-|----------|---------|-------|
-| GIS (primärt) | ArcGIS Pro + ArcGIS Enterprise | Analys, kartproduktion, publicering |
-| Pipeline | Python (geopandas, requests) | Datahämtning och ETL |
-| Geodatabas | File GDB (ESRI) | Primär lagring och leverans |
-| Versionshantering | Git / GitHub | Kod och dokumentation |
-| Dokument | Microsoft 365 (Word, PowerPoint) | Rapporter och presentationer |
-| Kommunikation | Teams / Outlook | Intern samverkan |
-
-Pipeline körs från `C:\Users\galag\GitHub\natura-2000` — se `docs/verktyg.md`.
+**Steg 3 – Revidering och leverans**
+Fältdata matas in, statusklassificering revideras och leveranspaket
+produceras till Naturvårdsverket.
 
 ---
 
-## 8. Risker
+## 8. Verktyg
+
+| Verktyg | Användning |
+|---------|------------|
+| ArcGIS Pro | GIS-analys, kartproduktion, habitatbedömning |
+| NNK (Nationell Naturtypskartering) | IT-stöd för naturtypskartering och datainmatning |
+| ArcGIS Enterprise | Publicering av karttjänster och datadelning |
+| Python-pipeline (`natura-2000`) | Automatiserad datahämtning och ETL |
+| Microsoft 365 | Dokument, kommunikation, Teams-möten |
+
+Se `docs/verktyg.md` för pipeline-dokumentation.
+
+---
+
+## 9. Risker
 
 | Risk | Sannolikhet | Konsekvens | Åtgärd |
 |------|-------------|------------|--------|
-| Försenad systemåtkomst (ArcGIS Enterprise, SharePoint) | Hög | Medel | Starta med lokalt ArcGIS Pro + öppna data |
-| Tidsbrist inför EU-deadline 1 sep | Hög | Hög | Prioritera L1–L4 hårt; skjut L5–L8 till höst |
-| Datainkonsistens (NV vs fält) | Medel | Hög | Markera osäker data med `okant`, dokumentera avvikelser |
-| Ändrade krav från NV / EU-kommissionen | Medel | Hög | Löpande dialog med NV; agil planering |
-| Väder / tillgänglighet fältlokaler | Medel | Låg–Medel | Buffertvekor inlagda i fas 3 |
-| Resursbrist (en av två medarbetare sjuk) | Låg | Hög | Prioritera A-objekt; skala ned B/C till höst |
+| Försenad systemåtkomst (ArcGIS Enterprise, NNK) | Hög | Medel | Starta med lokalt ArcGIS Pro + öppna data |
+| Svårtillgängliga objekt i fält (mark, terräng, väder) | Medel | Låg–Medel | Boka tidiga fältperioder, buffertdagar |
+| Bristfällig befintlig kartering (många `okant`) | Medel | Medel | Prioritera hårt; dokumentera osäkerheter tydligt |
+| Ändrade krav eller vägledning från NV | Medel | Hög | Löpande kontakt med NV; agil planering |
+| Intressekonflikter med markägare | Låg–Medel | Medel | Tidig dialog; förankra via Naturskyddsenheten |
 
 ---
 
-## 9. Uppföljning och rapportering
+## 10. Uppföljning
 
-- **Veckomöte** med Naturvårdsenheten under fas 2–4 (juni–augusti)
-- **Delrapport** efter fas 2 (leverans L2/L3, senast 20 augusti)
-- **Slutleverans** fas 5 (senast 28 augusti, buffer till 1 september)
-- **Statusuppdatering** i detta repo: `docs/projektplan.md` uppdateras vid milstolpar
+- Löpande avstämning med chef och kollegor på Naturskyddsenheten
+- Statusuppdatering i `docs/projektplan.md` vid varje fas-skifte
+- Leveranstidpunkter synkas med Naturvårdsverkets vägledning
 
 ---
 
-*Projektplan upprättad: 2026-05-27 · Nästa revidering: efter fas 1 (2026-06-30)*
+*Version 1.1 – Reviderad baserat på jobbbeskrivning ref. 2451-2026 · 2026-05-27*

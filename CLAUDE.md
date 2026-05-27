@@ -11,12 +11,16 @@
 **Tjänst:** Två personer anställs för att genomföra naturrestaureringsuppdraget. Rollen innefattar GIS-analys, fältinventering, databasarbete och rapportering med fokus på Natura 2000-områden och biologisk mångfald i länet.
 
 **Arbetsgivare:** Länsstyrelsen i Södermanlands län, Nyköping  
-**Avdelning:** Natur- och landsbygdsavdelningen (Naturvårdsenheten)  
-**Tidshorisont:** 2026–2027 (projekttiden anpassas efter uppdraget)
+**Avdelning:** Naturavdelningen – **Naturskyddsenheten** (ca 15 personer)  
+**Roll:** Naturskyddshandläggare för genomförande av NRF (ref. 2451-2026)  
+**Tidshorisont:** 2026–2027 (tillsvidaretjänst, provanställning 6 månader)
 
 **Viktiga datum:**
-- Sverige ska lämna nationell restaureringsplan till EU-kommissionen: **1 september 2026**
 - Naturvårdsverket slutredovisade sitt underlag: 26 februari 2026
+- Länsstyrelsens underlag levereras till **Naturvårdsverket** (NV ansvarar för EU-rapporteringen)
+
+**Uppdragets kärna:** Statusbedömning av livsmiljötyper i beslutade Natura 2000-områden —
+areal per habitattyp klassificerad som **gott / icke gott / okänt tillstånd**.
 
 ---
 
