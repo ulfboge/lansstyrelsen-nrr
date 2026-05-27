@@ -56,6 +56,11 @@ secrets.json
 # Claude Code (lokala projektinställningar)
 .claude/
 
+# Processad geodata (lagras ej i Git)
+data/processed/
+data/raw/
+data/outputs/*.gpkg
+
 # Temporära filer
 *.tmp
 *.bak

@@ -193,11 +193,16 @@ Länsstyrelsen/
 ├── CLAUDE.md              ← Denna fil (projektinstruktioner för Claude)
 ├── README.md              ← Publik projektbeskrivning
 ├── index.html             ← GitHub Pages hemsida
+├── data/
+│   ├── sources_sodermanland.csv   ← Datakälleregister (aktivera/inaktivera)
+│   └── templates/
+│       └── assessment_template_sodermanland.csv  ← Bedömningsmall (fyll i efter fält)
 ├── docs/
 │   ├── projektplan.md     ← Detaljerad projektplan
 │   ├── datakallor.md      ← Datakällor och licenser
 │   ├── datamodell.md      ← ER-diagram och tabellstruktur
-│   └── riskanalys.md      ← Risklogg
+│   ├── riskanalys.md      ← Risklogg
+│   └── verktyg.md         ← Pipeline-dokumentation (natura-2000 repo)
 ├── scripts/
 │   ├── etl/               ← ETL-skript (Python)
 │   └── analysis/          ← Analysverktyg (Python/SQL)
@@ -208,7 +213,25 @@ Länsstyrelsen/
 
 ---
 
-## 10. Instruktioner för Claude
+## 10. Befintliga analysverktyg
+
+Det finns ett färdigt analysverktyg i `C:\Users\galag\GitHub\natura-2000` med:
+
+- **11-stegs pipeline** för Natura 2000 Södermanland (datahämtning → prioritetsanalys → ArcGIS/QGIS-export)
+- **Webbkarta** (Origo) med sök, statistikpanel och klickbara lager
+- **Exportformat**: ArcGIS Pro `.gdb`/`.lyrx`/`.aprx`, QGIS GPKG, GeoJSON
+
+**Viktigt om prioritetsanalysen:**
+Steg 3 (`03_priority_analysis.py`) använder defaultvärden (`pressure_score=3`,
+`restoration_potential_score=3`, `feasibility_score=3`, `synergy_score=3`).
+Dessa **måste uppdateras** med verklig information från fältinventering och
+NV-tryckdata innan resultaten används som beslutsunderlag.
+
+Se `docs/verktyg.md` för fullständig dokumentation och instruktioner.
+
+---
+
+## 11. Instruktioner för Claude
 
 När du arbetar i detta projekt, Claude:
 
@@ -220,6 +243,7 @@ När du arbetar i detta projekt, Claude:
 6. **Synka tidplanen** mot EU-deadlinen 1 september 2026
 7. **Kontrollera** om filer finns innan du skriver nya (undvik dubbletter)
 8. **GitHub Pages** (index.html) uppdateras när projektplanen förändras
+9. **Använd `natura-2000`-repot** för pipeline-körningar — kör inte om skripten härifrån
 
 ---
 

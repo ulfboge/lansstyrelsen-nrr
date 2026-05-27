@@ -1,0 +1,8 @@
+source_id,source_name,theme,kind,url,local_filename,layer_name,enabled,notes
+n2000_sites_sci,Natura 2000 SCI riks,boundary,vector,https://geodata.naturvardsverket.se/nedladdning/naturvardsregistret/SCI_Rikstackande.zip,SCI_Rikstackande.zip,n2000_sites_sci,1,Officiell nedladdning Naturvardsregistret
+n2000_sites_spa,Natura 2000 SPA riks,boundary,vector,https://geodata.naturvardsverket.se/nedladdning/naturvardsregistret/SPA_Rikstackande.zip,SPA_Rikstackande.zip,n2000_sites_spa,1,Officiell nedladdning Naturvardsregistret
+habitat_map_d,Natura naturtypskartan Sormland,habitats,vector,https://geodata.naturvardsverket.se/nedladdning/naturtypskartan/Naturtypskartan_D.zip,Naturtypskartan_D.zip,natura_habitats,1,Lanskod D = Sormland
+habitat_map_riks,Natura naturtypskartan riks,habitats,vector,https://geodata.naturvardsverket.se/nedladdning/naturtypskartan/Naturtypskartan_RIKS.zip,Naturtypskartan_RIKS.zip,natura_habitats_riks,0,Stor fil aktivera vid behov
+vmi,Vatmarksinventeringen,wetlands,vector,https://geodata.naturvardsverket.se/nedladdning/VMI/,vmi_source_page.txt,vmi,0,Manuell val av fil i katalog behovs innan scriptad nedladdning
+tuva,TUVA,grasslands,vector,https://jordbruksverket.se/e-tjanster-databaser-och-appar/e-tjanster-och-databaser-stod/tuva,tuva_source_page.txt,tuva,0,Krav pa manuell nedladdning av kartskikt eller WFS
+viss,VISS vattenforekomster,water,vector,https://viss.lansstyrelsen.se/Exports.aspx,viss_source_page.txt,viss,0,Krav pa manuell export eller API-anrop

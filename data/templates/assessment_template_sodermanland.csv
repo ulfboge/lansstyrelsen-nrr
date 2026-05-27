@@ -1,0 +1,2 @@
+site_code,habitat_code,assessment_unit_id,estimated_area_ha,condition_class,geometry_confidence,habitat_confidence,condition_confidence,data_currency,field_verification_need,data_sources,last_field_visit,assessor,motivation,main_uncertainty,proposed_action,next_review_date
+SE0000001,9010,SE0000001_001,12.4,okant,medel,medel,lag,okand,ja,"NNK 2024; ortofoto 2025",,,"Karteringsstatus oklar","Grans osaker mot angransande skog","Faltkontroll och geometrijustering",2026-10-01
