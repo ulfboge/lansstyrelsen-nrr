@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naturrestaurering – Länsstyrelsen Södermanland</title>
+  <style>
+    :root {
+      --green-dark: #1a4a2e;
+      --green-mid: #2d7a4f;
+      --green-light: #4caf50;
+      --green-pale: #e8f5e9;
+      --green-muted: #c8e6c9;
+      --blue: #1565c0;
+      --blue-pale: #e3f2fd;
+      --amber: #e65100;
+      --amber-pale: #fff3e0;
+      --gray-dark: #212121;
+      --gray-mid: #546e7a;
+      --gray-light: #f5f5f5;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--gray-light);
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      color: white;
+      padding: 40px 32px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: 0; right: 0;
+      height: 60px;
+      background: var(--gray-light);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      max-width: 700px;
+    }
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+      max-width: 600px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .header-meta span {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* NAV */
+    nav {
+      background: white;
+      border-bottom: 2px solid var(--green-muted);
+      padding: 0 32px;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    nav a {
+      display: block;
+      padding: 14px 16px;
+      color: var(--gray-mid);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--green-mid);
+      border-bottom-color: var(--green-mid);
+    }
+
+    /* LAYOUT */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    section {
+      margin-bottom: 56px;
+      scroll-margin-top: 60px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      color: var(--green-dark);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--green-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    h2 .icon { font-size: 1.3rem; }
+
+    h3 {
+      font-size: 1.05rem;
+      color: var(--green-dark);
+      margin: 16px 0 10px;
+    }
+
+    p { margin-bottom: 12px; color: #444; }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 4px solid var(--green-light);
+    }
+    .card.blue { border-left-color: var(--blue); }
+    .card.amber { border-left-color: var(--amber); }
+    .card-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray-mid);
+      margin-bottom: 6px;
+    }
+    .card-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+    .card.blue .card-value { color: var(--blue); }
+    .card.amber .card-value { color: var(--amber); }
+    .card-sub {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      margin-top: 4px;
+    }
+
+    /* GANTT */
+    .gantt-wrapper {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow-x: auto;
+    }
+    .gantt-months {
+      display: flex;
+      margin-left: 160px;
+      margin-bottom: 8px;
+    }
+    .gantt-month {
+      flex: 1;
+      min-width: 60px;
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gray-mid);
+      text-transform: uppercase;
+    }
+    .gantt-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .gantt-label {
+      width: 160px;
+      min-width: 160px;
+      font-size: 0.83rem;
+      color: var(--gray-dark);
+      padding-right: 12px;
+      font-weight: 500;
+    }
+    .gantt-track {
+      flex: 1;
+      display: flex;
+      min-width: 480px;
+    }
+    .gantt-cell {
+      flex: 1;
+      min-width: 60px;
+      height: 28px;
+      border-radius: 0;
+    }
+    .gantt-bar {
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .g-green { background: var(--green-mid); }
+    .g-blue { background: #1976d2; }
+    .g-teal { background: #00796b; }
+    .g-purple { background: #7b1fa2; }
+    .g-orange { background: #e65100; }
+    .g-milestone {
+      background: var(--green-dark);
+      border-radius: 4px;
+      width: 24px;
+      height: 24px;
+      transform: rotate(45deg);
+      margin: 2px auto;
+    }
+
+    /* TASKS TABLE */
+    .tasks-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+    .task-group-header {
+      background: var(--green-pale);
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--green-dark);
+      border-left: 4px solid var(--green-mid);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .task-item {
+      padding: 14px 20px 14px 36px;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gray-dark);
+    }
+    .task-desc {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      margin-top: 2px;
+    }
+    .task-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .tag {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .tag-gis { background: #e8f5e9; color: #2e7d32; }
+    .tag-data { background: #e3f2fd; color: #1565c0; }
+    .tag-rapport { background: #fce4ec; color: #c62828; }
+    .tag-samverkan { background: #f3e5f5; color: #6a1b9a; }
+    .tag-falt { background: #fff3e0; color: #e65100; }
+    .tag-prio-hog { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; }
+    .tag-prio-med { background: #fff8e1; color: #e65100; border: 1px solid #ffe082; }
+
+    /* DATA SOURCES */
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .source-card {
+      background: white;
+      border-radius: 10px;
+      padding: 16px 18px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+      border-top: 3px solid var(--green-light);
+    }
+    .source-card.blue-top { border-top-color: #1976d2; }
+    .source-card.teal-top { border-top-color: #00796b; }
+    .source-org {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .source-data { font-size: 0.83rem; color: #555; margin-bottom: 8px; }
+    .source-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .source-badge {
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .badge-cc0 { background: #e8f5e9; color: #2e7d32; }
+    .badge-ccby { background: #e3f2fd; color: #1565c0; }
+    .badge-inspire { background: #f3e5f5; color: #6a1b9a; }
+    .badge-api { background: #fff3e0; color: #e65100; }
+
+    /* TECH STACK */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .tech-card {
+      background: white;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+    .tech-icon { font-size: 2rem; margin-bottom: 8px; }
+    .tech-name { font-weight: 700; font-size: 0.95rem; color: var(--green-dark); }
+    .tech-desc { font-size: 0.8rem; color: var(--gray-mid); margin-top: 4px; }
+    .tech-primary { border: 2px solid var(--green-light); }
+    .tech-secondary { border: 1px dashed #bdbdbd; }
+
+    /* RISK TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      font-size: 0.87rem;
+    }
+    th {
+      background: var(--green-dark);
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafafa; }
+    .risk-hog { color: #b71c1c; font-weight: 700; }
+    .risk-med { color: #e65100; font-weight: 700; }
+    .risk-lag { color: #2e7d32; font-weight: 700; }
+
+    /* ALERT BOX */
+    .alert {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .alert-green { background: var(--green-pale); border-left: 4px solid var(--green-mid); }
+    .alert-blue { background: var(--blue-pale); border-left: 4px solid var(--blue); }
+    .alert-amber { background: var(--amber-pale); border-left: 4px solid var(--amber); }
+    .alert-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .alert-text { font-size: 0.88rem; color: #333; }
+    .alert-text strong { display: block; margin-bottom: 2px; }
+
+    /* ORG CHART */
+    .org-chart {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .org-top {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .org-box {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 2px solid;
+    }
+    .org-box-main { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+    .org-box-primary { background: var(--green-pale); color: var(--green-dark); border-color: var(--green-mid); }
+    .org-box-secondary { background: white; color: var(--gray-dark); border-color: #bdbdbd; }
+    .org-box-highlight { background: #fff9c4; color: #f57f17; border-color: #fbc02d; }
+    .org-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .org-connector {
+      text-align: center;
+      color: var(--gray-mid);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      border-top: 1px solid #e0e0e0;
+      background: white;
+    }
+
+    /* UTILS */
+    .pill {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .pill-green { background: var(--green-pale); color: var(--green-dark); }
+    .pill-blue { background: var(--blue-pale); color: var(--blue); }
+
+    .deadline-box {
+      background: linear-gradient(135deg, #b71c1c, #e53935);
+      color: white;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .deadline-label { font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
+    .deadline-date { font-size: 1.4rem; font-weight: 700; }
+    .deadline-desc { font-size: 0.83rem; opacity: 0.9; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.4rem; }
+      .gantt-label { width: 100px; min-width: 100px; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">Länsstyrelsen Södermanland &nbsp;·&nbsp; 2026–2027</div>
+  <h1>Naturrestaureringsuppdraget</h1>
+  <p>Implementering av EU:s naturrestaureringsförordning i Södermanlands län – kartläggning, GIS-analys och beslutsunderlag för Natura 2000-områden.</p>
+  <div class="header-meta">
+    <span>🌿 Natur- och landsbygdsavdelningen</span>
+    <span>📍 Länsstyrelsen i Södermanlands län, Nyköping</span>
+    <span>👥 2 tjänster</span>
+    <span>📅 Uppdaterad: 2026-05-27</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#oversikt" class="active">Översikt</a>
+  <a href="#organisation">Organisation</a>
+  <a href="#tidplan">Tidsplan</a>
+  <a href="#arbetsuppgifter">Arbetsuppgifter</a>
+  <a href="#verktyg">Verktyg &amp; system</a>
+  <a href="#datakallor">Datakällor</a>
+  <a href="#risker">Riskanalys</a>
+  <a href="#resurser">Resurser</a>
+</nav>
+
+<main>
+
+  <!-- OVERVIEW -->
+  <section id="oversikt">
+    <h2><span class="icon">📋</span> Översikt</h2>
+
+    <div class="deadline-box">
+      <div>
+        <div class="deadline-label">⚠ Viktig deadline – EU-rapportering</div>
+        <div class="deadline-date">1 september 2026</div>
+      </div>
+      <div class="deadline-desc">Sverige ska lämna nationell restaureringsplan till EU-kommissionen.<br>Naturvårdsverket slutredovisade sin del 26 februari 2026.</div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">EU-förordning</div>
+        <div class="card-value">NRR</div>
+        <div class="card-sub">Nature Restoration Regulation (EU 2024/1991)</div>
+      </div>
+      <div class="card blue">
+        <div class="card-title">Fokusområden</div>
+        <div class="card-value">Natura&nbsp;2000</div>
+        <div class="card-sub">Skyddade natur- och habitatområden i länet</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Projekttid</div>
+        <div class="card-value">~7 mån</div>
+        <div class="card-sub">Uppstart → slutleverans</div>
+      </div>
+      <div class="card amber">
+        <div class="card-title">Antal tjänster</div>
+        <div class="card-value">2</div>
+        <div class="card-sub">Anställda för att genomföra uppdraget</div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="alert alert-green">
+        <span class="alert-icon">🎯</span>
+        <div class="alert-text">
+          <strong>Uppdragets syfte</strong>
+          Kartlägga och analysera livsmiljöstatus i skyddade naturområden (särskilt Natura 2000) i Södermanlands län. Leverera beslutsunderlag genom databaser, kartor, rapporter och presentationer som stöder genomförandet av EU:s naturrestaureringsförordning.
+        </div>
+      </div>
+      <div class="alert alert-blue">
+        <span class="alert-icon">🏛</span>
+        <div class="alert-text">
+          <strong>Myndighetskopplingar</strong>
+          Naturvårdsverket (NV) · Skogsstyrelsen · Havs- och vattenmyndigheten (HaV) · Jordbruksverket · SLU Artdatabanken · Lantmäteriet · EU-kommissionen
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANISATION -->
+  <section id="organisation">
+    <h2><span class="icon">🏢</span> Organisation</h2>
+    <p>Länsstyrelsen i Södermanlands län är organiserad i fem avdelningar. Tjänsten är placerad inom Natur- och landsbygdsavdelningen.</p>
+
+    <div class="org-chart">
+      <div class="org-top">
+        <div class="org-box org-box-main">Länsstyrelsen i Södermanlands län</div>
+      </div>
+      <div class="org-connector">↓</div>
+      <div class="org-row">
+        <div class="org-box org-box-primary">Natur- och landsbygdsavdelningen ⭐</div>
+        <div class="org-box org-box-secondary">Miljö- och vattenavdelningen</div>
+        <div class="org-box org-box-secondary">Samhällsbyggnadsavdelningen</div>
+        <div class="org-box org-box-secondary">Rättsavdelningen</div>
+        <div class="org-box org-box-secondary">Administrativ avdelning</div>
+      </div>
+      <div class="org-connector" style="text-align:left; margin-left:20px;">↓</div>
+      <div class="org-row" style="justify-content:flex-start; margin-left:20px;">
+        <div class="org-box org-box-highlight">Naturvårdsenheten 👤👤</div>
+        <div class="org-box org-box-secondary">Landsbygdsenheten</div>
+        <div class="org-box org-box-secondary">Lantbruksenheten</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;" class="alert alert-amber">
+      <span class="alert-icon">ℹ</span>
+      <div class="alert-text">
+        <strong>Närmaste samarbetspartners</strong>
+        Miljö- och vattenavdelningen (vattenstatus, klimat) · Samhällsbyggnadsavdelningen (grön infrastruktur, GIS) · GIS-enheten på länsstyrelserna (gis.lansstyrelsen.se)
+      </div>
+    </div>
+  </section>
+
+  <!-- TIDSPLAN / GANTT -->
+  <section id="tidplan">
+    <h2><span class="icon">📅</span> Tidsplan</h2>
+    <p>Uppskattad projektplan med start juni 2026. Alla datum synkroniseras mot EU-deadlinen 1 september 2026 för nationell restaureringsplan.</p>
+
+    <div class="gantt-wrapper">
+      <div class="gantt-months">
+        <div class="gantt-month">Jun</div>
+        <div class="gantt-month">Jul</div>
+        <div class="gantt-month">Aug</div>
+        <div class="gantt-month">Sep</div>
+        <div class="gantt-month">Okt</div>
+        <div class="gantt-month">Nov</div>
+        <div class="gantt-month">Dec</div>
+        <div class="gantt-month">Jan</div>
+      </div>
+
+      <!-- Uppstart -->
+      <div class="gantt-row">
+        <div class="gantt-label">🚀 Uppstart &amp; orientering</div>
+        <div class="gantt-track">
+          <div style="flex:1; padding: 0 2px;">
+            <div class="gantt-bar g-green" style="width:100%;">Mån 1</div>
+          </div>
+          <div style="flex:7;"></div>
+        </div>
+      </div>
+
+      <!-- Datainsamling -->
+      <div class="gantt-row">
+        <div class="gantt-label">🗄 Datainsamling &amp; ETL</div>
+        <div class="gantt-track">
+          <div style="flex:1; padding: 0 2px;"></div>
+          <div style="flex:2; padding: 0 2px;">
+            <div class="gantt-bar g-blue" style="width:100%;">ETL</div>
+          </div>
+          <div style="flex:5;"></div>
+        </div>
+      </div>
+
+      <!-- Fältinventering -->
+      <div class="gantt-row">
+        <div class="gantt-label">🌿 Fältinventering</div>
+        <div class="gantt-track">
+          <div style="flex:1;"></div>
+          <div style="flex:4; padding: 0 2px;">
+            <div class="gantt-bar g-teal" style="width:100%;">Inventering i fält</div>
+          </div>
+          <div style="flex:3;"></div>
+        </div>
+      </div>
+
+      <!-- GIS-analys -->
+      <div class="gantt-row">
+        <div class="gantt-label">🗺 GIS-analys &amp; kartor</div>
+        <div class="gantt-track">
+          <div style="flex:2;"></div>
+          <div style="flex:4; padding: 0 2px;">
+            <div class="gantt-bar g-purple" style="width:100%;">Analys &amp; kartproduktion</div>
+          </div>
+          <div style="flex:2;"></div>
+        </div>
+      </div>
+
+      <!-- Rapport -->
+      <div class="gantt-row">
+        <div class="gantt-label">📝 Delrapport 1</div>
+        <div class="gantt-track">
+          <div style="flex:3;"></div>
+          <div style="flex:1; padding: 0 2px;">
+            <div class="gantt-bar g-orange" style="width:100%;">Del 1</div>
+          </div>
+          <div style="flex:4;"></div>
+        </div>
+      </div>
+
+      <!-- Slutrapport -->
+      <div class="gantt-row">
+        <div class="gantt-label">📄 Slutrapport</div>
+        <div class="gantt-track">
+          <div style="flex:4;"></div>
+          <div style="flex:2; padding: 0 2px;">
+            <div class="gantt-bar g-orange" style="width:100%;">Rapportering</div>
+          </div>
+          <div style="flex:2;"></div>
+        </div>
+      </div>
+
+      <!-- Presentation -->
+      <div class="gantt-row">
+        <div class="gantt-label">🎤 Presentation</div>
+        <div class="gantt-track">
+          <div style="flex:6;"></div>
+          <div style="flex:1; padding: 0 2px;">
+            <div class="gantt-bar g-green" style="width:100%;">Leverans</div>
+          </div>
+          <div style="flex:1;"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px; padding-top:12px; border-top:1px dashed #e0e0e0; font-size:0.8rem; color:#888;">
+        ⭐ = Månadsgräns &nbsp;·&nbsp; Alla datum är uppskattade och justeras vid projektstart
+      </div>
+    </div>
+
+    <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+      <span class="pill pill-green">Fas 1: Uppstart (mån 1)</span>
+      <span class="pill pill-blue">Fas 2: Datainsamling (mån 1–3)</span>
+      <span class="pill pill-green">Fas 3: Analys (mån 3–6)</span>
+      <span class="pill pill-blue">Fas 4: Rapportering (mån 5–7)</span>
+    </div>
+  </section>
+
+  <!-- ARBETSUPPGIFTER -->
+  <section id="arbetsuppgifter">
+    <h2><span class="icon">✅</span> Arbetsuppgifter</h2>
+    <p>Detaljerade arbetsuppgifter kategoriserade efter område. Prioritet anges för de viktigaste uppgifterna.</p>
+
+    <div class="tasks-container">
+
+      <div class="task-group-header">🗺 A. GIS-analys och kartproduktion</div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Kartläggning av habitattyper i Natura 2000-områden</div>
+          <div class="task-desc">Klassificera och kartlägga livsmiljötyper (habitat) med status god/icke god/okänd i ArcGIS Pro</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-gis">GIS</span><span class="tag tag-prio-hog">Hög prio</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Rumsliga analyser – area och överlappning</div>
+          <div class="task-desc">Area-beräkningar, intersektioner och buffertzoner med ArcGIS Pro / ModelBuilder</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-gis">GIS</span><span class="tag tag-prio-hog">Hög prio</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Fragmenteringsanalys</div>
+          <div class="task-desc">Analysera grön infrastruktur och konnektivitet mellan naturvärdesområden i länet</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-gis">GIS</span><span class="tag tag-prio-med">Med prio</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Karttjänster via ArcGIS Server (WMS/WFS)</div>
+          <div class="task-desc">Publicera resultat som Feature Services och karttjänster via LST:s ArcGIS Enterprise Portal</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-gis">GIS</span><span class="tag tag-data">Data</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Tematiska kartor för beslutsfattare</div>
+          <div class="task-desc">ArcGIS Pro-layouter som PDF och publika webbkartor (ArcGIS Online)</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-gis">GIS</span><span class="tag tag-rapport">Rapport</span></div>
+      </div>
+
+      <div class="task-group-header">🌿 B. Fältinventering</div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Inventering av naturvärden i Natura 2000-områden</div>
+          <div class="task-desc">Fältbesök, artobservationer, habitatstatus. Datainsamling med ArcGIS Field Maps eller Survey123</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-falt">Fält</span><span class="tag tag-prio-hog">Hög prio</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Datainmatning i nationella system</div>
+          <div class="task-desc">Registrering i Artportalen (SLU), SERS och LST:s geodatabas</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-falt">Fält</span><span class="tag tag-data">Data</span></div>
+      </div>
+
+      <div class="task-group-header">🗄 C. Databasarbete och ETL</div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Byggnad och underhåll av ESRI Geodatabas</div>
+          <div class="task-desc">File Geodatabase / Enterprise GDB med Natura 2000-data, habitattyper, artobservationer</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-data">Data</span><span class="tag tag-prio-hog">Hög prio</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">ETL-pipeline: hämta data från öppna tjänster</div>
+          <div class="task-desc">Python-skript för NV (WFS), Lantmäteriet (API), SLU (API), SMHI. SWEREF 99 TM (EPSG:3006) för alla lager.</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-data">Data</span><span class="tag tag-gis">GIS</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Datavalidering och kvalitetskontroll</div>
+          <div class="task-desc">Geometrikontroller, konsistenskontroller mot kända värden, metadata enligt INSPIRE-standard</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-data">Data</span></div>
+      </div>
+
+      <div class="task-group-header">📝 D. Rapportering och dokumentation</div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Delrapporter vid milstolpar</div>
+          <div class="task-desc">Intermediära rapporter med preliminära resultat. Format: Word/PDF på svenska.</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-rapport">Rapport</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Slutrapport med metodik och rekommendationer</div>
+          <div class="task-desc">Fullständig rapport med bakgrund, datakällor, GIS-metodik, analyser, slutsatser och restaureringsrekommendationer</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-rapport">Rapport</span><span class="tag tag-prio-hog">Hög prio</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Teknisk dokumentation (datamodell, ETL)</div>
+          <div class="task-desc">ER-diagram, tabellstruktur, ETL-flödesbeskrivning, Python-skript, driftmanual</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-rapport">Rapport</span><span class="tag tag-data">Data</span></div>
+      </div>
+
+      <div class="task-group-header">📊 E. Visualiseringar och presentationer</div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">PowerPoint-presentationer för styrgrupp</div>
+          <div class="task-desc">Kartor, diagram och nyckeltal för beslutsfattare vid milstolpsmöten</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-rapport">Rapport</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Interaktiv dashboard (Power BI / ArcGIS Dashboard)</div>
+          <div class="task-desc">Visualisering av naturtillstånd, habitatstatus och åtgärdsstatus per Natura 2000-område</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-gis">GIS</span><span class="tag tag-prio-med">Med prio</span></div>
+      </div>
+
+      <div class="task-group-header">🤝 F. Samverkan och koordinering</div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Dialog med NV, Skogsstyrelsen, HaV, Jordbruksverket</div>
+          <div class="task-desc">Regelbundna möten och datautbyte med nationella myndigheter</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-samverkan">Samverkan</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Kommunikation med länets kommuner</div>
+          <div class="task-desc">Information om restaureringsinsatser, LONA-samordning, remisser</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-samverkan">Samverkan</span></div>
+      </div>
+      <div class="task-item">
+        <div>
+          <div class="task-name">Presentationsseminarium för intressenter</div>
+          <div class="task-desc">Avslutande presentation av projektresultat för myndigheter, kommuner och allmänhet</div>
+        </div>
+        <div class="task-tags"><span class="tag tag-samverkan">Samverkan</span><span class="tag tag-rapport">Rapport</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VERKTYG -->
+  <section id="verktyg">
+    <h2><span class="icon">🔧</span> Verktyg och system</h2>
+
+    <h3>GIS-plattform (ESRI) – primär</h3>
+    <div class="tech-grid">
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">🗺</div>
+        <div class="tech-name">ArcGIS Pro</div>
+        <div class="tech-desc">Primärt GIS-verktyg för analys, kartproduktion och geodata</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">🏢</div>
+        <div class="tech-name">ArcGIS Enterprise</div>
+        <div class="tech-desc">Portal v11.5.0 – interna karttjänster och geodatalagring</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">🌐</div>
+        <div class="tech-name">ArcGIS Online</div>
+        <div class="tech-desc">Webkartor, delning och ArcGIS Dashboard</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">📱</div>
+        <div class="tech-name">ArcGIS Field Maps</div>
+        <div class="tech-desc">Mobil datainsamling i fält</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:20px;">Microsoft 365 – kontorssystem</h3>
+    <div class="tech-grid">
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">💬</div>
+        <div class="tech-name">Microsoft Teams</div>
+        <div class="tech-desc">Kommunikation, möten och samarbete</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">📁</div>
+        <div class="tech-name">SharePoint</div>
+        <div class="tech-desc">Dokumenthantering och intranät</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">📋</div>
+        <div class="tech-name">Planner / To Do</div>
+        <div class="tech-desc">Uppgiftshantering och projektplanering</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">📊</div>
+        <div class="tech-name">Power BI</div>
+        <div class="tech-desc">Dashboards och visualiseringar</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:20px;">Kompletterande tekniska verktyg</h3>
+    <div class="tech-grid">
+      <div class="tech-card tech-secondary">
+        <div class="tech-icon">🐍</div>
+        <div class="tech-name">Python</div>
+        <div class="tech-desc">ETL-skript, databearbetning (arcpy, geopandas)</div>
+      </div>
+      <div class="tech-card tech-secondary">
+        <div class="tech-icon">🗄</div>
+        <div class="tech-name">PostgreSQL/PostGIS</div>
+        <div class="tech-desc">Öppen GIS-databas som komplement</div>
+      </div>
+      <div class="tech-card tech-secondary">
+        <div class="tech-icon">📂</div>
+        <div class="tech-name">QGIS</div>
+        <div class="tech-desc">Öppen GIS-klient, backup om ArcGIS-licens saknas</div>
+      </div>
+      <div class="tech-card tech-secondary">
+        <div class="tech-icon">🔀</div>
+        <div class="tech-name">Git / GitHub</div>
+        <div class="tech-desc">Versionshantering av skript och dokumentation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATAKÄLLOR -->
+  <section id="datakallor">
+    <h2><span class="icon">🗃</span> Datakällor</h2>
+    <p>Prioriterade öppna och fria datakällor från svenska myndigheter och EU. Alla data projiceras till <strong>SWEREF 99 TM (EPSG:3006)</strong>.</p>
+
+    <div class="sources-grid">
+      <div class="source-card">
+        <div class="source-org">Naturvårdsverket (NV)</div>
+        <div class="source-data">Natura 2000-områden (SCI/SPA), livsmiljötyper, skyddade arter, NMD2023</div>
+        <div class="source-meta">
+          <span class="source-badge badge-inspire">INSPIRE</span>
+          <span class="source-badge badge-ccby">CC BY</span>
+          <span class="source-badge badge-api">WMS/WFS/REST</span>
+        </div>
+      </div>
+      <div class="source-card blue-top">
+        <div class="source-org">Lantmäteriet</div>
+        <div class="source-data">Administrativa gränser, höjdmodell (NH), hydrografi, ortnamn</div>
+        <div class="source-meta">
+          <span class="source-badge badge-cc0">CC0</span>
+          <span class="source-badge badge-api">WFS/WCS/API</span>
+        </div>
+      </div>
+      <div class="source-card teal-top">
+        <div class="source-org">SLU Artdatabanken</div>
+        <div class="source-data">Artobservationer, naturtypsregistreringar, Artportalen</div>
+        <div class="source-meta">
+          <span class="source-badge badge-ccby">CC BY 4.0</span>
+          <span class="source-badge badge-api">API/Öppna filer</span>
+        </div>
+      </div>
+      <div class="source-card">
+        <div class="source-org">SMHI</div>
+        <div class="source-data">Klimatdata, hydrologidata, vattenflöden, temperatur</div>
+        <div class="source-meta">
+          <span class="source-badge badge-ccby">CC BY</span>
+          <span class="source-badge badge-api">API/CSV</span>
+        </div>
+      </div>
+      <div class="source-card blue-top">
+        <div class="source-org">Jordbruksverket</div>
+        <div class="source-data">Arealer, betesmark, jordbruksmark, skötseldata</div>
+        <div class="source-meta">
+          <span class="source-badge badge-ccby">CC BY</span>
+          <span class="source-badge badge-api">Nedladdning</span>
+        </div>
+      </div>
+      <div class="source-card teal-top">
+        <div class="source-org">Copernicus / EU</div>
+        <div class="source-data">CORINE Land Cover, Sentinel-satellitbilder</div>
+        <div class="source-meta">
+          <span class="source-badge badge-cc0">Öppen</span>
+          <span class="source-badge badge-api">Nedladdning</span>
+        </div>
+      </div>
+      <div class="source-card">
+        <div class="source-org">SGU</div>
+        <div class="source-data">Geologisk information, jordarter, berggrundskartor</div>
+        <div class="source-meta">
+          <span class="source-badge badge-cc0">CC0</span>
+          <span class="source-badge badge-api">WMS/WFS</span>
+        </div>
+      </div>
+      <div class="source-card blue-top">
+        <div class="source-org">Länsstyrelsen (LST)</div>
+        <div class="source-data">Regionala naturinventeringar, skötselplaner, egna geodata</div>
+        <div class="source-meta">
+          <span class="source-badge badge-api">Intern/GDK</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RISKANALYS -->
+  <section id="risker">
+    <h2><span class="icon">⚠</span> Riskanalys</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Risk</th>
+          <th>Sannolikhet</th>
+          <th>Konsekvens</th>
+          <th>Åtgärd</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Försenad systemåtkomst (ArcGIS Enterprise, SharePoint)</td>
+          <td class="risk-hog">Hög</td>
+          <td class="risk-med">Medel</td>
+          <td>Påbörja med öppna data och QGIS tills licenser aktiveras. Kontakta IT dag 1.</td>
+        </tr>
+        <tr>
+          <td>Bristfällig eller föråldrad data (habitatstatus)</td>
+          <td class="risk-med">Medel</td>
+          <td class="risk-hog">Hög</td>
+          <td>Fältinventering som komplement, dokumentera osäkerheter, kontakta NV</td>
+        </tr>
+        <tr>
+          <td>Försenade leveranser mot EU-deadline 1 sep 2026</td>
+          <td class="risk-med">Medel</td>
+          <td class="risk-hog">Hög</td>
+          <td>Synka tidplan mot NV:s nationella plan. Tydliga interna milstolpar.</td>
+        </tr>
+        <tr>
+          <td>Kompetensbrist (ArcGIS Pro, Python)</td>
+          <td class="risk-lag">Låg</td>
+          <td class="risk-med">Medel</td>
+          <td>ESRI-utbildningar via LST IT, intern GIS-enhet som stöd</td>
+        </tr>
+        <tr>
+          <td>Ändrade krav från NV eller EU-kommissionen</td>
+          <td class="risk-med">Medel</td>
+          <td class="risk-med">Medel</td>
+          <td>Agil planering, kontinuerlig dialog med uppdragsgivare och NV</td>
+        </tr>
+        <tr>
+          <td>Tekniska problem (ESRI-licenser, serverfel)</td>
+          <td class="risk-lag">Låg</td>
+          <td class="risk-hog">Hög</td>
+          <td>QGIS som backup, kontakta LST IT-support, löpande backup av geodatabaser</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RESURSER -->
+  <section id="resurser">
+    <h2><span class="icon">🔗</span> Nyckelresurser och länkar</h2>
+
+    <div class="sources-grid">
+      <div class="source-card">
+        <div class="source-org">Länsstyrelsen Södermanland</div>
+        <div class="source-data">Startsida, organisation, naturvård, kontakt</div>
+        <div class="source-meta"><a href="https://www.lansstyrelsen.se/sodermanland" target="_blank" style="font-size:0.8rem; color:#1565c0;">lansstyrelsen.se/sodermanland ↗</a></div>
+      </div>
+      <div class="source-card blue-top">
+        <div class="source-org">GIS på länsstyrelserna</div>
+        <div class="source-data">WebbGIS, geodatakatalog, karttjänster för alla länsstyrelser</div>
+        <div class="source-meta"><a href="https://gis.lansstyrelsen.se" target="_blank" style="font-size:0.8rem; color:#1565c0;">gis.lansstyrelsen.se ↗</a></div>
+      </div>
+      <div class="source-card teal-top">
+        <div class="source-org">NV – EU-förordning naturrestaurering</div>
+        <div class="source-data">Nationell plan, mål och artiklar, rapportering</div>
+        <div class="source-meta"><a href="https://www.naturvardsverket.se/amnesomraden/mark-och-vattenanvandning/eu-forordning-for-att-restaurera-natur/" target="_blank" style="font-size:0.8rem; color:#1565c0;">naturvardsverket.se ↗</a></div>
+      </div>
+      <div class="source-card">
+        <div class="source-org">Geodatakatalogen (LST)</div>
+        <div class="source-data">Metadata och geodatainventering för länsstyrelserna</div>
+        <div class="source-meta"><a href="https://gis.lansstyrelsen.se/geodata/geodatakatalogen/" target="_blank" style="font-size:0.8rem; color:#1565c0;">gis.lansstyrelsen.se/geodata ↗</a></div>
+      </div>
+      <div class="source-card blue-top">
+        <div class="source-org">ArcGIS Geoportal (LST)</div>
+        <div class="source-data">Extern ArcGIS Enterprise Portal för länsstyrelserna</div>
+        <div class="source-meta"><a href="https://ext-geoportal.lansstyrelsen.se" target="_blank" style="font-size:0.8rem; color:#1565c0;">ext-geoportal.lansstyrelsen.se ↗</a></div>
+      </div>
+      <div class="source-card teal-top">
+        <div class="source-org">Lantmäteriet Öppna data</div>
+        <div class="source-data">Basgeodata CC0 – kommuner, höjd, vägar, hydrografi</div>
+        <div class="source-meta"><a href="https://www.lantmateriet.se/oppnadata" target="_blank" style="font-size:0.8rem; color:#1565c0;">lantmateriet.se/oppnadata ↗</a></div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;" class="alert alert-green">
+      <span class="alert-icon">📁</span>
+      <div class="alert-text">
+        <strong>GitHub-repo och projektfiler</strong>
+        Alla skript, dokumentation och projektfiler hanteras i detta repo. Se <code>CLAUDE.md</code> för fullständiga projektinstruktioner och <code>docs/</code> för detaljerad dokumentation.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Naturrestaureringsuppdraget · Länsstyrelsen i Södermanlands län · Uppdaterad 2026-05-27
+  &nbsp;·&nbsp; <a href="https://github.com" style="color:#1565c0;">GitHub</a>
+  &nbsp;·&nbsp; <a href="CLAUDE.md" style="color:#1565c0;">CLAUDE.md</a>
+</footer>
+
+<script>
+  // Smooth scroll and active nav highlighting
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Intersection observer for nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

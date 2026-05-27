@@ -1,0 +1,62 @@
+# Geodata (stora filer - lagras ej i Git)
+*.gdb/
+*.mdb
+*.shp
+*.shx
+*.dbf
+*.prj
+*.sbn
+*.sbx
+*.fbn
+*.fbx
+*.ain
+*.aih
+*.atx
+*.cpg
+*.qpj
+*.lyr
+*.lpk
+*.mpk
+*.aprx
+*.gdb
+*.gpkg
+*.tif
+*.tiff
+*.img
+*.ecw
+*.las
+*.laz
+
+# Raster
+*.asc
+*.bil
+*.bip
+*.bsq
+*.flt
+*.hdr
+
+# Python
+__pycache__/
+*.py[cod]
+.env
+venv/
+.venv/
+*.egg-info/
+
+# System
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Lösenord och känsliga filer
+*.env
+config_secret.py
+secrets.json
+
+# Claude Code (lokala projektinställningar)
+.claude/
+
+# Temporära filer
+*.tmp
+*.bak
+*.lock
