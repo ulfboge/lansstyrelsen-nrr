@@ -500,7 +500,7 @@
     <span>🌿 Naturskyddsenheten, Naturavdelningen</span>
     <span>📍 Länsstyrelsen i Södermanlands län, Nyköping</span>
     <span>📋 Ref. 2451-2026</span>
-    <span>📅 Uppdaterad: 2026-05-27</span>
+    <span>📅 Uppdaterad: 2026-05-28</span>
   </div>
 </header>
 
@@ -511,6 +511,7 @@
   <a href="#tidplan">Tidsplan</a>
   <a href="#arbetsuppgifter">Arbetsuppgifter</a>
   <a href="#verktyg">Verktyg &amp; system</a>
+  <a href="#datamodell">Datamodell</a>
   <a href="#datakallor">Datakällor</a>
   <a href="#risker">Riskanalys</a>
   <a href="#resurser">Resurser</a>
@@ -975,6 +976,85 @@
     </div>
   </section>
 
+  <!-- DATAMODELL -->
+  <section id="datamodell">
+    <h2><span class="icon">🗄</span> Datamodell – fältdatainsamling</h2>
+    <p>Fältdata samlas in via <strong>ArcGIS Survey123</strong> och <strong>Field Maps</strong>, kopplade mot en Feature Service i ArcGIS Enterprise. ArcGIS Pro ansluter direkt mot samma tjänst – ingen manuell import krävs.</p>
+
+    <div class="alert alert-blue" style="margin-bottom:20px;">
+      <span class="alert-icon">🔄</span>
+      <div class="alert-text">
+        <strong>Dataflöde</strong>
+        Survey123 / Field Maps (fält) &nbsp;→&nbsp; Feature Service i Enterprise Portal &nbsp;→&nbsp; ArcGIS Pro (analys) &nbsp;→&nbsp; Leverans till NV
+      </div>
+    </div>
+
+    <h3>Feature Service-schema: <code>habitatbedomning_falt</code></h3>
+    <p style="font-size:0.85rem; color:#555; margin-bottom:12px;">Schemat är direkt anpassat efter bedömningsmallen i <code>data/templates/assessment_template_sodermanland.csv</code>. Projektion: SWEREF 99 TM (EPSG:3006).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Fält</th>
+          <th>Typ</th>
+          <th>Domän / Exempel</th>
+          <th>Beskrivning</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>site_code</code></td><td>Text(20)</td><td>SE0230201</td><td>Natura 2000-ID</td></tr>
+        <tr><td><code>habitat_code</code></td><td>Text(10)</td><td>6210, 9010 …</td><td>EU Annex I-habitattyp</td></tr>
+        <tr><td><code>assessment_unit_id</code></td><td>Text(30)</td><td>SE0230201_003</td><td>Unik bedömningsenhet (en fläck per rad)</td></tr>
+        <tr><td><code>estimated_area_ha</code></td><td>Double</td><td>12.4</td><td>Uppskattad areal i hektar</td></tr>
+        <tr><td><code>condition_class</code></td><td>Text (domän)</td><td>gott · icke_gott · okant</td><td>Tillståndsklass – kärnleverans till NV</td></tr>
+        <tr><td><code>geometry_confidence</code></td><td>Text (domän)</td><td>hog · medel · lag</td><td>Säkerhet i geometrin</td></tr>
+        <tr><td><code>habitat_confidence</code></td><td>Text (domän)</td><td>hog · medel · lag</td><td>Säkerhet i habitatbestämningen</td></tr>
+        <tr><td><code>condition_confidence</code></td><td>Text (domän)</td><td>hog · medel · lag</td><td>Säkerhet i tillståndsbedömningen</td></tr>
+        <tr><td><code>field_verification_need</code></td><td>Text (domän)</td><td>ja · nej</td><td>Kräver fältbesök?</td></tr>
+        <tr><td><code>data_sources</code></td><td>Text(500)</td><td>"NNK 2024; ortofoto 2025"</td><td>Använda datakällor</td></tr>
+        <tr><td><code>last_field_visit</code></td><td>Date</td><td>2026-09-15</td><td>Senaste fältbesök</td></tr>
+        <tr><td><code>assessor</code></td><td>Text(100)</td><td>Auto från inloggning</td><td>Inventerare</td></tr>
+        <tr><td><code>motivation</code></td><td>Text(2000)</td><td>Fritext</td><td>Motivering till bedömning</td></tr>
+        <tr><td><code>main_uncertainty</code></td><td>Text(1000)</td><td>Fritext</td><td>Huvudsaklig osäkerhetskälla</td></tr>
+        <tr><td><code>proposed_action</code></td><td>Text(1000)</td><td>Fritext</td><td>Föreslagen restaureringsåtgärd</td></tr>
+        <tr><td><code>next_review_date</code></td><td>Date</td><td>2027-06-01</td><td>Datum för nästa granskning</td></tr>
+        <tr><td><code>Shape</code></td><td>Polygon</td><td>EPSG:3006</td><td>Geometri – ritas i Field Maps eller Survey123</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:24px;">Survey123-formulär – nyckelkopplingar</h3>
+    <div class="tech-grid" style="margin-top:8px;">
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">📋</div>
+        <div class="tech-name">Survey123</div>
+        <div class="tech-desc">Strukturerat inventeringsformulär med villkorsstyrda fält, domänlistor och automatisk GPS-taggning</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">🗺</div>
+        <div class="tech-name">Field Maps</div>
+        <div class="tech-desc">Polygondigitalisering i fält, navigering till Natura 2000-objekt, offline-kartpaket</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">📸</div>
+        <div class="tech-name">Attachments</div>
+        <div class="tech-desc">Foton kopplas direkt till bedömningsenheten via Feature Service-lagrets attachment-funktion</div>
+      </div>
+      <div class="tech-card tech-primary">
+        <div class="tech-icon">🔁</div>
+        <div class="tech-name">Offline-synk</div>
+        <div class="tech-desc">Fungerar utan täckning – data laddas upp automatiskt vid nätverksåtkomst</div>
+      </div>
+    </div>
+
+    <div class="alert alert-green" style="margin-top:20px;">
+      <span class="alert-icon">📁</span>
+      <div class="alert-text">
+        <strong>Fullständig dokumentation</strong>
+        Se <a href="docs/datamodell.md" style="color:#1a4a2e; font-weight:600;">docs/datamodell.md</a> för komplett schema, domänvärden, XLSForm-mappning och uppstartschecklista.
+      </div>
+    </div>
+  </section>
+
   <!-- DATAKÄLLOR -->
   <section id="datakallor">
     <h2><span class="icon">🗃</span> Datakällor</h2>
@@ -1151,7 +1231,7 @@
 </main>
 
 <footer>
-  Naturrestaureringsuppdraget · Länsstyrelsen i Södermanlands län · Uppdaterad 2026-05-27
+  Naturrestaureringsuppdraget · Länsstyrelsen i Södermanlands län · Uppdaterad 2026-05-28
   &nbsp;·&nbsp; <a href="https://github.com" style="color:#1565c0;">GitHub</a>
   &nbsp;·&nbsp; <a href="CLAUDE.md" style="color:#1565c0;">CLAUDE.md</a>
 </footer>
