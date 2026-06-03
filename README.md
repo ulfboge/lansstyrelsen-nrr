@@ -20,20 +20,25 @@ Länsstyrelsen i Södermanlands län har rekryterat två personer för att genom
 
 **Viktigt datum:** Sverige ska lämna nationell restaureringsplan till EU-kommissionen **1 september 2026**.
 
-## Repo-struktur
+## Repostruktur
+
+| Repo | Synlighet | Innehåll |
+|------|-----------|----------|
+| **[lansstyrelsen-nrr](https://github.com/ulfboge/lansstyrelsen-nrr)** (detta) | Publikt | Projektöversikt, plan, datakällor, GitHub Pages |
+| **[natura-2000](https://github.com/ulfboge/natura-2000)** | Privat | Python-pipeline, Origo-webbkarta, ArcGIS Pro (`.aprx`) |
+
+Pipeline och kartor utvecklas i det privata repot; denna sida länkar dit. **Åtkomst till natura-2000:** begär inbjudan från projektägaren.
 
 ```
-├── index.html          # GitHub Pages hemsida (projektöversikt)
-├── CLAUDE.md           # Projektinstruktioner för Claude
-├── README.md           # Denna fil
-├── docs/               # Dokumentation
-│   ├── projektplan.md
-│   ├── datakallor.md
-│   └── datamodell.md
-├── scripts/
-│   ├── etl/            # Python ETL-skript
-│   └── analysis/       # Analysverktyg
-└── .gitignore
+lansstyrelsen-nrr/          ← du är här
+├── index.html              # GitHub Pages
+├── docs/                   # plan, datakallor, verktyg.md (översikt)
+└── scripts/                # planerade ETL/analys (lättvikt)
+
+natura-2000/                ← separat privat repo
+├── scripts/01–11           # datapipeline
+├── web/public/             # Origo-webbkarta
+└── deliveries/             # ArcGIS-paket (.aprx)
 ```
 
 ## Teknisk stack

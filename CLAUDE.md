@@ -166,10 +166,12 @@ Prioriterade källor:
 ### Projektion
 - **SWEREF 99 TM (EPSG:3006)** används för ALLA geografiska data
 
-### Versionskontroll (detta repo)
-- Branches: `main` (stabil), `develop` (aktiv utveckling)
-- Commits: Svenska meddelanden, t.ex. `Lägg till ETL-skript för Natura 2000`
-- Använd `.gitignore` för stora datafiler (geodata lagras ej i Git)
+### Versionskontroll (två repos)
+- **lansstyrelsen-nrr** (detta repo, publikt): projektöversikt, `docs/`, GitHub Pages — ingen känslig bedömningsdata
+- **natura-2000** (privat): https://github.com/ulfboge/natura-2000 — pipeline, webbkarta, ArcGIS `.aprx`
+- Branches: `main` (stabil), `develop` (valfritt)
+- Commits: Svenska meddelanden
+- Geodata och bedömningar: endast i `natura-2000` (med `.gitignore` för stora filer)
 
 ### Python-skript
 - Python 3.10+
@@ -192,8 +194,15 @@ Prioriterade källor:
 
 ## 9. Repo-struktur
 
+**Syskonrepos** (samma maskin, separata Git-remotes):
+
+| Mapp / repo | GitHub | Innehåll |
+|-------------|--------|----------|
+| `Länsstyrelsen/` → lansstyrelsen-nrr | Publikt | Denna fil, Pages, plan |
+| `natura-2000/` → natura-2000 | Privat | Pipeline, Origo, ArcGIS |
+
 ```
-Länsstyrelsen/
+Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
 ├── CLAUDE.md              ← Denna fil (projektinstruktioner för Claude)
 ├── README.md              ← Publik projektbeskrivning
 ├── index.html             ← GitHub Pages hemsida
@@ -219,7 +228,7 @@ Länsstyrelsen/
 
 ## 10. Befintliga analysverktyg
 
-Det finns ett färdigt analysverktyg i `C:\Users\galag\GitHub\natura-2000` med:
+Det finns ett färdigt analysverktyg i det **privata** repot `natura-2000` ([GitHub](https://github.com/ulfboge/natura-2000), lokalt `C:\Users\galag\GitHub\natura-2000`) med:
 
 - **11-stegs pipeline** för Natura 2000 Södermanland (datahämtning → prioritetsanalys → ArcGIS/QGIS-export)
 - **Webbkarta** (Origo) med sök, statistikpanel och klickbara lager
@@ -251,4 +260,4 @@ När du arbetar i detta projekt, Claude:
 
 ---
 
-*Senast uppdaterad: 2026-05-27*
+*Senast uppdaterad: 2026-06-03*

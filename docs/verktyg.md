@@ -3,7 +3,16 @@
 Dokumentation av det befintliga analysverktyget i `C:\Users\galag\GitHub\natura-2000`.
 Pipelines körs **från det repot** men skripten refereras och dokumenteras här.
 
-**GitHub:** [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) (privat arbetsrepo — pipeline, webbkarta, ArcGIS Pro-projekt)
+## Repostruktur
+
+| Repo | URL | Roll |
+|------|-----|------|
+| **lansstyrelsen-nrr** | [github.com/ulfboge/lansstyrelsen-nrr](https://github.com/ulfboge/lansstyrelsen-nrr) | Publik projektyta (denna dokumentation + [GitHub Pages](https://ulfboge.github.io/lansstyrelsen-nrr)) |
+| **natura-2000** | [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) | Privat arbetsrepo — pipeline, Origo, ArcGIS Pro |
+
+Kör all pipeline-kod i **natura-2000**. Lägg inte preliminär NRF-bedömning i det publika repot.
+
+**Åtkomst:** `natura-2000` är privat — begär GitHub-inbjudan från projektägaren vid LST Södermanland.
 
 ---
 
