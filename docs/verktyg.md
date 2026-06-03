@@ -3,6 +3,8 @@
 Dokumentation av det befintliga analysverktyget i `C:\Users\galag\GitHub\natura-2000`.
 Pipelines körs **från det repot** men skripten refereras och dokumenteras här.
 
+**GitHub:** [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) (privat arbetsrepo — pipeline, webbkarta, ArcGIS Pro-projekt)
+
 ---
 
 ## Snabbstart
@@ -115,7 +117,7 @@ för att beräkna realistisk prioritet.
 
 | Format | Innehåll | Plats |
 |--------|----------|-------|
-| ArcGIS Pro | `.gdb`, `.lyrx`, `.aprx` | `deliveries/arcgis_LATEST.txt` |
+| ArcGIS Pro | `.aprx` (Git), `.lyrx`, GDB/shapefiles (lokal export) | `deliveries/arcgis_LATEST.txt` → `NRF_Sodermanland_N2000.aprx` |
 | QGIS | GPKG + CSV | `deliveries/qgis_*` |
 | Webbkarta | GeoJSON + Origo-config | `web/public/` |
 | Statistik | CSV-tabeller | `data/outputs/` |

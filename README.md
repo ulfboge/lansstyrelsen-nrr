@@ -50,6 +50,8 @@ Länsstyrelsen i Södermanlands län har rekryterat två personer för att genom
 
 Se [CLAUDE.md](CLAUDE.md) för fullständiga projektinstruktioner.
 
+**Natura 2000-pipeline (Python, Origo, ArcGIS Pro):** [natura-2000](https://github.com/ulfboge/natura-2000) — dokumentation i [docs/verktyg.md](docs/verktyg.md).
+
 ---
 
 *Länsstyrelsen i Södermanlands län · Natur- och landsbygdsavdelningen*
