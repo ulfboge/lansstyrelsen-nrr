@@ -13,11 +13,12 @@
 **Arbetsgivare:** Länsstyrelsen i Södermanlands län, Nyköping  
 **Avdelning:** Naturavdelningen – **Naturskyddsenheten** (ca 15 personer)  
 **Roll:** Naturskyddshandläggare för genomförande av NRF (ref. 2451-2026)  
-**Tidshorisont:** 2026–2027 (tillsvidaretjänst, provanställning 6 månader)
+**Tidshorisont:** 2026–2027 (tillsvidaretjänst, provanställning 6 månader)  
+**Tillträde:** 10 augusti 2026 (förberedande planering pågår dessförinnan)
 
 **Viktiga datum:**
 - Naturvårdsverket slutredovisade sitt underlag: 26 februari 2026
-- Länsstyrelsens underlag levereras till **Naturvårdsverket** (NV ansvarar för EU-rapporteringen)
+- Länsstyrelsens underlag levereras till **Naturvårdsverket** — det är **NV** som ansvarar för rapporteringen vidare till EU, inte länsstyrelsen direkt
 
 **Uppdragets kärna:** Statusbedömning av livsmiljötyper i beslutade Natura 2000-områden —
 areal per habitattyp klassificerad som **gott / icke gott / okänt tillstånd**.
@@ -120,22 +121,23 @@ Prioriterade källor:
 #### F. Samverkan och koordinering
 - Samarbete med Naturvårdsverket, Skogsstyrelsen, HaV, Jordbruksverket
 - Dialog med kommuner i Södermanlands län
-- Rapportering till EU (via nationell plan)
+- Bidra till NV:s underlag för EU-rapporteringen (länsstyrelsen rapporterar till NV, inte till EU direkt)
 
 ---
 
 ## 5. Tidsplan (uppskattad)
 
-| Fas | Period | Innehåll |
-|-----|--------|----------|
-| Uppstart | Mån 1 | Orientering, systemåtkomst, verktygsinlärning (ArcGIS Pro, SharePoint), kontakter |
-| Datainsamling | Mån 1–3 | ETL från NV, LM, SLU, SMHI. Geodatabas-setup. |
-| Fältinventering | Mån 2–5 | Inventering i Natura 2000-områden i länet |
-| Analys | Mån 3–6 | GIS-analyser, statusbedömningar, kartproduktion |
-| Rapportering | Mån 5–7 | Delrapporter, visualiseringar, slutrapport |
-| Presentation | Mån 7 | Presentation för intressenter, leverans |
+| Fas | Period | Datum (ca) | Innehåll |
+|-----|--------|------------|----------|
+| Förberedelse | Pre-anställning | Jun–Aug 2026 | Planering, litteratur, verktygsförberedelse |
+| Uppstart | Mån 1 | Aug–Sep 2026 | Orientering, systemåtkomst, ArcGIS Pro, SharePoint, kontakter |
+| Datainsamling | Mån 1–3 | Sep–Nov 2026 | ETL från NV, LM, SLU, SMHI. Geodatabas-setup. |
+| Fältinventering | Mån 2–5 | Sep 2026–Jan 2027 | Inventering i Natura 2000-områden i länet |
+| Analys | Mån 3–6 | Nov 2026–Feb 2027 | GIS-analyser, statusbedömningar, kartproduktion |
+| Rapportering | Mån 5–7 | Jan–Mar 2027 | Delrapporter, visualiseringar, slutrapport till NV |
+| Presentation | Mån 7 | Mar 2027 | Presentation för intressenter, leverans |
 
-> Nationell restaureringsplan ska lämnas till EU 1 september 2026 – synka leveranser mot detta.
+> Länsstyrelsen levererar underlag till **Naturvårdsverket**. NV ansvarar för den nationella restaureringsplanen och EU-rapporteringen.
 
 ---
 
@@ -234,11 +236,16 @@ Det finns ett färdigt analysverktyg i det **privata** repot `natura-2000` ([Git
 - **Webbkarta** (Origo) med sök, statistikpanel och klickbara lager
 - **Exportformat**: ArcGIS Pro `.gdb`/`.lyrx`/`.aprx`, QGIS GPKG, GeoJSON
 
-**Viktigt om prioritetsanalysen:**
-Steg 3 (`03_priority_analysis.py`) använder defaultvärden (`pressure_score=3`,
-`restoration_potential_score=3`, `feasibility_score=3`, `synergy_score=3`).
-Dessa **måste uppdateras** med verklig information från fältinventering och
-NV-tryckdata innan resultaten används som beslutsunderlag.
+**Viktigt om prioritetsanalysen:** (uppdaterad 2026-08-12)
+Steg 3 (`03_priority_analysis.py`) läser numera verkliga påverkansvärden från
+`data/assessments/pressure_overrides.csv` och sätter `pressure_score` därifrån.
+Kontrollerad vokabulär (11 påverkanstyper, 5 allvarlighetsgrader) finns i
+`scripts/pressure_classes.py` och används även i Survey123-formuläret och
+bedömningsmallen.
+
+Rader med `priority_valid=True` är beslutsunderlag; rader med `False` bygger
+fortfarande på defaultvärden. Kvarstående defaults som **måste** fyllas i:
+`restoration_potential_score`, `feasibility_score`, `synergy_score`.
 
 Se `docs/verktyg.md` för fullständig dokumentation och instruktioner.
 
@@ -253,11 +260,11 @@ När du arbetar i detta projekt, Claude:
 3. **Referera till NRR** (naturrestaureringsförordningen) och nationell plan vid strategiska beslut
 4. **Spara leverabler** i rätt undermappar enligt repo-strukturen ovan
 5. **Verifiera datakällor** mot listan i `docs/datakallor.md` innan du föreslår nya
-6. **Synka tidplanen** mot EU-deadlinen 1 september 2026
+6. **Synka tidplanen** mot tillträdet 10 augusti 2026 och leverans till Naturvårdsverket (NV ansvarar för EU-rapporteringen)
 7. **Kontrollera** om filer finns innan du skriver nya (undvik dubbletter)
 8. **GitHub Pages** (index.html) uppdateras när projektplanen förändras
 9. **Använd `natura-2000`-repot** för pipeline-körningar — kör inte om skripten härifrån
 
 ---
 
-*Senast uppdaterad: 2026-06-03*
+*Senast uppdaterad: 2026-06-08*
