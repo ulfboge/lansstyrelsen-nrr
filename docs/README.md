@@ -14,8 +14,4 @@ GitHub Pages använder filerna i den här mappens rot: `nrf-guide.html` och `dat
 | `verktyg.md` | Pipeline-dokumentation (privata `natura-2000`-repot) |
 | `planner_struktur.md` | Microsoft Planner-upplägg vid tjänststart |
 | `nrf-guide.html` | Publik NRR-guide (GitHub Pages) |
-| `nnk/` | Arbetsdokument för NNK-granskningen 2026 |
-| `underlag/` | Källmaterial från Naturvårdsverket och publika NNK |
-| `faltprotokoll/` | Fältdokumentation, en fil per fältdag |
-
-Nya styrdokument för NNK-arbetet läggs i `nnk/`. Nedladdade manualer, statistik och geodataunderlag läggs i `underlag/`.
+| `nnk/`, `underlag/`, `faltprotokoll/` | Pekare — det faktiska NNK-arbetet ligger i [natura-2000](https://github.com/ulfboge/natura-2000) |

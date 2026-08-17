@@ -1,6 +1,6 @@
 # data/
 
-Geodata, register och mallar för NRR-arbetet i Södermanlands län. All geodata ska vara i **SWEREF 99 TM (EPSG:3006)**.
+Geodataregister och mallar för den publika projektytan. All geodata ska vara i **SWEREF 99 TM (EPSG:3006)**.
 
 ## Innehåll
 
@@ -8,8 +8,5 @@ Geodata, register och mallar för NRR-arbetet i Södermanlands län. All geodata
 |--------|------------------------|
 | `sources_sodermanland.csv` | Datakälleregister. Sätt `enabled=1` för att aktivera en källa. |
 | `templates/` | Bedömningsmall för skrivbords- och fältbedömning |
-| `nnk/` | Bearbetad NNK: områdeskoppling och nollmätning |
-| `uttag/` | Råa NNK-uttag med datum i filnamnet |
+| `nnk/`, `uttag/` | Pekare — bearbetad NNK och uttag ligger i [natura-2000](https://github.com/ulfboge/natura-2000) |
 | `raw/` | Nedladdningar (skapas av ETL, ignoreras av Git) |
-
-Stora geodatafiler (`.gpkg`, shapefiler, zip:ade paket) versionshanteras inte. CSV-register och mallar gör det.

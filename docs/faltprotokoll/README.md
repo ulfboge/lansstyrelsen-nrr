@@ -1,21 +1,5 @@
 # docs/faltprotokoll/
 
-Fältdokumentation från NNK-granskningen 2026. En fil per fältdag.
+Fältdokumentation skrivs i det **privata** syskonrepot:
 
-## Namnkonvention
-
-```
-YYYY-MM-DD_sitecode.md
-```
-
-Exempel: `2026-09-15_SE0220012.md`
-
-Fältplanen för säsongen läggs här som `faltplan_2026.md` (uppgift B1.3).
-
-## Per besökt yta, notera
-
-- NOID eller objekt-id, livsmiljötyp, hävdstatus
-- Strukturer, funktioner och typiska arter
-- Tillståndsklass med procentandelar
-- Datum och bedömare (krav enligt FAQ fråga 4)
-- Vad som är osäkert, i klartext
+**[natura-2000 / docs/faltprotokoll](https://github.com/ulfboge/natura-2000/tree/main/docs/faltprotokoll)**

@@ -25,22 +25,21 @@ Länsstyrelsen i Södermanlands län har rekryterat två personer för att genom
 | Repo | Synlighet | Innehåll |
 |------|-----------|----------|
 | **[lansstyrelsen-nrr](https://github.com/ulfboge/lansstyrelsen-nrr)** (detta) | Publikt | Projektöversikt, plan, datakällor, GitHub Pages |
-| **[natura-2000](https://github.com/ulfboge/natura-2000)** | Privat | Python-pipeline, Origo-webbkarta, ArcGIS Pro (`.aprx`) |
+| **[natura-2000](https://github.com/ulfboge/natura-2000)** | Privat | Pipeline, Origo, ArcGIS Pro, **NNK-granskning 2026** |
 
-Pipeline och kartor utvecklas i det privata repot; denna sida länkar dit. **Åtkomst till natura-2000:** begär inbjudan från projektägaren.
+Pipeline, kartor och NNK-arbete ligger i det privata repot; denna sida länkar dit. **Åtkomst till natura-2000:** du äger repot som `ulfboge`. Kollegor bjuds in under Settings → Collaborators.
 
 ```
-lansstyrelsen-nrr/          ← du är här
+lansstyrelsen-nrr/          ← du är här (publikt)
 ├── index.html              # GitHub Pages
-├── docs/                   # se docs/README.md
-│   ├── nnk/                # arbetsdokument NNK 2026
-│   ├── underlag/           # källmaterial från NV
-│   └── faltprotokoll/      # fältdokumentation
-├── data/                   # se data/README.md
-└── scripts/                # ETL och NNK-analys (lättvikt)
+├── docs/                   # plan, datakällor, NRR-guide
+└── scripts/etl/            # lättvikts-ETL
 
 natura-2000/                ← separat privat repo
+├── docs/nnk/               # arbetsplan, runbook, kontrollrum
+├── docs/underlag/          # handledning, statistik, naturtypskarta
 ├── scripts/01–11           # datapipeline
+├── scripts/analysis/       # NNK-nollmätning och områdeskoppling
 ├── web/public/             # Origo-webbkarta
 └── deliveries/             # ArcGIS-paket (.aprx)
 ```
@@ -59,7 +58,7 @@ natura-2000/                ← separat privat repo
 
 Se [CLAUDE.md](CLAUDE.md) för fullständiga projektinstruktioner.
 
-**Natura 2000-pipeline (Python, Origo, ArcGIS Pro):** [natura-2000](https://github.com/ulfboge/natura-2000) — dokumentation i [docs/verktyg.md](docs/verktyg.md).
+**Natura 2000-pipeline och NNK-granskning:** [natura-2000](https://github.com/ulfboge/natura-2000) (privat) — översikt i [docs/verktyg.md](docs/verktyg.md).
 
 ---
 

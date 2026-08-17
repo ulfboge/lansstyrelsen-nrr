@@ -8,11 +8,11 @@ Pipelines körs **från det repot** men skripten refereras och dokumenteras här
 | Repo | URL | Roll |
 |------|-----|------|
 | **lansstyrelsen-nrr** | [github.com/ulfboge/lansstyrelsen-nrr](https://github.com/ulfboge/lansstyrelsen-nrr) | Publik projektyta (denna dokumentation + [GitHub Pages](https://ulfboge.github.io/lansstyrelsen-nrr)) |
-| **natura-2000** | [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) | Privat arbetsrepo — pipeline, Origo, ArcGIS Pro |
+| **natura-2000** | [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) | Privat arbetsrepo — pipeline, Origo, ArcGIS Pro, NNK-granskning 2026 |
 
-Kör all pipeline-kod i **natura-2000**. Lägg inte preliminär NRF-bedömning i det publika repot.
+Kör all pipeline-kod och NNK-analys i **natura-2000**. Lägg inte preliminär NRF-bedömning i det publika repot.
 
-**Åtkomst:** `natura-2000` är privat — begär GitHub-inbjudan från projektägaren vid LST Södermanland.
+**Åtkomst:** du äger `natura-2000` som GitHub-användaren `ulfboge`. Kollegor bjuds in under repots Settings → Collaborators.
 
 ---
 

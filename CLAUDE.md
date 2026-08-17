@@ -201,7 +201,7 @@ Prioriterade källor:
 | Mapp / repo | GitHub | Innehåll |
 |-------------|--------|----------|
 | `Länsstyrelsen/` → lansstyrelsen-nrr | Publikt | Denna fil, Pages, plan |
-| `natura-2000/` → natura-2000 | Privat | Pipeline, Origo, ArcGIS |
+| `natura-2000/` → natura-2000 | Privat | Pipeline, Origo, ArcGIS, NNK-granskning 2026 |
 
 ```
 Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
@@ -209,28 +209,25 @@ Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
 ├── README.md              ← Publik projektbeskrivning
 ├── index.html             ← GitHub Pages hemsida
 ├── data/
-│   ├── README.md
-│   ├── sources_sodermanland.csv   ← Datakälleregister (aktivera/inaktivera)
-│   ├── templates/         ← Bedömningsmall
-│   ├── nnk/               ← Bearbetad NNK (SITECODE, nollmätning)
-│   └── uttag/             ← Råa NNK-uttag (datum i filnamnet)
+│   ├── sources_sodermanland.csv
+│   └── templates/
 ├── docs/
-│   ├── README.md
-│   ├── projektplan.md     ← Detaljerad projektplan
-│   ├── datakallor.md      ← Datakällor och licenser
-│   ├── datamodell.md      ← ER-diagram och tabellstruktur
-│   ├── verktyg.md         ← Pipeline-dokumentation (natura-2000 repo)
-│   ├── nnk/               ← Arbetsdokument NNK 2026 (plan, runbook, blankett)
-│   ├── underlag/          ← Källmaterial från NV (handledning, statistik, NNK)
-│   └── faltprotokoll/     ← Fältdokumentation
-├── scripts/
-│   ├── README.md
-│   ├── etl/               ← ETL-skript (Python)
-│   └── analysis/          ← NNK-analys (nollmätning, områdeskoppling, kontrollrum)
-└── .gitignore
+│   ├── projektplan.md
+│   ├── datakallor.md
+│   ├── datamodell.md
+│   └── verktyg.md         ← pekar till natura-2000
+└── scripts/etl/
+
+natura-2000/                 ← privat arbetsrepo
+├── docs/nnk/              ← arbetsplan, runbook, kontrollrum, blankett
+├── docs/underlag/         ← handledning, statistik, naturtypskarta
+├── docs/faltprotokoll/
+├── data/nnk/              ← SITECODE-koppling och nollmätning
+├── scripts/analysis/      ← NNK-analys
+└── scripts/01–11          ← datapipeline
 ```
 
-Varje mapp har en `README.md` som beskriver vad som hör hemma där. Flytta inte filer utan att uppdatera sökvägarna i `scripts/analysis/` och i NNK-dokumenten.
+NNK-arbetet körs i `natura-2000`. Det publika repot ska inte innehålla bedömningar, fältprotokoll eller Ajourhålla-uttag.
 
 ---
 
