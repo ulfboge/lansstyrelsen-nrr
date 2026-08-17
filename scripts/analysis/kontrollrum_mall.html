@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontrollrum NNK 2026 — Länsstyrelsen Södermanland</title>
+<style>
+:root{
+  color-scheme:light;
+  --surface-1:#fcfcfb; --plane:#f9f9f7;
+  --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,0.10);
+  --p-A:#2a78d6; --p-B:#eb6834; --p-C:#1baf7a; --p-D:#eda100;
+  --p-E:#e87ba4; --p-F:#008300; --p-G:#4a3aa7; --p-H:#e34948;
+  --good:#0ca30c; --idag:#d03b3b;
+  --skugga:rgba(0,0,0,.13);
+}
+@media(prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){
+  color-scheme:dark;
+  --surface-1:#1a1a19; --plane:#0d0d0d;
+  --ink-1:#fff; --ink-2:#c3c2b7; --ink-3:#898781;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
+  --p-A:#3987e5; --p-B:#d95926; --p-C:#199e70; --p-D:#c98500;
+  --p-E:#d55181; --p-F:#008300; --p-G:#9085e9; --p-H:#e66767;
+  --good:#0ca30c; --idag:#d03b3b; --skugga:rgba(0,0,0,.5);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --surface-1:#1a1a19; --plane:#0d0d0d;
+  --ink-1:#fff; --ink-2:#c3c2b7; --ink-3:#898781;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
+  --p-A:#3987e5; --p-B:#d95926; --p-C:#199e70; --p-D:#c98500;
+  --p-E:#d55181; --p-F:#008300; --p-G:#9085e9; --p-H:#e66767;
+  --good:#0ca30c; --idag:#d03b3b; --skugga:rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink-1);
+ font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1400px;margin:0 auto;padding:28px 20px 90px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+h1{font-size:25px;font-weight:650;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--ink-2);font-size:13.5px;margin:0}
+h2{font-size:18px;font-weight:620;margin:40px 0 4px;letter-spacing:-.005em}
+.lede{color:var(--ink-2);font-size:13.5px;margin:0 0 16px;max-width:80ch}
+.card{background:var(--surface-1);border:1px solid var(--ring);border-radius:12px;padding:18px 20px}
+.grid{display:grid;gap:12px}
+.tiles{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:16px}
+.tile .v{font-size:27px;font-weight:640;letter-spacing:-.02em;line-height:1.15}
+.tile .l{font-size:12px;color:var(--ink-2);margin-top:3px}
+button,select{font:inherit;font-size:13px;padding:5px 12px;border-radius:20px;
+ border:1px solid var(--ring);background:var(--surface-1);color:var(--ink-2);cursor:pointer}
+button[aria-pressed="true"]{background:var(--ink-1);color:var(--surface-1);border-color:var(--ink-1)}
+button:hover,select:hover{color:var(--ink-1)}
+select{border-radius:8px;padding:5px 8px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+.bar .sep{width:1px;height:22px;background:var(--grid);margin:0 4px}
+.bar label{font-size:12.5px;color:var(--ink-3);margin-right:2px}
+#themeBtn,.util{border-radius:8px}
+
+/* ---- gantt ---- */
+.gwrap{overflow-x:auto;border:1px solid var(--ring);border-radius:12px;background:var(--surface-1)}
+table.g{border-collapse:collapse;width:100%;min-width:1080px;font-size:12.5px}
+table.g th,table.g td{padding:0;border:0}
+.g thead th{position:sticky;top:0;z-index:3;background:var(--surface-1);
+ border-bottom:1px solid var(--axis);padding:6px 2px;font-weight:600;font-size:11px;color:var(--ink-3)}
+.g thead th.namn{text-align:left;padding-left:12px;min-width:330px;color:var(--ink-2);font-size:11.5px}
+.g th.wk{width:calc((100% - 330px)/19);font-variant-numeric:tabular-nums}
+.g th.wk.mstart{border-left:1px solid var(--grid)}
+.g td.cell{border-left:1px solid var(--grid);height:26px;position:relative}
+.g td.cell.mstart{border-left:1px solid var(--axis)}
+.g tr.paket td{background:var(--plane);font-weight:640;font-size:12px;color:var(--ink-1);
+ padding:5px 12px;border-top:1px solid var(--grid);border-bottom:1px solid var(--grid)}
+.g tr.u:hover td{background:var(--plane)}
+.g td.namn{padding:2px 12px 2px 22px;color:var(--ink-2);white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis;max-width:330px;cursor:pointer;border-bottom:1px solid var(--grid)}
+.g td.namn .id{color:var(--ink-3);font-variant-numeric:tabular-nums;margin-right:7px;font-size:11.5px}
+.g td.namn.done{text-decoration:line-through;color:var(--ink-3)}
+.g td.cell{border-bottom:1px solid var(--grid)}
+.gb{position:absolute;top:5px;height:15px;border-radius:4px;left:2px;right:2px;cursor:pointer}
+.gb.done{opacity:.32}
+.gb .tick{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+ color:#fff;font-size:11px;font-weight:700}
+.ms{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--ink-3);z-index:2}
+.mslab{font-size:10.5px;color:var(--ink-2);font-weight:700}
+.idag{position:absolute;top:0;bottom:0;border-left:2px solid var(--idag);z-index:2}
+.mrow td{font-size:10.5px;color:var(--ink-2);padding:3px 2px;text-align:center;
+ border-left:1px solid var(--grid);font-weight:700}
+.mrow td.namn{text-align:left;padding-left:12px;color:var(--ink-3);font-weight:400}
+
+/* ---- lista ---- */
+.ulist{display:grid;gap:8px}
+.uitem{background:var(--surface-1);border:1px solid var(--ring);border-radius:10px;
+ padding:10px 14px;display:grid;grid-template-columns:26px 62px 1fr auto;gap:12px;align-items:start;cursor:pointer}
+.uitem:hover{border-color:var(--axis)}
+.uitem.done{opacity:.55}
+.uitem .uid{font-variant-numeric:tabular-nums;color:var(--ink-3);font-size:12.5px;padding-top:1px}
+.uitem .urub{font-size:14px;font-weight:560}
+.uitem.done .urub{text-decoration:line-through}
+.uitem .umeta{font-size:12px;color:var(--ink-3);margin-top:2px}
+.uitem .utag{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.pill{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:600;color:#fff}
+.pill.gh{background:transparent;color:var(--ink-2);border:1px solid var(--axis);font-weight:500}
+input[type=checkbox]{width:17px;height:17px;accent-color:var(--good);cursor:pointer;margin-top:2px}
+
+/* ---- panel ---- */
+.ovl{position:fixed;inset:0;background:rgba(0,0,0,.34);opacity:0;pointer-events:none;
+ transition:opacity .15s;z-index:40}
+.ovl.on{opacity:1;pointer-events:auto}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(680px,100%);background:var(--surface-1);
+ border-left:1px solid var(--ring);box-shadow:-8px 0 30px var(--skugga);z-index:41;
+ transform:translateX(100%);transition:transform .18s;overflow-y:auto;padding:24px 28px 60px}
+.panel.on{transform:none}
+.panel h3{font-size:19px;margin:0 0 4px;font-weight:640;letter-spacing:-.01em}
+.panel .pmeta{color:var(--ink-3);font-size:12.5px;margin:0 0 18px}
+.panel ol{padding-left:20px;margin:10px 0 0}
+.panel ol li{margin:0 0 11px;font-size:14px}
+.panel code{background:var(--plane);padding:1px 5px;border-radius:4px;font-size:12.5px;
+ border:1px solid var(--ring)}
+.stang{position:absolute;top:16px;right:20px;border-radius:8px;padding:4px 11px}
+.pbox{background:var(--plane);border:1px solid var(--ring);border-radius:9px;padding:11px 14px;
+ margin:14px 0;font-size:13px;color:var(--ink-2)}
+.pbox b{color:var(--ink-1)}
+.doneRow{display:flex;align-items:center;gap:10px;margin:18px 0 0;font-size:14px}
+
+table.t{border-collapse:collapse;width:100%;font-size:13px}
+.t th,.t td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+.t th{color:var(--ink-2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em}
+.t td.n,.t th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.t tbody tr:hover{background:var(--plane)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;border-radius:3px;flex:none}
+.note{font-size:12.5px;color:var(--ink-3);margin-top:10px}
+ul.tight{margin:6px 0 0;padding-left:19px;color:var(--ink-2);font-size:13.5px}
+ul.tight li{margin:4px 0}
+.prog{height:7px;background:var(--grid);border-radius:20px;overflow:hidden;margin-top:9px}
+.prog i{display:block;height:100%;background:var(--good);border-radius:20px;transition:width .2s}
+footer{margin-top:50px;padding-top:16px;border-top:1px solid var(--grid);font-size:12px;color:var(--ink-3)}
+@media print{
+ .bar,#themeBtn,.ovl,.panel{display:none!important}
+ body{background:#fff} .card,.gwrap{break-inside:avoid}
+ .uitem{break-inside:avoid;border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Kontrollrum NNK 2026</h1>
+    <p class="sub">Statusbedömning av livsmiljötyper inom Natura 2000 · Länsstyrelsen i Södermanlands län · ref. 2451-2026<br>
+    68 uppgifter · 302 steg · 8 arbetspaket · v34–v52 2026</p>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button id="themeBtn" onclick="tog()">Mörkt / ljust</button>
+    <button class="util" onclick="window.print()">Skriv ut</button>
+  </div>
+</header>
+
+<div class="grid tiles">
+  <div class="card tile"><div class="v" id="tKlar">0 / 68</div><div class="l">Uppgifter klara</div>
+    <div class="prog"><i id="tProg" style="width:0%"></i></div></div>
+  <div class="card tile"><div class="v" id="tVecka">v34</div><div class="l" id="tVeckaL">Aktuell vecka</div></div>
+  <div class="card tile"><div class="v" id="tNu">0</div><div class="l">Pågår denna vecka</div></div>
+  <div class="card tile"><div class="v" id="tSen">0</div><div class="l">Passerad sluttid, ej klar</div></div>
+  <div class="card tile"><div class="v" id="tMs">M1</div><div class="l" id="tMsL">Nästa milstolpe</div></div>
+</div>
+
+<h2>Gantt v34–v52</h2>
+<p class="lede">Färg visar arbetspaket, streckad linje milstolpe, röd linje aktuell vecka. Klicka på en rad för stegen.</p>
+<div class="bar">
+  <label>Visa:</label>
+  <button data-f="alla" aria-pressed="true">Alla</button>
+  <button data-f="ej">Ej klara</button>
+  <span class="sep"></span>
+  <label>Ansvar:</label>
+  <select id="fAns"><option value="">Alla</option><option value="H">Handläggare</option>
+    <option value="K">Kollega</option><option value="HK">Båda</option></select>
+  <label>Arbetspaket:</label>
+  <select id="fPak"><option value="">Alla</option></select>
+  <span class="sep"></span>
+  <button class="util" onclick="expJson()">Spara läge till fil</button>
+  <button class="util" onclick="document.getElementById('imp').click()">Läs in läge</button>
+  <input type="file" id="imp" accept="application/json" style="display:none" onchange="impJson(event)">
+</div>
+<div class="gwrap"><table class="g" id="gantt"></table></div>
+<div class="legend" id="gleg"></div>
+
+<h2>Uppgifter</h2>
+<p class="lede">Bocka av när något är klart. Läget sparas inte automatiskt — använd <em>Spara läge till fil</em> så kan du läsa in det nästa gång.</p>
+<div class="ulist" id="ulist"></div>
+
+<h2>Leveranser</h2>
+<div class="card"><table class="t" id="tLev"><thead><tr>
+<th>#</th><th>Leverans</th><th>Paket</th><th class="n">Klart</th><th>Mottagare</th><th class="n">Status</th>
+</tr></thead><tbody></tbody></table></div>
+
+<h2>Milstolpar</h2>
+<div class="card"><table class="t" id="tMst"><thead><tr>
+<th>#</th><th class="n">Vecka</th><th class="n">Datum</th><th>Milstolpe</th><th class="n">Uppgifter klara</th>
+</tr></thead><tbody></tbody></table></div>
+
+<h2>Checklista före varje incheckning i NNK</h2>
+<p class="lede">Från handledningen avsnitt 2.3 och 3.3. Gäller varje gång ett område checkas in — inte bara första gången.</p>
+<div class="card"><ul class="tight" id="chk"></ul></div>
+
+<h2>Vad som medvetet inte görs 2026</h2>
+<div class="card"><table class="t" id="tAvg"><thead><tr>
+<th>Avgränsning</th><th>Innebörd</th><th>Stöd</th></tr></thead><tbody></tbody></table></div>
+
+<footer>
+Underlag: FAQ om uppdraget v1.1 (2026-07-03) · Handledning för NNK (NV-26-002862, 2026-07-03) · Lathund granskning WebbGIS-KartLitS (2026-07-10) · NNK-statistik D-län 2026-01-20 · Naturtypskartan_D.<br>
+Kontrollrum v1.0 · 2026-08-17 · genererat ur <code>scripts/analysis/uppgifter.py</code> · hör ihop med <code>docs/nnk/arbetsplan_nnk_2026.md</code> och <code>docs/nnk/runbook_nnk_2026.md</code>
+</footer>
+</div>
+
+<div class="ovl" id="ovl" onclick="stang()"></div>
+<div class="panel" id="panel">
+  <button class="stang" onclick="stang()">Stäng</button>
+  <h3 id="pTitel"></h3>
+  <p class="pmeta" id="pMeta"></p>
+  <div id="pDep"></div>
+  <div id="pLev"></div>
+  <div style="font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;font-weight:600;margin-top:20px">Steg</div>
+  <ol id="pSteg"></ol>
+  <div class="doneRow"><input type="checkbox" id="pChk"><label for="pChk">Markera uppgiften som klar</label></div>
+</div>
+
+<script>
+const D = /*DATA*/{}/*END*/;
+const ANSVAR={H:"Handläggare",K:"Kollega",HK:"Båda"};
+const klar = new Set();
+let filt="alla", fAns="", fPak="";
+const VNU = 34;                       // aktuell vecka vid generering
+const V = D.veckor.map(x=>x.v);
+const pc = p => `var(--p-${p})`;
+const U = D.uppgifter;
+const byId = Object.fromEntries(U.map(u=>[u.id,u]));
+
+function tog(){const d=document.documentElement;
+ const cur=d.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+ d.setAttribute('data-theme',cur==='dark'?'light':'dark')}
+
+function synliga(){return U.filter(u=>
+  (filt==='alla'||!klar.has(u.id)) && (!fAns||u.ansvar===fAns) && (!fPak||u.paket===fPak))}
+
+/* ---------- gantt ---------- */
+function ritaGantt(){
+  const t=document.getElementById('gantt');
+  const us=synliga();
+  const manadStart=new Set();
+  let sen=null;
+  D.veckor.forEach(w=>{const m=w.datum.slice(0,7); if(m!==sen){manadStart.add(w.v); sen=m}});
+  const msV={}; D.milstolpar.forEach(m=>{(msV[m.v]=msV[m.v]||[]).push(m.id)});
+
+  let h=`<thead><tr><th class="namn">Uppgift</th>`;
+  D.veckor.forEach(w=>{h+=`<th class="wk${manadStart.has(w.v)?' mstart':''}">v${w.v}</th>`});
+  h+=`</tr><tr class="mrow"><td class="namn">Milstolpar</td>`;
+  D.veckor.forEach(w=>{h+=`<td${manadStart.has(w.v)?' class="mstart"':''}>${(msV[w.v]||[]).join(' ')}</td>`});
+  h+=`</tr></thead><tbody>`;
+
+  Object.keys(D.paket).forEach(p=>{
+    const rows=us.filter(u=>u.paket===p);
+    if(!rows.length) return;
+    h+=`<tr class="paket"><td colspan="${V.length+1}">
+        <span style="display:inline-block;width:9px;height:9px;border-radius:2px;background:${pc(p)};margin-right:8px"></span>
+        ${p}. ${D.paket[p].namn} <span style="color:var(--ink-3);font-weight:400">· ${rows.length} uppgifter</span></td></tr>`;
+    rows.forEach(u=>{
+      const d=klar.has(u.id);
+      h+=`<tr class="u" data-id="${u.id}"><td class="namn${d?' done':''}" title="${u.rubrik.replace(/"/g,'&quot;')}">
+          <span class="id">${u.id}</span>${u.rubrik}</td>`;
+      D.veckor.forEach(w=>{
+        const inom = w.v>=u.v1 && w.v<=u.v2;
+        const forst = w.v===u.v1, sist = w.v===u.v2;
+        let s='';
+        if(inom){
+          const l = forst?'2px':'-1px', r = sist?'2px':'-1px';
+          const br = `border-radius:${forst?'4px':'0'} ${sist?'4px':'0'} ${sist?'4px':'0'} ${forst?'4px':'0'}`;
+          s=`<div class="gb${d?' done':''}" style="background:${pc(u.paket)};left:${l};right:${r};${br}">
+             ${d&&forst?'<span class="tick">✓</span>':''}</div>`;
+        }
+        const idag = w.v===VNU ? '<div class="idag" style="left:0"></div>' : '';
+        const msl = msV[w.v] ? '<div class="ms" style="left:0"></div>' : '';
+        h+=`<td class="cell${manadStart.has(w.v)?' mstart':''}">${msl}${idag}${s}</td>`;
+      });
+      h+=`</tr>`;
+    });
+  });
+  h+=`</tbody>`;
+  t.innerHTML=h;
+  t.querySelectorAll('tr.u').forEach(tr=>tr.addEventListener('click',()=>oppna(tr.dataset.id)));
+  document.getElementById('gleg').innerHTML =
+    Object.entries(D.paket).map(([p,v])=>`<span><i class="sw" style="background:${pc(p)}"></i>${p}. ${v.namn}</span>`).join('')
+    + `<span><i class="sw" style="background:var(--idag)"></i>Aktuell vecka</span>`;
+}
+
+/* ---------- lista ---------- */
+function ritaLista(){
+  const el=document.getElementById('ulist');
+  const us=synliga();
+  el.innerHTML = us.map(u=>{
+    const d=klar.has(u.id);
+    const vt = u.v1===u.v2 ? `v${u.v1}` : `v${u.v1}–v${u.v2}`;
+    const lev = u.leverans ? `<span class="pill gh">${u.leverans}</span>` : '';
+    return `<div class="uitem${d?' done':''}" data-id="${u.id}">
+      <input type="checkbox" ${d?'checked':''} data-chk="${u.id}" onclick="event.stopPropagation()">
+      <div class="uid">${u.id}</div>
+      <div><div class="urub">${u.rubrik}</div>
+        <div class="umeta">${vt} · ${ANSVAR[u.ansvar]} · ${u.steg.length} steg${u.dep.length?' · förutsätter '+u.dep.join(', '):''}</div></div>
+      <div class="utag">${lev}<span class="pill" style="background:${pc(u.paket)}">${u.paket}</span></div>
+    </div>`}).join('') || `<div class="card" style="color:var(--ink-3)">Inga uppgifter matchar filtret.</div>`;
+  el.querySelectorAll('.uitem').forEach(x=>x.addEventListener('click',()=>oppna(x.dataset.id)));
+  el.querySelectorAll('[data-chk]').forEach(x=>x.addEventListener('change',e=>{
+    satt(e.target.dataset.chk, e.target.checked)}));
+}
+
+/* ---------- panel ---------- */
+let aktiv=null;
+function oppna(id){
+  const u=byId[id]; if(!u) return; aktiv=id;
+  document.getElementById('pTitel').textContent=`${u.id} · ${u.rubrik}`;
+  const vt = u.v1===u.v2 ? `v${u.v1}` : `v${u.v1}–v${u.v2}`;
+  const dat = D.veckor.find(w=>w.v===u.v1);
+  document.getElementById('pMeta').textContent =
+    `${D.paket[u.paket].namn} · ${vt} (från ${dat?dat.datum:''}) · ${ANSVAR[u.ansvar]}`;
+  document.getElementById('pDep').innerHTML = u.dep.length
+    ? `<div class="pbox"><b>Förutsätter:</b> ${u.dep.map(d=>`${d} — ${byId[d].rubrik}`).join('<br>')}</div>` : '';
+  const lev = u.leverans ? D.leveranser.find(l=>l.id===u.leverans) : null;
+  document.getElementById('pLev').innerHTML = lev
+    ? `<div class="pbox"><b>Bidrar till leverans ${lev.id}:</b> ${lev.text} <span style="color:var(--ink-3)">→ ${lev.mottagare}, klart v${lev.v}</span></div>` : '';
+  document.getElementById('pSteg').innerHTML = u.steg.map(s=>`<li>${md(s)}</li>`).join('');
+  document.getElementById('pChk').checked = klar.has(id);
+  document.getElementById('panel').classList.add('on');
+  document.getElementById('ovl').classList.add('on');
+}
+function stang(){document.getElementById('panel').classList.remove('on');
+ document.getElementById('ovl').classList.remove('on'); aktiv=null}
+document.getElementById('pChk').addEventListener('change',e=>{if(aktiv) satt(aktiv,e.target.checked)});
+addEventListener('keydown',e=>{if(e.key==='Escape') stang()});
+
+function md(s){return s
+ .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+ .replace(/`([^`]+)`/g,'<code>$1</code>')
+ .replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>')
+ .replace(/\*([^*]+)\*/g,'<em>$1</em>')}
+
+/* ---------- status ---------- */
+function satt(id,v){v?klar.add(id):klar.delete(id); rita()}
+function rita(){ritaGantt();ritaLista();ritaTabeller();nyckeltal()}
+
+function nyckeltal(){
+  document.getElementById('tKlar').textContent=`${klar.size} / ${U.length}`;
+  document.getElementById('tProg').style.width=(100*klar.size/U.length).toFixed(0)+'%';
+  const w=D.veckor.find(x=>x.v===VNU);
+  document.getElementById('tVecka').textContent='v'+VNU;
+  document.getElementById('tVeckaL').textContent='Vecka från '+(w?w.datum:'');
+  document.getElementById('tNu').textContent=U.filter(u=>u.v1<=VNU&&u.v2>=VNU&&!klar.has(u.id)).length;
+  document.getElementById('tSen').textContent=U.filter(u=>u.v2<VNU&&!klar.has(u.id)).length;
+  const nasta=D.milstolpar.filter(m=>m.v>=VNU).sort((a,b)=>a.v-b.v)[0];
+  document.getElementById('tMs').textContent=nasta?nasta.id+' · v'+nasta.v:'—';
+  document.getElementById('tMsL').textContent=nasta?nasta.text:'Alla milstolpar passerade';
+}
+
+function ritaTabeller(){
+  document.querySelector('#tLev tbody').innerHTML = D.leveranser.map(l=>{
+    const ups=U.filter(u=>u.leverans===l.id);
+    const k=ups.filter(u=>klar.has(u.id)).length;
+    return `<tr><td>${l.id}</td><td>${l.text}</td>
+      <td><span class="pill" style="background:${pc(l.paket)}">${l.paket}</span></td>
+      <td class="n">v${l.v}</td><td>${l.mottagare}</td>
+      <td class="n">${ups.length? (k+' / '+ups.length) : '—'}</td></tr>`}).join('');
+  document.querySelector('#tMst tbody').innerHTML = D.milstolpar.map(m=>{
+    const ups=U.filter(u=>u.v2<=m.v);
+    const k=ups.filter(u=>klar.has(u.id)).length;
+    return `<tr><td><b>${m.id}</b></td><td class="n">v${m.v}</td><td class="n">${m.datum}</td>
+      <td>${m.text}</td><td class="n">${k} / ${ups.length}</td></tr>`}).join('');
+  document.querySelector('#tAvg tbody').innerHTML = D.avgransningar.map(a=>
+    `<tr><td><b>${a.vad}</b></td><td>${a.detalj}</td><td style="color:var(--ink-3);white-space:nowrap">${a.kalla}</td></tr>`).join('');
+}
+
+/* ---------- export/import ---------- */
+function expJson(){
+  const b=new Blob([JSON.stringify({version:1,sparat:new Date().toISOString().slice(0,10),
+    klara:[...klar].sort()},null,1)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download='nnk_status.json'; a.click();
+  URL.revokeObjectURL(a.href);
+}
+function impJson(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{try{
+    const o=JSON.parse(r.result);
+    klar.clear(); (o.klara||[]).forEach(x=>{if(byId[x]) klar.add(x)});
+    rita();
+  }catch(err){alert('Kunde inte läsa filen: '+err.message)}};
+  r.readAsText(f); e.target.value='';
+}
+
+/* ---------- init ---------- */
+document.getElementById('fPak').innerHTML='<option value="">Alla</option>'+
+  Object.entries(D.paket).map(([p,v])=>`<option value="${p}">${p}. ${v.namn}</option>`).join('');
+document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',e=>{
+  filt=b.dataset.f;
+  document.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===filt));
+  rita()}));
+document.getElementById('fAns').addEventListener('change',e=>{fAns=e.target.value;rita()});
+document.getElementById('fPak').addEventListener('change',e=>{fPak=e.target.value;rita()});
+document.getElementById('chk').innerHTML=D.checklista.map(c=>`<li>${md(c)}</li>`).join('');
+rita();
+</script>
+</body>
+</html>

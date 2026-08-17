@@ -60,6 +60,12 @@ secrets.json
 data/processed/
 data/raw/
 data/outputs/*.gpkg
+data/nnk/*.zip
+data/uttag/*
+!data/uttag/README.md
+
+# Genererad mellanfil (kontrollrum)
+scripts/analysis/kontrollrum_data.json
 
 # Temporära filer
 *.tmp

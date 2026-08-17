@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NNK Södermanland — kunskapsläge och arbetsplan 2026</title>
+<style>
+:root{
+  color-scheme: light;
+  --surface-1:#fcfcfb; --plane:#f9f9f7;
+  --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,0.10);
+  --s1:#2a78d6; --s2:#eb6834;
+  --neutral:#c3c2b7; --neutral-2:#e1e0d9;
+  --c-green:#0ca30c; --c-violet:#4a3aa7; --c-yellow:#eda100; --c-red:#d03b3b;
+  --p1:#2a78d6; --p2:#eb6834; --p3:#898781; --p4:#c3c2b7;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --surface-1:#1a1a19; --plane:#0d0d0d;
+    --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
+    --s1:#3987e5; --s2:#d95926;
+    --neutral:#52514e; --neutral-2:#383835;
+    --c-green:#0ca30c; --c-violet:#9085e9; --c-yellow:#c98500; --c-red:#d03b3b;
+    --p1:#3987e5; --p2:#d95926; --p3:#898781; --p4:#52514e;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --surface-1:#1a1a19; --plane:#0d0d0d;
+  --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
+  --s1:#3987e5; --s2:#d95926;
+  --neutral:#52514e; --neutral-2:#383835;
+  --c-green:#0ca30c; --c-violet:#9085e9; --c-yellow:#c98500; --c-red:#d03b3b;
+  --p1:#3987e5; --p2:#d95926; --p3:#898781; --p4:#52514e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--plane);color:var(--ink-1);
+ font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 20px 80px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:8px}
+h1{font-size:26px;font-weight:650;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--ink-2);font-size:14px;margin:0}
+h2{font-size:18px;font-weight:620;margin:44px 0 6px;letter-spacing:-.005em}
+h2:first-of-type{margin-top:32px}
+.lede{color:var(--ink-2);font-size:14px;margin:0 0 18px;max-width:74ch}
+.card{background:var(--surface-1);border:1px solid var(--ring);border-radius:12px;padding:20px 22px}
+.grid{display:grid;gap:14px}
+.tiles{grid-template-columns:repeat(auto-fit,minmax(178px,1fr));margin-top:18px}
+.tile .v{font-size:30px;font-weight:640;letter-spacing:-.02em;line-height:1.1}
+.tile .l{font-size:12.5px;color:var(--ink-2);margin-top:4px}
+.tile .n{font-size:11.5px;color:var(--ink-3);margin-top:6px}
+.two{grid-template-columns:1fr 1fr}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.ch-title{font-size:14.5px;font-weight:600;margin:0 0 2px}
+.ch-sub{font-size:12.5px;color:var(--ink-3);margin:0 0 16px}
+svg{display:block;width:100%;overflow:visible}
+.tick{fill:var(--ink-3);font-size:11px;font-variant-numeric:tabular-nums}
+.lab{fill:var(--ink-2);font-size:12px}
+.val{fill:var(--ink-1);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.gl{stroke:var(--grid);stroke-width:1}
+.base{stroke:var(--axis);stroke-width:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:11px;height:11px;border-radius:3px;flex:none}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--grid);white-space:nowrap}
+th{color:var(--ink-2);font-weight:600;font-size:12px;position:sticky;top:0;background:var(--surface-1);cursor:pointer;user-select:none}
+th:hover{color:var(--ink-1)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:hover{background:var(--plane)}
+.tblwrap{max-height:520px;overflow:auto;border:1px solid var(--ring);border-radius:12px;background:var(--surface-1)}
+.pill{display:inline-block;padding:1px 7px;border-radius:20px;font-size:11px;font-weight:600;color:#fff}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+button{font:inherit;font-size:13px;padding:5px 13px;border-radius:20px;border:1px solid var(--ring);
+ background:var(--surface-1);color:var(--ink-2);cursor:pointer}
+button[aria-pressed="true"]{background:var(--ink-1);color:var(--surface-1);border-color:var(--ink-1)}
+button:hover{color:var(--ink-1)}
+.tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--surface-1);
+ border:1px solid var(--ring);border-radius:8px;padding:8px 11px;font-size:12.5px;
+ box-shadow:0 6px 20px rgba(0,0,0,.13);z-index:50;max-width:280px}
+.tip b{display:block;font-size:13px;margin-bottom:3px}
+.tl{display:grid;grid-template-columns:70px 1fr;gap:0 14px;font-size:13px}
+.tl .w{color:var(--ink-3);font-variant-numeric:tabular-nums;padding:6px 0;border-top:1px solid var(--grid)}
+.tl .b{padding:6px 0;border-top:1px solid var(--grid)}
+.tl .ms{color:var(--ink-1);font-weight:600}
+.note{font-size:12.5px;color:var(--ink-3);margin-top:12px}
+ul.tight{margin:6px 0 0;padding-left:19px;color:var(--ink-2);font-size:13.5px}
+ul.tight li{margin:3px 0}
+.k{font-weight:600;color:var(--ink-1)}
+footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--grid);font-size:12px;color:var(--ink-3)}
+#themeBtn{border-radius:8px;padding:5px 11px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>NNK Södermanland — kunskapsläge och arbetsplan 2026</h1>
+    <p class="sub">Statusbedömning av livsmiljötyper i Natura 2000 · Länsstyrelsen i Södermanlands län · ref. 2451-2026<br>
+    Underlag: NNK-statistik D-län, uttag 2026-01-20 · FAQ version 1.1 (2026-07-03)</p>
+  </div>
+  <button id="themeBtn" onclick="tog()">Mörkt / ljust</button>
+</header>
+
+<div class="grid tiles">
+  <div class="card tile"><div class="v">197</div><div class="l">Natura 2000-områden (SCI/SAC)</div><div class="n">50 009 ha skyddat</div></div>
+  <div class="card tile"><div class="v">7 821<span style="font-size:16px;font-weight:500"> ha</span></div><div class="l">Terrestra livsmiljötyper</div><div class="n">av 22 851 ha karterad livsmiljötyp</div></div>
+  <div class="card tile"><div class="v" style="color:var(--c-red)">86 %</div><div class="l">Polygoner utan tillståndsbedömning</div><div class="n">8 587 av 9 980 · "Ej bedömd status"</div></div>
+  <div class="card tile"><div class="v">40</div><div class="l">Objekt i prioritet 1</div><div class="n">täcker 79 % av hävdberoende mark</div></div>
+</div>
+
+<h2>1 · Var osäkerheten faktiskt ligger</h2>
+<p class="lede">Nästan all osäker naturtypsavgränsning i länet är marin — och FAQ fråga 16 och 29 säger att marina livsmiljötyper inte ska läggas in i NNK och att arbetsgruppen för akvatiska miljöer startar först hösten 2026. Den terrestra utbredningsfrågan är därmed ett par hundra hektar, inte sjutton tusen.</p>
+<div class="card">
+  <p class="ch-title">Osäker och obestämd naturtyp inom Natura 2000, per miljö</p>
+  <p class="ch-sub">Hektar · logaritmisk skala saknas medvetet — proportionen är hela poängen</p>
+  <svg id="c1" viewBox="0 0 900 250" role="img" aria-label="Marin osäkerhet 16 912 hektar mot terrester 445 hektar och obestämd 108 hektar"></svg>
+  <p class="note">Slutsats: lägg ingen tid på det marina under 2026. Dokumentera det som medvetet nedprioriterat med hänvisning till FAQ fråga 16.</p>
+</div>
+
+<h2>2 · Tillståndsbedömningen är i praktiken orörd</h2>
+<p class="lede">Bara 8 % av polygonerna inom länets Natura 2000-områden har en tillståndsbedömning. Samtidigt rekommenderar Naturvårdsverket (FAQ fråga 30) att man avvaktar med att registrera tillstånd i NNK tills de nya attributen driftsätts i slutet av september 2026. Höstens första hälft går därför till utbredning och fält, inte till inmatning.</p>
+<div class="grid two">
+  <div class="card">
+    <p class="ch-title">Naturtypsstatus per polygon</p>
+    <p class="ch-sub">9 980 polygoner inom Natura 2000</p>
+    <svg id="c2" viewBox="0 0 440 250" role="img" aria-label="Fördelning av naturtypsstatus"></svg>
+    <div class="legend" id="l2"></div>
+  </div>
+  <div class="card">
+    <p class="ch-title">Terrester livsmiljötyp per kategori</p>
+    <p class="ch-sub">Hektar karterat inom Natura 2000</p>
+    <svg id="c3" viewBox="0 0 440 250" role="img" aria-label="Areal per kategori av terrester livsmiljötyp"></svg>
+  </div>
+</div>
+
+<h2>3 · Underlagets ålder är den underliggande kvalitetsrisken</h2>
+<div class="grid two">
+  <div class="card">
+    <p class="ch-title">Karteringens ursprung</p>
+    <p class="ch-sub">Polygoner inom Natura 2000 · 96 % kommer från basinventeringen (BIDOS), med vägledningar från före 2011</p>
+    <svg id="c4" viewBox="0 0 440 190" role="img" aria-label="Ursprung: BIDOS 9 576, NNK 395, övrigt 13"></svg>
+  </div>
+  <div class="card">
+    <p class="ch-title">Faktisk fältkunskap</p>
+    <p class="ch-sub">Karteringsstatus per polygon</p>
+    <svg id="c5" viewBox="0 0 440 190" role="img" aria-label="Karteringsstatus: granskad vid skrivbordet 8 578, fältkontrollerad 744, ej granskad 335"></svg>
+    <p class="note">Endast 7,5 % av ytorna har någonsin besökts i fält.</p>
+  </div>
+</div>
+
+<h2>4 · Prioriterade objekt</h2>
+<p class="lede">Prioriteringen följer FAQ fråga 11: hävdberoende livsmiljötyper först, därefter förekomster med liten utbredning i länet. De 40 objekten i prioritet 1 rymmer 5 178 ha av länets 7 821 ha terrestra livsmiljötyper och 2 111 ha av 2 661 ha hävdberoende mark.</p>
+<div class="controls" id="filters"></div>
+<div class="tblwrap"><table id="tbl">
+<thead><tr>
+<th data-k="t">Prio</th><th data-k="b">Batch</th><th data-k="sc">Sitecode</th><th data-k="n">Områdesnamn</th>
+<th class="num" data-k="havd">Hävdber. ha</th><th class="num" data-k="terr">Terr. ha</th>
+<th class="num" data-k="sal">Sällsynt ha</th><th>Sällsynta koder</th>
+<th class="num" data-k="pol">Polygoner</th><th class="num" data-k="falt">Fältkontr.</th><th class="num" data-k="bed">Bedömd %</th>
+</tr></thead><tbody></tbody></table></div>
+<p class="note" id="tblnote"></p>
+
+<h2>5 · Tidplan v34–v52 2026</h2>
+<div class="card">
+<div class="tl" id="tl"></div>
+</div>
+
+<h2>6 · Vad som medvetet inte görs i år</h2>
+<div class="card">
+<ul class="tight">
+<li><span class="k">Marina livsmiljötyper</span> läggs inte in i NNK — 16 912 ha osäker marin areal lämnas orörd <em>(FAQ f.16)</em></li>
+<li><span class="k">Limniska ytterkanter</span> justeras inte; livsmiljötyp anges i befintliga ytor där förekomsten är känd <em>(f.16)</em></li>
+<li><span class="k">Båvens 4 845 ha okarterat</span> åtgärdas inte <em>(f.16, f.29)</em></li>
+<li><span class="k">Grottor, branter, sandstäpp, inlandssandmarker</span> — nationella underlag räcker <em>(f.16)</em></li>
+<li><span class="k">Obetydliga livsmiljötyper</span> inom N2000 — endast areal redovisas, ingen tillståndsbedömning <em>(f.15)</em></li>
+<li><span class="k">Standard Data Form / N2000-databasen</span> uppdateras inte — hämtas automatiskt ur NNK <em>(f.17)</em></li>
+<li><span class="k">Osäkra tillståndsbedömningar</span> görs inte; behåll tidigare bedömning eller ange okänt och dokumentera osäkerheten <em>(f.22)</em></li>
+<li><span class="k">Uppdateringar under minsta karteringsenhet</span> görs inte — 0,25 ha generellt, 1 ha skog och våtmark, 0,5 ha ädellöv <em>(f.12)</em></li>
+<li><span class="k">Naturreservat utanför N2000</span> får screening, inte genomgång — deadline är 2027 <em>(f.6)</em></li>
+</ul>
+</div>
+
+<footer>
+Arealer avser karterad areal inom Natura 2000 (SCI/SAC) i D-län. Källa: NNK-statistik per Natura 2000-område, uttag 2026-01-20, Naturvårdsverket, samt NNK-kartering D-län (14 830 polygoner).<br>
+Dashboard v1.0 · 2026-08-17 · hör ihop med <code>docs/nnk/arbetsplan_nnk_2026.md</code>
+</footer>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+const OBJ = /*DATA*/[{"sc":"SE0220129","n":"Skärgårdsreservaten","t":"P1","b":"S","havd":501.3,"terr":1341.5,"sal":69.3,"salk":["1220","1620","4030","5133","6210","6230"],"pol":2915,"falt":198,"bed":0.5},{"sc":"SE0220126","n":"Nynäs","t":"P1","b":"S","havd":168.7,"terr":521.8,"sal":23.9,"salk":["1640","4030","6110","6210","6230","8231"],"pol":1433,"falt":30,"bed":1.9},{"sc":"SE0220439","n":"Askö","t":"P1","b":"A","havd":218.3,"terr":346.0,"sal":6.9,"salk":["1220","1640","2181","8231","9006"],"pol":506,"falt":48,"bed":37.9},{"sc":"SE0220020","n":"Strandstuviken","t":"P1","b":"A","havd":155.6,"terr":268.4,"sal":15.5,"salk":["1220","1640","8231","8232","9006","9190"],"pol":255,"falt":40,"bed":14.9},{"sc":"SE0220077","n":"Ridö-Sundbyholmsarkipelagen södra","t":"P1","b":"A","havd":84.5,"terr":408.9,"sal":14.8,"salk":["9110","9190"],"pol":195,"falt":12,"bed":1.0},{"sc":"SE0220034","n":"Tullgarn södra","t":"P1","b":"A","havd":90.6,"terr":327.1,"sal":24.4,"salk":["1620","6110","6210"],"pol":254,"falt":38,"bed":14.6},{"sc":"SE0220110","n":"Skåraviken","t":"P1","b":"B","havd":94.9,"terr":94.9,"sal":0,"salk":[],"pol":43,"falt":0,"bed":62.8},{"sc":"SE0220017","n":"Svanviken-Lindbacke","t":"P1","b":"B","havd":73.6,"terr":73.6,"sal":5.0,"salk":["5130"],"pol":30,"falt":1,"bed":3.3},{"sc":"SE0220231","n":"Rågö","t":"P1","b":"A","havd":72.4,"terr":174.3,"sal":4.5,"salk":["8220","8231","9006","9072"],"pol":371,"falt":15,"bed":3.5},{"sc":"SE0220063","n":"Sparreholms ekhagar","t":"P1","b":"B","havd":83.3,"terr":83.3,"sal":0,"salk":[],"pol":25,"falt":0,"bed":0.0},{"sc":"SE0220176","n":"Tovhulta stormosse","t":"P1","b":"C","havd":0,"terr":47.0,"sal":47.0,"salk":["7110"],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220218","n":"Stendörren","t":"P1","b":"A","havd":69.7,"terr":167.8,"sal":0,"salk":[],"pol":277,"falt":11,"bed":4.0},{"sc":"SE0220304","n":"Kilaån-Vretaån","t":"P1","b":"C","havd":6.2,"terr":45.9,"sal":44.9,"salk":["3260","9750"],"pol":214,"falt":41,"bed":17.8},{"sc":"SE0220602","n":"Vilsta","t":"P1","b":"D","havd":12.3,"terr":248.2,"sal":7.9,"salk":["9006","9072"],"pol":146,"falt":8,"bed":4.8},{"sc":"SE0220182","n":"Segersön","t":"P1","b":"B","havd":44.0,"terr":96.7,"sal":0,"salk":[],"pol":65,"falt":0,"bed":0.0},{"sc":"SE0220118","n":"Labro ängar","t":"P1","b":"B","havd":52.4,"terr":52.4,"sal":0,"salk":[],"pol":22,"falt":0,"bed":50.0},{"sc":"SE0220343","n":"Askholmen","t":"P1","b":"D","havd":20.2,"terr":54.9,"sal":18.0,"salk":["9072","9190"],"pol":41,"falt":14,"bed":34.1},{"sc":"SE0220150","n":"Tåkenön","t":"P1","b":"B","havd":38.1,"terr":85.8,"sal":0,"salk":[],"pol":50,"falt":2,"bed":4.0},{"sc":"SE0220106","n":"Fjällmossen norra","t":"P1","b":"C","havd":0.4,"terr":230.5,"sal":7.4,"salk":["9006"],"pol":144,"falt":109,"bed":11.8},{"sc":"SE0220145","n":"Båvenöarna","t":"P2","b":"","havd":17.2,"terr":119.3,"sal":0,"salk":[],"pol":96,"falt":0,"bed":51.0},{"sc":"SE0220085","n":"Gripsholms Hjorthage","t":"P1","b":"B","havd":36.6,"terr":36.6,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220009","n":"Stora Bötet","t":"P2","b":"","havd":0,"terr":250.3,"sal":2.6,"salk":["9006"],"pol":178,"falt":13,"bed":5.1},{"sc":"SE0220363","n":"Lindön","t":"P1","b":"B","havd":31.4,"terr":57.4,"sal":0,"salk":[],"pol":27,"falt":0,"bed":25.9},{"sc":"SE0220115","n":"Marsviken-Marsäng","t":"P1","b":"B","havd":42.8,"terr":42.8,"sal":0.4,"salk":["6230"],"pol":26,"falt":2,"bed":7.7},{"sc":"SE0220206","n":"Floden","t":"P1","b":"B","havd":31.1,"terr":31.1,"sal":0,"salk":[],"pol":13,"falt":0,"bed":61.5},{"sc":"SE0220228","n":"Ånhammarsnäset","t":"P1","b":"B","havd":20.4,"terr":28.8,"sal":0.5,"salk":["6430"],"pol":30,"falt":0,"bed":0.0},{"sc":"SE0220088","n":"Herröknanäs","t":"P1","b":"B","havd":28.8,"terr":33.4,"sal":0,"salk":[],"pol":13,"falt":0,"bed":0.0},{"sc":"SE0220603","n":"Jungfruvassen","t":"P1","b":"B","havd":34.4,"terr":52.0,"sal":0,"salk":[],"pol":12,"falt":4,"bed":91.7},{"sc":"SE0220344","n":"Lövön","t":"P1","b":"B","havd":25.7,"terr":35.4,"sal":0,"salk":[],"pol":20,"falt":0,"bed":0.0},{"sc":"SE0220309","n":"Brebol","t":"P1","b":"B","havd":24.4,"terr":24.4,"sal":0,"salk":[],"pol":42,"falt":0,"bed":0.0},{"sc":"SE0220435","n":"Gesta","t":"P1","b":"B","havd":21.8,"terr":21.8,"sal":0,"salk":[],"pol":22,"falt":0,"bed":0.0},{"sc":"SE0220137","n":"Bråtamossen","t":"P1","b":"C","havd":0,"terr":25.8,"sal":14.9,"salk":["7230"],"pol":10,"falt":0,"bed":0.0},{"sc":"SE0220417","n":"Rösätter-Viksätter","t":"P2","b":"","havd":17.2,"terr":17.2,"sal":0.6,"salk":["6230"],"pol":19,"falt":0,"bed":0.0},{"sc":"SE0220503","n":"Fjellskäfte","t":"P1","b":"D","havd":0,"terr":15.0,"sal":15.0,"salk":["9060"],"pol":10,"falt":0,"bed":50.0},{"sc":"SE0220174","n":"Marvikarna","t":"P2","b":"","havd":13.2,"terr":60.8,"sal":4.3,"salk":["8220","9006"],"pol":79,"falt":16,"bed":11.4},{"sc":"SE0220211","n":"Ekorneberg","t":"P1","b":"D","havd":8.5,"terr":8.5,"sal":6.6,"salk":["6230"],"pol":11,"falt":0,"bed":0.0},{"sc":"SE0220229","n":"Koholmen","t":"P3","b":"","havd":17.3,"terr":19.9,"sal":0,"salk":[],"pol":11,"falt":0,"bed":0.0},{"sc":"SE0220201","n":"Evighetsbacken","t":"P3","b":"","havd":13.6,"terr":13.6,"sal":0.6,"salk":["6230"],"pol":15,"falt":0,"bed":0.0},{"sc":"SE0220122","n":"Västra Djupvik","t":"P3","b":"","havd":14.1,"terr":15.0,"sal":0.9,"salk":["7230"],"pol":22,"falt":0,"bed":0.0},{"sc":"SE0220148","n":"Davik","t":"P3","b":"","havd":14.5,"terr":15.1,"sal":0,"salk":[],"pol":23,"falt":0,"bed":0.0},{"sc":"SE0220217","n":"Tore Grav","t":"P1","b":"D","havd":0,"terr":10.2,"sal":10.2,"salk":["9060"],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220401","n":"Berga-Lista","t":"P3","b":"","havd":14.8,"terr":14.8,"sal":0,"salk":[],"pol":15,"falt":0,"bed":46.7},{"sc":"SE0220234","n":"Persö","t":"P1","b":"D","havd":5.8,"terr":8.0,"sal":5.8,"salk":["6280"],"pol":20,"falt":0,"bed":0.0},{"sc":"SE0220364","n":"Väsby","t":"P3","b":"","havd":13.8,"terr":13.8,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220420","n":"Simonsbol","t":"P3","b":"","havd":13.8,"terr":13.8,"sal":0,"salk":[],"pol":24,"falt":0,"bed":54.2},{"sc":"SE0220238","n":"Björnvad","t":"P3","b":"","havd":13.5,"terr":13.5,"sal":0,"salk":[],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220130","n":"Lotsängsbacken","t":"P1","b":"D","havd":0,"terr":13.8,"sal":8.3,"salk":["9180"],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220322","n":"Harpsund-Ön","t":"P3","b":"","havd":12.3,"terr":12.3,"sal":0,"salk":[],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220253","n":"Tussmötet","t":"P2","b":"","havd":0,"terr":54.3,"sal":0,"salk":[],"pol":25,"falt":0,"bed":0.0},{"sc":"SE0220087","n":"Söderfjärden","t":"P3","b":"","havd":12.6,"terr":12.6,"sal":0,"salk":[],"pol":23,"falt":0,"bed":0.0},{"sc":"SE0220219","n":"Skedevi","t":"P2","b":"","havd":10.0,"terr":24.1,"sal":0,"salk":[],"pol":15,"falt":0,"bed":0.0},{"sc":"SE0220367","n":"Tomsängen","t":"P2","b":"","havd":9.2,"terr":26.7,"sal":0,"salk":[],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220311","n":"Fräkenvassen","t":"P2","b":"","havd":8.5,"terr":8.5,"sal":0,"salk":[],"pol":23,"falt":0,"bed":0.0},{"sc":"SE0220199","n":"Gorsingeholm","t":"P3","b":"","havd":11.6,"terr":11.6,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220103","n":"Pilgöljan","t":"P1","b":"C","havd":0.1,"terr":8.4,"sal":7.6,"salk":["7230","7231"],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220354","n":"Säbyviken-Bädarn","t":"P2","b":"","havd":7.6,"terr":7.6,"sal":0,"salk":[],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220248","n":"Sundängen","t":"P3","b":"","havd":11.3,"terr":11.3,"sal":0,"salk":[],"pol":2,"falt":0,"bed":0.0},{"sc":"SE0220348","n":"Tynnelsö Djurgård","t":"P1","b":"D","havd":8.2,"terr":21.2,"sal":8.2,"salk":["9072"],"pol":19,"falt":1,"bed":5.3},{"sc":"SE0220191","n":"Himlingeåsen","t":"P3","b":"","havd":11.2,"terr":11.2,"sal":0,"salk":[],"pol":50,"falt":0,"bed":0.0},{"sc":"SE0220509","n":"Kråmö","t":"P2","b":"","havd":5.8,"terr":35.0,"sal":0.0,"salk":["1620"],"pol":37,"falt":0,"bed":0.0},{"sc":"SE0220507","n":"Lundäng","t":"P1","b":"D","havd":1.1,"terr":7.5,"sal":6.4,"salk":["4030"],"pol":4,"falt":0,"bed":0.0},{"sc":"SE0220368","n":"Skiren-Kvicken","t":"P2","b":"","havd":0.1,"terr":101.0,"sal":2.8,"salk":["9006"],"pol":57,"falt":9,"bed":14.0},{"sc":"SE0220220","n":"Nyckelmossen","t":"P2","b":"","havd":0,"terr":63.3,"sal":0,"salk":[],"pol":6,"falt":0,"bed":83.3},{"sc":"SE0220240","n":"Kårtorp","t":"P3","b":"","havd":9.1,"terr":9.1,"sal":0.2,"salk":["6230"],"pol":16,"falt":0,"bed":0.0},{"sc":"SE0220237","n":"Melån","t":"P3","b":"","havd":10.2,"terr":10.2,"sal":0,"salk":[],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220516","n":"Gölet","t":"P3","b":"","havd":5.8,"terr":5.8,"sal":3.2,"salk":["6230"],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220425","n":"Valdemarsön","t":"P3","b":"","havd":9.9,"terr":9.9,"sal":0,"salk":[],"pol":16,"falt":0,"bed":0.0},{"sc":"SE0220083","n":"Nybbleholme","t":"P2","b":"","havd":2.8,"terr":42.8,"sal":0,"salk":[],"pol":4,"falt":0,"bed":75.0},{"sc":"SE0220339","n":"Misätters ekhagar","t":"P3","b":"","havd":9.2,"terr":9.2,"sal":0,"salk":[],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220606","n":"Nästorp","t":"P3","b":"","havd":8.5,"terr":10.5,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220438","n":"Åsa gravfält","t":"P1","b":"D","havd":1.0,"terr":6.2,"sal":5.2,"salk":["4030"],"pol":4,"falt":0,"bed":0.0},{"sc":"SE0220431","n":"Femörehuvud","t":"P2","b":"","havd":0,"terr":20.3,"sal":4.0,"salk":["8220"],"pol":25,"falt":0,"bed":0.0},{"sc":"SE0220214","n":"Utnäset","t":"P2","b":"","havd":0,"terr":26.2,"sal":3.1,"salk":["8210","8220"],"pol":17,"falt":0,"bed":76.5},{"sc":"SE0220215","n":"Bokö-Oxnö","t":"P2","b":"","havd":8.9,"terr":47.6,"sal":1.7,"salk":["8220","8231"],"pol":96,"falt":9,"bed":9.4},{"sc":"SE0220318","n":"Skogstorpshagen","t":"P3","b":"","havd":6.6,"terr":6.6,"sal":1.2,"salk":["6230"],"pol":24,"falt":0,"bed":0.0},{"sc":"SE0220314","n":"Hällvik","t":"P3","b":"","havd":7.9,"terr":7.9,"sal":0,"salk":[],"pol":17,"falt":0,"bed":0.0},{"sc":"SE0220504","n":"Ormsjöbergen","t":"P2","b":"","havd":0,"terr":45.7,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220205","n":"Stora Munkebo","t":"P3","b":"","havd":7.4,"terr":7.4,"sal":0,"salk":[],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220519","n":"Duvtorp","t":"P3","b":"","havd":7.3,"terr":7.3,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220194","n":"Henaredalen","t":"P3","b":"","havd":6.1,"terr":13.0,"sal":0,"salk":[],"pol":12,"falt":0,"bed":25.0},{"sc":"SE0220414","n":"Stora Brandsbol","t":"P3","b":"","havd":7.1,"terr":7.1,"sal":0,"salk":[],"pol":9,"falt":0,"bed":11.1},{"sc":"SE0220233","n":"Stora Åsa","t":"P3","b":"","havd":6.7,"terr":6.7,"sal":0,"salk":[],"pol":17,"falt":0,"bed":0.0},{"sc":"SE0220232","n":"Holmtorp","t":"P3","b":"","havd":6.8,"terr":6.8,"sal":0,"salk":[],"pol":14,"falt":0,"bed":0.0},{"sc":"SE0220310","n":"Västra Kolberga","t":"P3","b":"","havd":6.7,"terr":6.7,"sal":0,"salk":[],"pol":10,"falt":0,"bed":0.0},{"sc":"SE0220175","n":"Södra Kärrlången","t":"P2","b":"","havd":0.5,"terr":37.6,"sal":0,"salk":[],"pol":30,"falt":0,"bed":10.0},{"sc":"SE0220028","n":"Hävringe-Källskären","t":"P2","b":"","havd":0,"terr":39.7,"sal":0,"salk":[],"pol":284,"falt":0,"bed":0.0},{"sc":"SE0220334","n":"Himlingeskogen","t":"P2","b":"","havd":0,"terr":39.0,"sal":0,"salk":[],"pol":15,"falt":0,"bed":53.3},{"sc":"SE0220329","n":"Marsjön","t":"P2","b":"","havd":0,"terr":38.1,"sal":0,"salk":[],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220505","n":"Varglyan","t":"P2","b":"","havd":0,"terr":37.8,"sal":0,"salk":[],"pol":12,"falt":0,"bed":0.0},{"sc":"SE0220236","n":"Lerböle","t":"P3","b":"","havd":6.3,"terr":6.3,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220353","n":"Lervik","t":"P3","b":"","havd":5.7,"terr":9.3,"sal":0,"salk":[],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220408","n":"Haga hage","t":"P3","b":"","havd":0,"terr":16.4,"sal":2.6,"salk":["9190"],"pol":16,"falt":0,"bed":43.8},{"sc":"SE0220327","n":"Kokärret","t":"P2","b":"","havd":0,"terr":20.1,"sal":0.9,"salk":["9006"],"pol":31,"falt":0,"bed":0.0},{"sc":"SE0220514","n":"Hasta","t":"P3","b":"","havd":5.4,"terr":5.4,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220312","n":"Skyle","t":"P3","b":"","havd":5.3,"terr":5.3,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220208","n":"Lomsjöskogen","t":"P2","b":"","havd":0,"terr":29.9,"sal":0,"salk":[],"pol":7,"falt":0,"bed":57.1},{"sc":"SE0220152","n":"Barrsjömossen","t":"P2","b":"","havd":0,"terr":29.2,"sal":0,"salk":[],"pol":13,"falt":0,"bed":53.8},{"sc":"SE0220166","n":"Bråtön","t":"P2","b":"","havd":0,"terr":28.3,"sal":0,"salk":[],"pol":19,"falt":0,"bed":52.6},{"sc":"SE0220337","n":"Storhultet","t":"P2","b":"","havd":0,"terr":28.0,"sal":0,"salk":[],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220301","n":"Borsö","t":"P3","b":"","havd":12.5,"terr":12.5,"sal":1.6,"salk":["6110"],"pol":9,"falt":9,"bed":22.2},{"sc":"SE0220257","n":"Tomtaklintskogen","t":"P2","b":"","havd":0,"terr":27.3,"sal":0,"salk":[],"pol":17,"falt":0,"bed":0.0},{"sc":"SE0220350","n":"Ljuvalund","t":"P2","b":"","havd":0,"terr":25.9,"sal":0,"salk":[],"pol":4,"falt":0,"bed":0.0},{"sc":"SE0220245","n":"Stenstorps hagkärr","t":"P2","b":"","havd":0,"terr":25.6,"sal":0,"salk":[],"pol":10,"falt":0,"bed":10.0},{"sc":"SE0220402","n":"Karlslundsskogen","t":"P2","b":"","havd":0,"terr":24.4,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220213","n":"Fräkenkärret","t":"P2","b":"","havd":0,"terr":79.5,"sal":0.6,"salk":["9006"],"pol":45,"falt":25,"bed":28.9},{"sc":"SE0220226","n":"Fiholm","t":"P2","b":"","havd":11.3,"terr":23.7,"sal":0,"salk":[],"pol":8,"falt":1,"bed":0.0},{"sc":"SE0220011","n":"Bärstakärret","t":"P3","b":"","havd":0,"terr":5.1,"sal":2.2,"salk":["7230"],"pol":4,"falt":0,"bed":0.0},{"sc":"SE0220429","n":"Timmermon","t":"P2","b":"","havd":0.0,"terr":22.4,"sal":0,"salk":[],"pol":15,"falt":0,"bed":26.7},{"sc":"SE0220235","n":"Kalkugnstorp","t":"P3","b":"","havd":12.4,"terr":18.8,"sal":0,"salk":[],"pol":7,"falt":1,"bed":28.6},{"sc":"SE0220432","n":"Furön","t":"P3","b":"","havd":0,"terr":16.8,"sal":0,"salk":[],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220427","n":"Berga Kulle","t":"P2","b":"","havd":0,"terr":21.3,"sal":0,"salk":[],"pol":13,"falt":0,"bed":23.1},{"sc":"SE0220072","n":"Stampmossen","t":"P3","b":"","havd":0,"terr":11.0,"sal":1.3,"salk":["7230"],"pol":14,"falt":0,"bed":71.4},{"sc":"SE0220346","n":"Hyltingeravinen","t":"P3","b":"","havd":0,"terr":5.5,"sal":1.9,"salk":["9180"],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220345","n":"Stenhammars Kohage","t":"P2","b":"","havd":0,"terr":20.9,"sal":0,"salk":[],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220511","n":"Södra Lämund","t":"P3","b":"","havd":0,"terr":15.9,"sal":0.6,"salk":["8220"],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220411","n":"Hällesta","t":"P3","b":"","havd":0,"terr":19.7,"sal":0,"salk":[],"pol":11,"falt":0,"bed":54.5},{"sc":"SE0220252","n":"Igelsjöskogen","t":"P3","b":"","havd":0,"terr":18.9,"sal":0,"salk":[],"pol":7,"falt":0,"bed":28.6},{"sc":"SE0220369","n":"Magsjötorp","t":"P3","b":"","havd":0,"terr":18.1,"sal":0,"salk":[],"pol":11,"falt":0,"bed":0.0},{"sc":"SE0220433","n":"Hasselö-Bergö","t":"P3","b":"","havd":0,"terr":17.8,"sal":0,"salk":[],"pol":10,"falt":0,"bed":0.0},{"sc":"SE0220335","n":"Utnorsskogen","t":"P3","b":"","havd":0,"terr":17.7,"sal":0,"salk":[],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220203","n":"Lånestaheden","t":"P3","b":"","havd":6.5,"terr":6.5,"sal":4.8,"salk":["6110"],"pol":6,"falt":2,"bed":16.7},{"sc":"SE0220021","n":"Sjösakärren","t":"P1","b":"C","havd":2.2,"terr":20.9,"sal":5.7,"salk":["7230"],"pol":16,"falt":1,"bed":62.5},{"sc":"SE0220207","n":"Åtorpskogen","t":"P3","b":"","havd":0,"terr":17.2,"sal":0,"salk":[],"pol":9,"falt":0,"bed":44.4},{"sc":"SE0220421","n":"Tornskogen","t":"P3","b":"","havd":0,"terr":17.0,"sal":0,"salk":[],"pol":10,"falt":0,"bed":40.0},{"sc":"SE0220370","n":"Tynnelsö-Prästholmen","t":"P3","b":"","havd":0,"terr":16.1,"sal":0,"salk":[],"pol":16,"falt":0,"bed":31.2},{"sc":"SE0220356","n":"Masugnsskogen","t":"P3","b":"","havd":0,"terr":15.2,"sal":0,"salk":[],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220331","n":"Ödesängssjön","t":"P3","b":"","havd":0,"terr":14.9,"sal":0,"salk":[],"pol":15,"falt":0,"bed":0.0},{"sc":"SE0220069","n":"Putbergen","t":"P3","b":"","havd":0,"terr":14.5,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220251","n":"Djupvikssjöskogen","t":"P3","b":"","havd":0.2,"terr":11.1,"sal":0.2,"salk":["6430"],"pol":11,"falt":0,"bed":36.4},{"sc":"SE0220255","n":"Fågelboskogen","t":"P3","b":"","havd":0,"terr":13.6,"sal":0,"salk":[],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220336","n":"Harpebolnäset","t":"P3","b":"","havd":0,"terr":10.1,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220515","n":"Gorsingelund","t":"P3","b":"","havd":0,"terr":9.8,"sal":0,"salk":[],"pol":2,"falt":0,"bed":0.0},{"sc":"SE0220601","n":"Stenby äng","t":"P3","b":"","havd":10.0,"terr":19.5,"sal":0,"salk":[],"pol":5,"falt":3,"bed":20.0},{"sc":"SE0220349","n":"Djupdalshagen","t":"P3","b":"","havd":0,"terr":7.9,"sal":0,"salk":[],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220517","n":"Rosmossen","t":"P3","b":"","havd":0,"terr":8.7,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220440","n":"Borgmästarholmen","t":"P3","b":"","havd":4.4,"terr":14.6,"sal":4.0,"salk":["9190"],"pol":8,"falt":5,"bed":62.5},{"sc":"SE0220443","n":"Gorsingeholmskullarna","t":"P3","b":"","havd":0,"terr":6.4,"sal":0,"salk":[],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220413","n":"Nytorpsravinen","t":"P3","b":"","havd":0,"terr":6.0,"sal":0,"salk":[],"pol":8,"falt":0,"bed":50.0},{"sc":"SE0220403","n":"Råby-Myrhem","t":"P3","b":"","havd":0,"terr":5.0,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220012","n":"Nävsjöskogen","t":"P3","b":"","havd":0,"terr":5.0,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220347","n":"Nykärr","t":"P2","b":"","havd":0,"terr":4.9,"sal":4.1,"salk":["9190"],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220078","n":"Sofiebergsåsen","t":"P2","b":"","havd":3.4,"terr":3.4,"sal":2.6,"salk":["5130"],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220124","n":"Horsvik","t":"P3","b":"","havd":8.4,"terr":9.0,"sal":0.6,"salk":["4030"],"pol":21,"falt":3,"bed":4.8},{"sc":"SE0220224","n":"Näsberget","t":"P3","b":"","havd":4.9,"terr":4.9,"sal":2.3,"salk":["6210"],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220247","n":"Hedensö","t":"P2","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":4,"falt":0,"bed":0.0},{"sc":"SE0220250","n":"Norrby kyrkskog","t":"P3","b":"","havd":6.7,"terr":8.0,"sal":0,"salk":[],"pol":11,"falt":8,"bed":27.3},{"sc":"SE0220351","n":"Djurgården","t":"P3","b":"","havd":6.6,"terr":7.7,"sal":0,"salk":[],"pol":10,"falt":2,"bed":30.0},{"sc":"SE0220160","n":"Bränntorp","t":"P3","b":"","havd":3.7,"terr":3.7,"sal":0.7,"salk":["6230"],"pol":15,"falt":0,"bed":0.0},{"sc":"SE0220193","n":"Jaktstuguskogen","t":"P2","b":"","havd":0,"terr":40.4,"sal":0,"salk":[],"pol":25,"falt":9,"bed":32.0},{"sc":"SE0220332","n":"Örmossen","t":"P2","b":"","havd":0,"terr":39.8,"sal":0,"salk":[],"pol":29,"falt":3,"bed":0.0},{"sc":"SE0220216","n":"Rosenlund","t":"P3","b":"","havd":2.8,"terr":2.8,"sal":2.8,"salk":["6210"],"pol":5,"falt":1,"bed":20.0},{"sc":"SE0220604","n":"Malmaåsen","t":"P3","b":"","havd":0,"terr":3.8,"sal":3.8,"salk":["9060"],"pol":4,"falt":0,"bed":25.0},{"sc":"SE0220243","n":"Eknäset","t":"P2","b":"","havd":0,"terr":29.7,"sal":0,"salk":[],"pol":12,"falt":9,"bed":66.7},{"sc":"SE0220352","n":"Vurstusbacken","t":"P3","b":"","havd":4.2,"terr":4.2,"sal":0,"salk":[],"pol":5,"falt":4,"bed":40.0},{"sc":"SE0220154","n":"Öknaby","t":"P3","b":"","havd":4.4,"terr":4.4,"sal":0.5,"salk":["6230"],"pol":6,"falt":0,"bed":0.0},{"sc":"SE0220320","n":"Tynäs ekhagar","t":"P3","b":"","havd":4.9,"terr":4.9,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220151","n":"Igelbålen","t":"P3","b":"","havd":0,"terr":4.2,"sal":3.1,"salk":["7230","7231"],"pol":12,"falt":0,"bed":8.3},{"sc":"SE0220330","n":"Torsmossen","t":"P2","b":"","havd":0,"terr":23.1,"sal":0,"salk":[],"pol":12,"falt":2,"bed":16.7},{"sc":"SE0220315","n":"Vreten","t":"P3","b":"","havd":3.4,"terr":3.4,"sal":0.5,"salk":["6230"],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220341","n":"Svinnäset","t":"P3","b":"","havd":0,"terr":17.2,"sal":0.8,"salk":["9006"],"pol":43,"falt":8,"bed":9.3},{"sc":"SE0220223","n":"Svartsjömyren","t":"P3","b":"","havd":0,"terr":13.9,"sal":1.2,"salk":["9006"],"pol":21,"falt":7,"bed":19.0},{"sc":"SE0220119","n":"Linudden","t":"P3","b":"","havd":2.5,"terr":10.5,"sal":0,"salk":[],"pol":4,"falt":4,"bed":25.0},{"sc":"SE0220338","n":"Dagöholmsbackarna","t":"P3","b":"","havd":3.8,"terr":3.8,"sal":0,"salk":[],"pol":4,"falt":0,"bed":0.0},{"sc":"SE0220168","n":"Mora hage","t":"P3","b":"","havd":3.3,"terr":3.3,"sal":0.3,"salk":["6230"],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220013","n":"Ängbacken","t":"P3","b":"","havd":3.7,"terr":3.7,"sal":0,"salk":[],"pol":2,"falt":0,"bed":0.0},{"sc":"SE0220210","n":"Lenellstorpskärret","t":"P3","b":"","havd":0,"terr":11.0,"sal":1.3,"salk":["7230"],"pol":13,"falt":1,"bed":30.8},{"sc":"SE0220202","n":"Djupviksnäs","t":"P3","b":"","havd":2.4,"terr":2.4,"sal":0.6,"salk":["6430"],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220227","n":"Stavåsen","t":"P3","b":"","havd":3.1,"terr":3.1,"sal":0,"salk":[],"pol":1,"falt":0,"bed":100.0},{"sc":"SE0220506","n":"Hvalsta","t":"P3","b":"","havd":0,"terr":15.8,"sal":0,"salk":[],"pol":6,"falt":3,"bed":50.0},{"sc":"SE0220156","n":"Lilla Tjärbruket","t":"P3","b":"","havd":2.0,"terr":2.0,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220317","n":"Kila","t":"P3","b":"","havd":2.0,"terr":2.0,"sal":0,"salk":[],"pol":7,"falt":0,"bed":0.0},{"sc":"SE0220333","n":"Nya kärren","t":"P3","b":"","havd":0,"terr":2.0,"sal":1.2,"salk":["7230"],"pol":3,"falt":0,"bed":0.0},{"sc":"SE0220373","n":"Åboravinen","t":"P3","b":"","havd":0,"terr":10.7,"sal":0,"salk":[],"pol":18,"falt":1,"bed":22.2},{"sc":"SE0220405","n":"Torparskogen","t":"P3","b":"","havd":0,"terr":10.6,"sal":0,"salk":[],"pol":11,"falt":7,"bed":45.5},{"sc":"SE0220104","n":"Sågartorpskärret","t":"P3","b":"","havd":0,"terr":4.2,"sal":0.6,"salk":["7230"],"pol":11,"falt":0,"bed":45.5},{"sc":"SE0220306","n":"Näsnaren","t":"P3","b":"","havd":0.2,"terr":0.6,"sal":0,"salk":[],"pol":52,"falt":0,"bed":1.9},{"sc":"SE0220360","n":"Hornskogen","t":"P3","b":"","havd":0,"terr":8.2,"sal":0,"salk":[],"pol":2,"falt":2,"bed":100.0},{"sc":"SE0220239","n":"Veckla äng","t":"P3","b":"","havd":1.2,"terr":1.2,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220197","n":"Kalkbro","t":"P3","b":"","havd":0.3,"terr":2.6,"sal":0.3,"salk":["6210"],"pol":2,"falt":0,"bed":0.0},{"sc":"SE0220059","n":"Grindstugan","t":"P3","b":"","havd":0.9,"terr":0.9,"sal":0,"salk":[],"pol":7,"falt":1,"bed":42.9},{"sc":"SE0220434","n":"Bredsjönäs","t":"P3","b":"","havd":0,"terr":4.9,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220241","n":"Lisstorp","t":"P3","b":"","havd":0.6,"terr":0.6,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220513","n":"Rinkesta såg","t":"P3","b":"","havd":0,"terr":3.1,"sal":0.1,"salk":["3260"],"pol":5,"falt":0,"bed":0.0},{"sc":"SE0220362","n":"Lögarbäcken","t":"P3","b":"","havd":0,"terr":2.2,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220358","n":"Skolmästarhagen","t":"P3","b":"","havd":0,"terr":2.0,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220701","n":"Vedaån","t":"P4","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":17,"falt":0,"bed":5.9},{"sc":"SE0220340","n":"Lidakärret","t":"P3","b":"","havd":0,"terr":1.9,"sal":0,"salk":[],"pol":2,"falt":0,"bed":0.0},{"sc":"SE0220372","n":"Ånga","t":"P3","b":"","havd":0,"terr":1.7,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220357","n":"Likstammen","t":"P3","b":"","havd":0,"terr":1.7,"sal":0,"salk":[],"pol":16,"falt":0,"bed":81.2},{"sc":"SE0220328","n":"Källarhalsen","t":"P3","b":"","havd":0,"terr":1.5,"sal":0,"salk":[],"pol":1,"falt":0,"bed":0.0},{"sc":"SE0220305","n":"Floda-Kyrksjön","t":"P3","b":"","havd":0.0,"terr":0.0,"sal":0,"salk":[],"pol":30,"falt":0,"bed":0.0},{"sc":"SE0220303","n":"Båven","t":"P3","b":"","havd":0.0,"terr":0.1,"sal":0,"salk":[],"pol":197,"falt":1,"bed":1.0},{"sc":"SE0220089","n":"Tuna","t":"P4","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":9,"falt":0,"bed":0.0},{"sc":"SE0220204","n":"Hålvetten-Näsnaren","t":"P4","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":39,"falt":0,"bed":0.0},{"sc":"SE0220212","n":"Stortrön","t":"P4","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":13,"falt":0,"bed":0.0},{"sc":"SE0220702","n":"Svärtaån","t":"P4","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":8,"falt":0,"bed":0.0},{"sc":"SE0220703","n":"Sibro","t":"P4","b":"","havd":0,"terr":0,"sal":0,"salk":[],"pol":3,"falt":0,"bed":0.0}]/*END*/;
+const tip=document.getElementById('tip');
+function show(e,h){tip.innerHTML=h;tip.style.opacity=1;move(e)}
+function move(e){const p=12;let x=e.clientX+p,y=e.clientY+p;
+ const r=tip.getBoundingClientRect();
+ if(x+r.width>innerWidth-8)x=e.clientX-r.width-p;
+ if(y+r.height>innerHeight-8)y=e.clientY-r.height-p;
+ tip.style.left=x+'px';tip.style.top=y+'px'}
+function hide(){tip.style.opacity=0}
+function tog(){const d=document.documentElement;
+ const cur=d.getAttribute('data-theme')|| (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+ d.setAttribute('data-theme',cur==='dark'?'light':'dark')}
+const nf=n=>n.toLocaleString('sv-SE');
+const SVG='http://www.w3.org/2000/svg';
+function el(t,a,p){const n=document.createElementNS(SVG,t);for(const k in a)n.setAttribute(k,a[k]);if(p)p.appendChild(n);return n}
+
+/* ---- chart 1: osäkerhet marin vs terrester ---- */
+(function(){
+ const s=document.getElementById('c1'),W=900,H=250,L=210,R=70,T=18,B=34;
+ const d=[{n:'Marin — osäker natura/icke-natura',v:16911.5,c:'var(--s2)',note:'Lämnas till nationell marin kartering'},
+          {n:'Terrester — osäker natura/icke-natura',v:444.8,c:'var(--s1)',note:'Skog 361 · Gräsmark 53 · Våtmark 31'},
+          {n:'Terrester — obestämd naturtyp',v:107.9,c:'var(--s1)',note:'Gräsmark 77 · Skog 22 · Berg 7'}];
+ const max=17000,bw=(W-L-R),x=v=>bw*v/max, rows=d.length, bh=30, gap=26;
+ const y0=T+14;
+ for(let i=0;i<=4;i++){const gx=L+bw*i/4;
+  el('line',{x1:gx,x2:gx,y1:y0-8,y2:y0+rows*(bh+gap)-gap+6,class:'gl'},s);
+  el('text',{x:gx,y:y0+rows*(bh+gap)-gap+22,class:'tick','text-anchor':'middle'},s).textContent=nf(max*i/4);}
+ d.forEach((r,i)=>{const y=y0+i*(bh+gap);
+  el('text',{x:L-12,y:y+bh/2+4,class:'lab','text-anchor':'end'},s).textContent=r.n;
+  const w=Math.max(x(r.v),3);
+  const p=el('path',{d:`M${L},${y} h${w-4} a4,4 0 0 1 4,4 v${bh-8} a4,4 0 0 1 -4,4 h${-(w-4)} z`,fill:r.c},s);
+  p.style.cursor='default';
+  p.addEventListener('mousemove',e=>show(e,`<b>${r.n}</b>${nf(Math.round(r.v))} ha<br><span style="color:var(--ink-3)">${r.note}</span>`));
+  p.addEventListener('mouseleave',hide);
+  el('text',{x:L+w+9,y:y+bh/2+4,class:'val'},s).textContent=nf(Math.round(r.v))+' ha';});
+ el('line',{x1:L,x2:L,y1:y0-8,y2:y0+rows*(bh+gap)-gap+6,class:'base'},s);
+})();
+
+/* ---- chart 2: naturtypsstatus (stacked column) ---- */
+(function(){
+ const s=document.getElementById('c2'),lg=document.getElementById('l2');
+ const d=[{n:'Ej bedömd status',v:8587,c:'var(--neutral)'},
+          {n:'Fullgod Natura-naturtyp',v:482,c:'var(--c-green)'},
+          {n:'Utvecklingsmark',v:167,c:'var(--c-violet)'},
+          {n:'Övrigt, icke Natura-naturtyp',v:237,c:'var(--c-yellow)'},
+          {n:'Icke fullgod Natura-naturtyp',v:336,c:'var(--c-red)'},
+          {n:'Status saknas',v:171,c:'var(--neutral-2)'}];
+ const tot=d.reduce((a,b)=>a+b.v,0),W=440,X=54,BW=104,T=18,H=196;
+ let y=T;
+ d.forEach(r=>{const h=H*r.v/tot;
+  const g=el('rect',{x:X,y:y,width:BW,height:Math.max(h-2,1.2),fill:r.c,rx:h>8?3:0},s);
+  g.addEventListener('mousemove',e=>show(e,`<b>${r.n}</b>${nf(r.v)} polygoner · ${(100*r.v/tot).toFixed(1)} %`));
+  g.addEventListener('mouseleave',hide);
+  if(h>15){el('text',{x:X+BW+11,y:y+h/2+4,class:'val'},s).textContent=(100*r.v/tot).toFixed(1)+' %';
+           el('text',{x:X+BW+62,y:y+h/2+4,class:'lab'},s).textContent=r.n;}
+  y+=h;});
+ el('text',{x:X+BW/2,y:T+H+22,class:'tick','text-anchor':'middle'},s).textContent=nf(tot)+' polygoner';
+ lg.innerHTML=d.map(r=>`<span><i class="sw" style="background:${r.c}"></i>${r.n} · ${nf(r.v)}</span>`).join('');
+})();
+
+/* ---- chart 3: terrester areal per kategori ---- */
+(function(){
+ const s=document.getElementById('c3');
+ const d=[['Skog',4205.7],['Gräsmark',2676.4],['Våtmark',638.3],['Stränder',277.1],['Berg',21.9],['Dyner',1.9]];
+ const W=440,L=88,R=62,T=14,bh=22,gap=12,max=4300,bw=W-L-R;
+ for(let i=0;i<=4;i++){const gx=L+bw*i/4;
+  el('line',{x1:gx,x2:gx,y1:T-6,y2:T+d.length*(bh+gap)-gap+6,class:'gl'},s);
+  el('text',{x:gx,y:T+d.length*(bh+gap)+14,class:'tick','text-anchor':'middle'},s).textContent=nf(max*i/4);}
+ d.forEach((r,i)=>{const y=T+i*(bh+gap),w=Math.max(bw*r[1]/max,2.5);
+  el('text',{x:L-11,y:y+bh/2+4,class:'lab','text-anchor':'end'},s).textContent=r[0];
+  const p=el('path',{d:`M${L},${y} h${Math.max(w-4,0)} a4,4 0 0 1 4,4 v${bh-8} a4,4 0 0 1 -4,4 h${-Math.max(w-4,0)} z`,fill:'var(--s1)'},s);
+  p.addEventListener('mousemove',e=>show(e,`<b>${r[0]}</b>${nf(Math.round(r[1]))} ha · ${(100*r[1]/7821).toFixed(1)} % av terrester areal`));
+  p.addEventListener('mouseleave',hide);
+  el('text',{x:L+w+9,y:y+bh/2+4,class:'val'},s).textContent=nf(Math.round(r[1]));});
+ el('line',{x1:L,x2:L,y1:T-6,y2:T+d.length*(bh+gap)-gap+6,class:'base'},s);
+})();
+
+/* ---- chart 4 & 5 ---- */
+function hbar(id,d,max,L){
+ const s=document.getElementById(id),W=440,R=76,T=14,bh=24,gap=16,bw=W-L-R;
+ for(let i=0;i<=4;i++){const gx=L+bw*i/4;
+  el('line',{x1:gx,x2:gx,y1:T-6,y2:T+d.length*(bh+gap)-gap+6,class:'gl'},s);
+  el('text',{x:gx,y:T+d.length*(bh+gap)+14,class:'tick','text-anchor':'middle'},s).textContent=nf(Math.round(max*i/4));}
+ d.forEach((r,i)=>{const y=T+i*(bh+gap),w=Math.max(bw*r[1]/max,2.5);
+  el('text',{x:L-11,y:y+bh/2+4,class:'lab','text-anchor':'end'},s).textContent=r[0];
+  const p=el('path',{d:`M${L},${y} h${Math.max(w-4,0)} a4,4 0 0 1 4,4 v${bh-8} a4,4 0 0 1 -4,4 h${-Math.max(w-4,0)} z`,fill:r[2]||'var(--s1)'},s);
+  p.addEventListener('mousemove',e=>show(e,`<b>${r[0]}</b>${nf(r[1])} polygoner · ${(100*r[1]/9984).toFixed(1)} %`));
+  p.addEventListener('mouseleave',hide);
+  el('text',{x:L+w+9,y:y+bh/2+4,class:'val'},s).textContent=nf(r[1]);});
+ el('line',{x1:L,x2:L,y1:T-6,y2:T+d.length*(bh+gap)-gap+6,class:'base'},s);
+}
+hbar('c4',[['BIDOS',9576,'var(--s2)'],['NNK',395],['BIDOS + NNK',13]],10000,104);
+hbar('c5',[['Granskad vid skrivbordet',8578],['Inventerad i fält',390,'var(--c-green)'],['Besökt i fält',354,'var(--c-green)'],['Ej granskad',335,'var(--s2)']],9000,152);
+
+/* ---- tabell ---- */
+const TCOL={P1:'var(--p1)',P2:'var(--p2)',P3:'var(--p3)',P4:'var(--p4)'};
+let filt='P1',sk='havd',sd=-1;
+const fdefs=[['P1','Prioritet 1 (40)'],['P2','Prioritet 2 (43)'],['P3','Prioritet 3 (108)'],['ALL','Alla 197']];
+document.getElementById('filters').innerHTML=fdefs.map(f=>
+ `<button data-f="${f[0]}" aria-pressed="${f[0]===filt}">${f[1]}</button>`).join('');
+document.getElementById('filters').addEventListener('click',e=>{
+ const b=e.target.closest('button');if(!b)return;filt=b.dataset.f;
+ [...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===filt));draw()});
+document.querySelectorAll('#tbl th[data-k]').forEach(th=>th.addEventListener('click',()=>{
+ const k=th.dataset.k; if(sk===k)sd=-sd; else{sk=k;sd=(['sc','n','t','b'].includes(k))?1:-1} draw()}));
+function draw(){
+ let r=OBJ.filter(o=>filt==='ALL'?true:o.t===filt);
+ r=r.slice().sort((a,b)=>{const x=a[sk],y=b[sk];
+  return (typeof x==='string')?sd*x.localeCompare(y,'sv'):sd*(x-y)});
+ document.querySelector('#tbl tbody').innerHTML=r.map(o=>`<tr>
+ <td><span class="pill" style="background:${TCOL[o.t]}">${o.t}</span></td>
+ <td>${o.b||'—'}</td><td>${o.sc}</td><td>${o.n}</td>
+ <td class="num">${o.havd?o.havd.toFixed(1):'—'}</td>
+ <td class="num">${o.terr?o.terr.toFixed(1):'—'}</td>
+ <td class="num">${o.sal?o.sal.toFixed(1):'—'}</td>
+ <td style="color:var(--ink-3)">${o.salk.join(', ')||'—'}</td>
+ <td class="num">${nf(o.pol)}</td><td class="num">${nf(o.falt)}</td>
+ <td class="num">${o.bed.toFixed(1)}</td></tr>`).join('');
+ const th=r.reduce((a,b)=>a+b.havd,0),tt=r.reduce((a,b)=>a+b.terr,0),tp=r.reduce((a,b)=>a+b.pol,0);
+ document.getElementById('tblnote').textContent=
+  `${r.length} objekt · ${nf(Math.round(tt))} ha terrester livsmiljötyp · ${nf(Math.round(th))} ha hävdberoende · ${nf(tp)} polygoner. Klicka på en kolumnrubrik för att sortera.`;
+}
+draw();
+
+/* ---- tidplan ---- */
+const TL=[['v34','Fältplanering och urval · metodikgenomgång · åtkomst till samverkansytan'],
+['v35','Systemåtkomst · kodlista och GIS-mall · avstämning med chef · fältbokningar'],
+['v36','<span class="ms">M1 arbetsplats klar</span> · fältkontroll hävdberoende gräsmark startar · batch B granskas'],
+['v37','Fältkontroll gräsmark · batch B'],
+['v38','<span class="ms">M2 batch B granskad</span> · batch A kust och skärgård startar'],
+['v39','Fält sällsynta typer · batch A · bevaka driftsättning av NNK-attribut'],
+['v40','<span class="ms">M3 nya NNK-attribut driftsatta</span> · utbildning · sista fältveckan'],
+['v41','<span class="ms">M4 fältsäsong avslutad</span> · batch S storobjekt startar · registrering av tillstånd börjar'],
+['v42','Batch S · batch C våtmark · screening naturreservat'],
+['v43','Batch S · batch C · batch D skog och ädellöv'],
+['v44','Batch S · okarterade ytor (Båven, Tullgarn södra) · batch D'],
+['v45','Batch S · nytt NNK-uttag för jämförelse · inmatning av fältdata'],
+['v46','<span class="ms">M5 alla P1-objekt granskade</span> · statistik per objekt och livsmiljötyp'],
+['v47','Kvantifiering av osäkerhet och kunskapsluckor · WebbGIS-dokumentation'],
+['v48','Revideringsbehov i beslut och skötselplaner · prioritering och antaganden för 2027'],
+['v49','Plan för 2027: insatsbehov, egen insats vs. hjälp utifrån'],
+['v50','<span class="ms">M6 kunskapslägesrapport klar</span> · utvecklingsmark och målnaturtyper'],
+['v51','Intern förankring · remiss till Naturvårdsverket'],
+['v52','<span class="ms">M7 plan för 2027 levererad</span> · underlag till årsredovisningen']];
+document.getElementById('tl').innerHTML=TL.map(r=>`<div class="w">${r[0]}</div><div class="b">${r[1]}</div>`).join('');
+addEventListener('scroll',hide,{passive:true});
+</script>
+</body>
+</html>

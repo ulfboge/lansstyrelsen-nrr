@@ -14,7 +14,8 @@ import json
 from pathlib import Path
 
 # --- Konfiguration ---
-OUTPUT_DIR = Path("data/raw")
+REPO = Path(__file__).resolve().parents[2]
+OUTPUT_DIR = REPO / "data" / "raw"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Naturvårdsverkets WFS-tjänst för Natura 2000

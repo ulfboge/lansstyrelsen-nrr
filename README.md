@@ -32,8 +32,12 @@ Pipeline och kartor utvecklas i det privata repot; denna sida länkar dit. **Åt
 ```
 lansstyrelsen-nrr/          ← du är här
 ├── index.html              # GitHub Pages
-├── docs/                   # plan, datakallor, verktyg.md (översikt)
-└── scripts/                # planerade ETL/analys (lättvikt)
+├── docs/                   # se docs/README.md
+│   ├── nnk/                # arbetsdokument NNK 2026
+│   ├── underlag/           # källmaterial från NV
+│   └── faltprotokoll/      # fältdokumentation
+├── data/                   # se data/README.md
+└── scripts/                # ETL och NNK-analys (lättvikt)
 
 natura-2000/                ← separat privat repo
 ├── scripts/01–11           # datapipeline

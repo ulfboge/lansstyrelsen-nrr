@@ -209,22 +209,28 @@ Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
 ├── README.md              ← Publik projektbeskrivning
 ├── index.html             ← GitHub Pages hemsida
 ├── data/
+│   ├── README.md
 │   ├── sources_sodermanland.csv   ← Datakälleregister (aktivera/inaktivera)
-│   └── templates/
-│       └── assessment_template_sodermanland.csv  ← Bedömningsmall (fyll i efter fält)
+│   ├── templates/         ← Bedömningsmall
+│   ├── nnk/               ← Bearbetad NNK (SITECODE, nollmätning)
+│   └── uttag/             ← Råa NNK-uttag (datum i filnamnet)
 ├── docs/
+│   ├── README.md
 │   ├── projektplan.md     ← Detaljerad projektplan
 │   ├── datakallor.md      ← Datakällor och licenser
 │   ├── datamodell.md      ← ER-diagram och tabellstruktur
-│   ├── riskanalys.md      ← Risklogg
-│   └── verktyg.md         ← Pipeline-dokumentation (natura-2000 repo)
+│   ├── verktyg.md         ← Pipeline-dokumentation (natura-2000 repo)
+│   ├── nnk/               ← Arbetsdokument NNK 2026 (plan, runbook, blankett)
+│   ├── underlag/          ← Källmaterial från NV (handledning, statistik, NNK)
+│   └── faltprotokoll/     ← Fältdokumentation
 ├── scripts/
+│   ├── README.md
 │   ├── etl/               ← ETL-skript (Python)
-│   └── analysis/          ← Analysverktyg (Python/SQL)
-├── templates/
-│   └── rapport_mall.docx  ← Rapportmall (Swedish)
+│   └── analysis/          ← NNK-analys (nollmätning, områdeskoppling, kontrollrum)
 └── .gitignore
 ```
+
+Varje mapp har en `README.md` som beskriver vad som hör hemma där. Flytta inte filer utan att uppdatera sökvägarna i `scripts/analysis/` och i NNK-dokumenten.
 
 ---
 
@@ -267,4 +273,4 @@ När du arbetar i detta projekt, Claude:
 
 ---
 
-*Senast uppdaterad: 2026-06-08*
+*Senast uppdaterad: 2026-08-17*
