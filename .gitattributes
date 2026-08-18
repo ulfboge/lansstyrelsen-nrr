@@ -1,0 +1,26 @@
+# Normalisera radslut till LF i repot, checka ut CRLF pa Windows.
+# Utan detta rapporteras hela filer som andrade nar repot last via
+# Cowork-bryggan (Linux) medan Windows har core.autocrlf=true.
+* text=auto
+
+*.md   text eol=lf
+*.py   text eol=lf
+*.html text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.csv  text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf
+*.txt  text eol=lf
+
+*.xlsx binary
+*.pdf  binary
+*.zip  binary
+*.lyrx binary
+*.gpkg binary
+*.shp  binary
+*.dbf  binary
+*.shx  binary
+*.prj  binary
+*.aprx binary
+*.png  binary
