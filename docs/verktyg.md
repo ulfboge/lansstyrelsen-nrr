@@ -8,9 +8,11 @@ Pipelines körs **från det repot** men skripten refereras och dokumenteras här
 | Repo | URL | Roll |
 |------|-----|------|
 | **lansstyrelsen-nrr** | [github.com/ulfboge/lansstyrelsen-nrr](https://github.com/ulfboge/lansstyrelsen-nrr) | Publik projektyta (denna dokumentation + [GitHub Pages](https://ulfboge.github.io/lansstyrelsen-nrr)) |
-| **natura-2000** | [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) | Privat arbetsrepo — pipeline, Origo, ArcGIS Pro, NNK-granskning 2026 |
+| **nnk-granskning-2026** | [github.com/ulfboge/nnk-granskning-2026](https://github.com/ulfboge/nnk-granskning-2026) | Publikt — NNK-granskning 2026 ([kontrollpanel](https://ulfboge.github.io/nnk-granskning-2026)) |
+| **natura-2000** | [github.com/ulfboge/natura-2000](https://github.com/ulfboge/natura-2000) | Privat arbetsrepo — pipeline, Origo, ArcGIS Pro, rådata, NV-underlag |
 
-Kör all pipeline-kod och NNK-analys i **natura-2000**. Lägg inte preliminär NRF-bedömning i det publika repot.
+Kör all pipeline-kod och NNK-analys i **natura-2000**. Arbetsdokument och kontrollpanel publiceras i **nnk-granskning-2026**.
+Lägg inte preliminär NRF-bedömning, rådata eller NV-underlag i något publikt repo.
 
 **Åtkomst:** du äger `natura-2000` som GitHub-användaren `ulfboge`. Kollegor bjuds in under repots Settings → Collaborators.
 

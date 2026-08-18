@@ -168,9 +168,10 @@ Prioriterade källor:
 ### Projektion
 - **SWEREF 99 TM (EPSG:3006)** används för ALLA geografiska data
 
-### Versionskontroll (två repos)
+### Versionskontroll (tre repos)
 - **lansstyrelsen-nrr** (detta repo, publikt): projektöversikt, `docs/`, GitHub Pages — ingen känslig bedömningsdata
-- **natura-2000** (privat): https://github.com/ulfboge/natura-2000 — pipeline, webbkarta, ArcGIS `.aprx`
+- **nnk-granskning-2026** (publikt): https://github.com/ulfboge/nnk-granskning-2026 — NNK-arbetsdokument och kontrollpanel som webbsidor. Endast eget material; inga NV-underlag, ingen rådata
+- **natura-2000** (privat): https://github.com/ulfboge/natura-2000 — pipeline, webbkarta, ArcGIS `.aprx`, rådata, NV-underlag
 - Branches: `main` (stabil), `develop` (valfritt)
 - Commits: Svenska meddelanden
 - Geodata och bedömningar: endast i `natura-2000` (med `.gitignore` för stora filer)
@@ -201,7 +202,8 @@ Prioriterade källor:
 | Mapp / repo | GitHub | Innehåll |
 |-------------|--------|----------|
 | `Länsstyrelsen/` → lansstyrelsen-nrr | Publikt | Denna fil, Pages, plan |
-| `natura-2000/` → natura-2000 | Privat | Pipeline, Origo, ArcGIS, NNK-granskning 2026 |
+| `nnk-granskning-2026/` → nnk-granskning-2026 | Publikt | NNK-arbetsdokument och kontrollpanel (Pages) |
+| `natura-2000/` → natura-2000 | Privat | Pipeline, Origo, ArcGIS, rådata, NV-underlag |
 
 ```
 Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
@@ -218,16 +220,24 @@ Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
 │   └── verktyg.md         ← pekar till natura-2000
 └── scripts/etl/
 
+nnk-granskning-2026/         ← publikt, GitHub Pages
+├── index.html             ← kontrollpanel
+├── kontrollrum.html       ← gantt och avbockning
+├── kunskapslage.html      ← kunskapsläge per objekt
+├── docs/                  ← arbetsplan, runbook, metodik (.md + genererad .html)
+├── blanketter/            ← blankett förvaltarkunskap
+└── bygg.py                ← genererar om docs/*.html från docs/*.md
+
 natura-2000/                 ← privat arbetsrepo
-├── docs/nnk/              ← arbetsplan, runbook, kontrollrum, blankett
-├── docs/underlag/         ← handledning, statistik, naturtypskarta
+├── docs/underlag/         ← NV:s handledning, kodlista, statistik, naturtypskarta
 ├── docs/faltprotokoll/
 ├── data/nnk/              ← SITECODE-koppling och nollmätning
 ├── scripts/analysis/      ← NNK-analys
 └── scripts/01–11          ← datapipeline
 ```
 
-NNK-arbetet körs i `natura-2000`. Det publika repot ska inte innehålla bedömningar, fältprotokoll eller Ajourhålla-uttag.
+NNK-analys och pipeline körs i `natura-2000`. Arbetsdokumenten publiceras i `nnk-granskning-2026`.
+Inget publikt repo ska innehålla bedömningsdata, fältprotokoll, Ajourhålla-uttag eller NV:s underlagsfiler.
 
 ---
 

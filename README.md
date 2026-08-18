@@ -25,9 +25,10 @@ Länsstyrelsen i Södermanlands län har rekryterat två personer för att genom
 | Repo | Synlighet | Innehåll |
 |------|-----------|----------|
 | **[lansstyrelsen-nrr](https://github.com/ulfboge/lansstyrelsen-nrr)** (detta) | Publikt | Projektöversikt, plan, datakällor, GitHub Pages |
-| **[natura-2000](https://github.com/ulfboge/natura-2000)** | Privat | Pipeline, Origo, ArcGIS Pro, **NNK-granskning 2026** |
+| **[nnk-granskning-2026](https://github.com/ulfboge/nnk-granskning-2026)** | Publikt | **NNK-granskning 2026** — kontrollpanel, arbetsplan, runbook, metodik |
+| **[natura-2000](https://github.com/ulfboge/natura-2000)** | Privat | Pipeline, Origo, ArcGIS Pro, rådata, NV-underlag |
 
-Pipeline, kartor och NNK-arbete ligger i det privata repot; denna sida länkar dit. **Åtkomst till natura-2000:** du äger repot som `ulfboge`. Kollegor bjuds in under Settings → Collaborators.
+NNK-arbetsdokumenten ligger publikt i `nnk-granskning-2026` — [öppna kontrollpanelen](https://ulfboge.github.io/nnk-granskning-2026). Pipeline, rådata och NV:s underlag ligger i det privata `natura-2000`. **Åtkomst till natura-2000:** du äger repot som `ulfboge`. Kollegor bjuds in under Settings → Collaborators.
 
 ```
 lansstyrelsen-nrr/          ← du är här (publikt)
@@ -35,9 +36,14 @@ lansstyrelsen-nrr/          ← du är här (publikt)
 ├── docs/                   # plan, datakällor, NRR-guide
 └── scripts/etl/            # lättvikts-ETL
 
+nnk-granskning-2026/         ← publikt, GitHub Pages
+├── index.html              # kontrollpanel
+├── kontrollrum.html        # gantt och avbockning
+├── kunskapslage.html       # kunskapsläge per objekt
+└── docs/                   # arbetsplan, runbook, metodik
+
 natura-2000/                ← separat privat repo
-├── docs/nnk/               # arbetsplan, runbook, kontrollrum
-├── docs/underlag/          # handledning, statistik, naturtypskarta
+├── docs/underlag/          # NV:s handledning, statistik, naturtypskarta
 ├── scripts/01–11           # datapipeline
 ├── scripts/analysis/       # NNK-nollmätning och områdeskoppling
 ├── web/public/             # Origo-webbkarta
@@ -58,7 +64,9 @@ natura-2000/                ← separat privat repo
 
 Se [CLAUDE.md](CLAUDE.md) för fullständiga projektinstruktioner.
 
-**Natura 2000-pipeline och NNK-granskning:** [natura-2000](https://github.com/ulfboge/natura-2000) (privat) — översikt i [docs/verktyg.md](docs/verktyg.md).
+**NNK-granskning 2026:** [kontrollpanel](https://ulfboge.github.io/nnk-granskning-2026) · [repo](https://github.com/ulfboge/nnk-granskning-2026) (publikt)
+
+**Natura 2000-pipeline och rådata:** [natura-2000](https://github.com/ulfboge/natura-2000) (privat) — översikt i [docs/verktyg.md](docs/verktyg.md).
 
 ---
 
