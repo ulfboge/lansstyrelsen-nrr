@@ -1,0 +1,74 @@
+{
+  "kalla": "https://etjanst.sjv.se/tuvaut/",
+  "api": "https://etjanst.sjv.se/hagenpub/rest/base",
+  "lan": "Södermanlands län (04)",
+  "hamtat_datum": "2026-08-21",
+  "antal_faltid_senaste": 3700,
+  "antal_faltid_alla": 3700,
+  "areal_ha_senaste": 13730.053921989049,
+  "areal_ha_alla": 14683.291606772242,
+  "kommuner": [
+    {
+      "id": "0488",
+      "name": "Trosa",
+      "areal": 718.2882676372051,
+      "antal": 146
+    },
+    {
+      "id": "0486",
+      "name": "Strängnäs",
+      "areal": 1342.208663033945,
+      "antal": 292
+    },
+    {
+      "id": "0484",
+      "name": "Eskilstuna",
+      "areal": 1610.9663266853945,
+      "antal": 534
+    },
+    {
+      "id": "0482",
+      "name": "Flen",
+      "areal": 2147.952546865991,
+      "antal": 594
+    },
+    {
+      "id": "0461",
+      "name": "Gnesta",
+      "areal": 1129.3153473366042,
+      "antal": 377
+    },
+    {
+      "id": "0483",
+      "name": "Katrineholm",
+      "areal": 2365.92419061301,
+      "antal": 681
+    },
+    {
+      "id": "0480",
+      "name": "Nyköping",
+      "areal": 3942.1138584361165,
+      "antal": 913
+    },
+    {
+      "id": "0481",
+      "name": "Oxelösund",
+      "areal": 39.96523394989235,
+      "antal": 6
+    },
+    {
+      "id": "0428",
+      "name": "Vingåker",
+      "areal": 433.31948743089157,
+      "antal": 157
+    }
+  ],
+  "csv_alla": "docs/tuva/sodermanland/export/Alla_inventeringsdatum-_komplett_fil_-_26-08-21.csv",
+  "csv_senaste": "docs/tuva/sodermanland/export/Senaste_inventeringsdatum_komplett_fil_-_26-08-21.csv",
+  "csv_summerad": "docs/tuva/sodermanland/export/Summerad_fil_-_26-08-21.csv",
+  "wfs_aob_objekt": 3822,
+  "wfs_naturtyper_objekt": 11609,
+  "objektrapporter_nedladdade": 3700,
+  "objektrapporter_fanns": 0,
+  "objektrapporter_fel": 0
+}

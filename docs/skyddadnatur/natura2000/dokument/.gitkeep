@@ -1,0 +1,2 @@
+# PDF-filer hämtas med:
+# python scripts/etl/fetch_skyddadnatur_dokument.py

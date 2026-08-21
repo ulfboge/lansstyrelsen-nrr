@@ -15,3 +15,5 @@ GitHub Pages använder filerna i den här mappens rot: `nrf-guide.html` och `dat
 | `planner_struktur.md` | Microsoft Planner-upplägg vid tjänststart |
 | `nrf-guide.html` | Publik NRR-guide (GitHub Pages) |
 | `nnk/`, `underlag/`, `faltprotokoll/` | Pekare — det faktiska NNK-arbetet ligger i [natura-2000](https://github.com/ulfboge/natura-2000) |
+| `skyddadnatur/natura2000/` | Bevarandeplaner från [Skyddad natur](https://skyddadnatur.naturvardsverket.se/) (PDF lokalt, index i Git) |
+| `tuva/sodermanland/` | TUVA ängs- och betesmark från [Jordbruksverket](https://etjanst.sjv.se/tuvaut/) (CSV + index i Git, rapporter/GIS lokalt) |

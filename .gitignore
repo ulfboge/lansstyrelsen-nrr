@@ -67,7 +67,22 @@ data/uttag/*
 # Genererad mellanfil (kontrollrum)
 scripts/analysis/kontrollrum_data.json
 
+# Bevarandeplaner från Skyddad natur (~800 MB PDF, hämtas lokalt)
+docs/skyddadnatur/natura2000/dokument/*
+!docs/skyddadnatur/natura2000/dokument/.gitkeep
+
+# TUVA objektsrapporter och GIS (stora lokala filer)
+docs/tuva/sodermanland/objektrapporter/*
+!docs/tuva/sodermanland/objektrapporter/.gitkeep
+docs/tuva/sodermanland/gis/*
+!docs/tuva/sodermanland/gis/.gitkeep
+
 # Temporära filer
 *.tmp
 *.bak
 *.lock
+
+# Bearbetade NNK-underlagsanalyser (bevarandeplaner, TUVA) - hör hemma i
+# det privata natura-2000-repot (data/analysis/), inte här. Lämnas
+# ignorerad här som skyddsnät om lokala körningar råkar hamna i denna mapp.
+data/analysis/
