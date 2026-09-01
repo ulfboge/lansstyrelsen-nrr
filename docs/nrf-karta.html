@@ -1,0 +1,501 @@
+<title>NRF-kartan</title>
+<style>
+  :root{
+    --paper:#FBF6DE;
+    --paper-deep:#F4EDC4;
+    --ink:#2B2E18;
+    --ink-soft:#5B5E42;
+    --line:#D8D0A0;
+    --olive:#444D26;
+    --olive-deep:#333A1C;
+    --sage:#A5B592;
+    --orange:#F3A447;
+    --yellow:#E7BC29;
+    --pink:#D092A7;
+    --purple:#9C85C0;
+    --blue:#809EC2;
+    --card-shadow: 0 1px 2px rgba(43,46,24,.06), 0 8px 24px rgba(43,46,24,.10);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Open Sans",-apple-system,"Segoe UI",Roboto,sans-serif;
+    overflow:hidden;
+    height:100vh;
+    width:100vw;
+    position:relative;
+  }
+  ::selection{background:var(--yellow);color:var(--olive-deep);}
+
+  /* ---------- top chrome ---------- */
+  .chrome{
+    position:fixed; inset:0 0 auto 0; z-index:40;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px;
+    pointer-events:none;
+  }
+  .chrome > *{pointer-events:auto;}
+  .brand{
+    display:flex; align-items:baseline; gap:10px;
+    font-weight:700; letter-spacing:.02em;
+  }
+  .brand .mark{
+    background:var(--olive); color:var(--paper);
+    font-size:13px; font-weight:700; letter-spacing:.06em;
+    padding:5px 9px; border-radius:5px;
+  }
+  .brand .sub{ font-size:12.5px; color:var(--ink-soft); font-weight:600; }
+
+  .audience{
+    display:flex; gap:2px; background:var(--paper-deep);
+    border:1px solid var(--line); border-radius:999px; padding:3px;
+    box-shadow:var(--card-shadow);
+  }
+  .audience button{
+    appearance:none; border:0; background:transparent; cursor:pointer;
+    font-family:inherit; font-size:12.5px; font-weight:600; color:var(--ink-soft);
+    padding:7px 13px; border-radius:999px; transition:background .15s, color .15s;
+    white-space:nowrap;
+  }
+  .audience button.active{ background:var(--olive); color:var(--paper); }
+  .audience button:focus-visible{ outline:2px solid var(--olive); outline-offset:2px; }
+
+  /* ---------- canvas ---------- */
+  .viewport{ position:absolute; inset:0; }
+  .canvas{
+    position:absolute; left:0; top:0;
+    width:2600px; height:1600px;
+    transform-origin:0 0;
+    transition:transform .85s cubic-bezier(.65,0,.24,1);
+    will-change:transform;
+  }
+  svg.path{ position:absolute; left:0; top:0; overflow:visible; }
+  svg.path path{
+    fill:none; stroke:var(--sage); stroke-width:3; stroke-dasharray:1 14;
+    stroke-linecap:round;
+  }
+
+  .node{
+    position:absolute;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--card-shadow);
+    padding:26px 30px;
+    cursor:pointer;
+    transition:box-shadow .2s, border-color .2s;
+  }
+  .node:hover{ border-color:var(--sage); }
+  .node.current{ box-shadow:0 0 0 3px var(--olive), var(--card-shadow); cursor:default; }
+  .node .eyebrow{
+    font-size:11.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  .node h2{ font-size:23px; line-height:1.2; margin:0 0 12px; font-weight:700; text-wrap:balance; }
+  .node .body{ font-size:14.5px; line-height:1.55; color:var(--ink); }
+  .node ul{ margin:0; padding-left:19px; }
+  .node li{ margin:0 0 7px; }
+  .node li:last-child{ margin-bottom:0; }
+  .node .kicker{ font-size:13px; color:var(--ink-soft); margin:0 0 10px; line-height:1.5; }
+
+  /* hub */
+  .hub{
+    width:250px; text-align:center; border-radius:50%;
+    background:var(--olive); color:var(--paper); border-color:var(--olive);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .hub .h1{ font-size:34px; font-weight:800; letter-spacing:.02em; margin:0; }
+  .hub .h2{ font-size:13px; font-weight:600; margin:8px 0 0; opacity:.92; line-height:1.4; }
+  .hub:hover{ border-color:var(--yellow); }
+  .hub.current{ box-shadow:0 0 0 4px var(--yellow), var(--card-shadow); }
+
+  /* mini badges */
+  .tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.05em;
+    text-transform:uppercase; padding:3px 8px; border-radius:5px; margin-bottom:10px;
+  }
+  .tag.led{ background:#fbe6cf; color:#8a4c0f; }
+  .tag.gra{ background:#e4ecdd; color:#3f5228; }
+  .tag.ext{ background:#e6ddf0; color:#4e3670; }
+
+  /* timeline node internals */
+  .tl-row{ display:flex; gap:14px; margin-top:4px; }
+  .tl-col{ flex:1; min-width:0; }
+  .tl-col .yr{ font-weight:800; font-size:17px; }
+  .tl-col ul{ padding-left:16px; margin-top:6px; }
+  .tl-col li{ font-size:12.5px; margin-bottom:5px; }
+  .tl-col:nth-child(1) .yr{ color:#c67a12; }
+  .tl-col:nth-child(2) .yr{ color:var(--olive); }
+  .tl-col:nth-child(3) .yr{ color:#5b4a86; }
+
+  /* process node internals */
+  .proc-row{ display:flex; gap:10px; margin-top:6px; }
+  .proc-step{ flex:1; min-width:0; }
+  .proc-step .num{
+    width:24px; height:24px; border-radius:50%; background:var(--sage);
+    color:var(--olive-deep); font-weight:800; font-size:12px;
+    display:flex; align-items:center; justify-content:center; margin-bottom:6px;
+  }
+  .proc-step h4{ font-size:12.5px; margin:0 0 4px; line-height:1.25; }
+  .proc-step p{ font-size:11.5px; color:var(--ink-soft); margin:0; line-height:1.4; }
+
+  /* areas cards */
+  .area-row{ display:flex; gap:10px; margin-top:4px; }
+  .area-card{
+    flex:1; border-radius:10px; padding:12px; text-align:center;
+    background:var(--paper-deep); border:1px solid var(--line);
+  }
+  .area-card.muted{ background:#fff; }
+  .area-card b{ display:block; font-size:13.5px; margin-bottom:4px; }
+  .area-card span{ font-size:11px; color:var(--ink-soft); line-height:1.35; display:block; }
+
+  /* ---------- controls ---------- */
+  .controls{
+    position:fixed; left:0; right:0; bottom:22px; z-index:40;
+    display:flex; align-items:center; justify-content:center; gap:16px;
+    pointer-events:none;
+  }
+  .controls > *{ pointer-events:auto; }
+  .navbtn{
+    width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+    background:#fff; color:var(--olive-deep); font-size:17px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--card-shadow);
+    transition:background .15s;
+  }
+  .navbtn:hover{ background:var(--paper-deep); }
+  .navbtn:focus-visible{ outline:2px solid var(--olive); outline-offset:2px; }
+  .dots{ display:flex; gap:7px; align-items:center; background:#fff; border:1px solid var(--line);
+    border-radius:999px; padding:9px 14px; box-shadow:var(--card-shadow); }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--line); cursor:pointer; border:0; padding:0; }
+  .dot.active{ background:var(--olive); width:18px; border-radius:4px; transition:width .2s; }
+  .dot.hub-dot{ background:var(--olive); opacity:.35; }
+  .dot.hub-dot.active{ opacity:1; }
+
+  .hint{
+    position:fixed; right:20px; bottom:22px; z-index:40;
+    font-size:11.5px; color:var(--ink-soft); background:#fff; border:1px solid var(--line);
+    padding:8px 12px; border-radius:10px; box-shadow:var(--card-shadow);
+  }
+  .hint kbd{ background:var(--paper-deep); border:1px solid var(--line); border-radius:4px;
+    padding:1px 5px; font-family:inherit; font-size:10.5px; }
+
+  .zoomctl{
+    position:fixed; left:22px; bottom:22px; z-index:40;
+    display:flex; flex-direction:column; background:#fff; border:1px solid var(--line);
+    border-radius:12px; box-shadow:var(--card-shadow); overflow:hidden;
+  }
+  .zoomctl button{
+    appearance:none; border:0; background:transparent; width:38px; height:34px; cursor:pointer;
+    font-size:16px; color:var(--olive-deep); font-family:inherit;
+  }
+  .zoomctl button:first-child{ border-bottom:1px solid var(--line); }
+  .zoomctl button:hover{ background:var(--paper-deep); }
+
+  @media (prefers-reduced-motion: reduce){
+    .canvas{ transition:none; }
+  }
+</style>
+
+<div class="chrome">
+  <div class="brand">
+    <span class="mark">NRF</span>
+    <span class="sub">Kartläggning av livsmiljötyper i skyddade områden — Länsstyrelsen Södermanland</span>
+  </div>
+  <div class="audience" role="group" aria-label="Målgrupp för slide 9">
+    <button data-aud="led" class="active">Ledningsgrupp</button>
+    <button data-aud="gra">Grannenhet</button>
+    <button data-aud="ext">Externa aktörer</button>
+  </div>
+</div>
+
+<div class="viewport">
+  <div class="canvas" id="canvas">
+    <svg class="path" width="2600" height="1600"><path d="M 260,780 C 500,420 760,1060 1000,780 S 1500,420 1740,780 S 2160,1120 2340,780 M 1000,780 C 1060,1180 1300,1300 1300,1300"></path></svg>
+
+    <!-- 0: title / hub -->
+    <div class="node hub" data-n="0" style="left:60px; top:660px; width:230px; height:230px;">
+      <p class="h1">NRF</p>
+      <p class="h2">Kartläggning av livsmiljötyper<br>i skyddade områden</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="node" data-n="1" style="left:430px; top:120px; width:400px;">
+      <p class="eyebrow">Bakgrund</p>
+      <h2>Vad är naturrestaureringsförordningen?</h2>
+      <ul class="body">
+        <li>EU-förordning (2024/1991), i kraft augusti 2024 — direkt bindande</li>
+        <li>Mål: restaurering på minst 20 % av EU:s land och hav till 2030, alla ekosystem i behov till 2050</li>
+        <li>Livsmiljötyper: tillståndet ska vara känt för minst 90 % av arealen till 2030</li>
+        <li>Sverige lämnar nationell restaureringsplan till EU — utkast 2026, slutlig 2027</li>
+      </ul>
+    </div>
+
+    <!-- 2 -->
+    <div class="node" data-n="2" style="left:900px; top:600px; width:380px;">
+      <p class="eyebrow">Uppdraget</p>
+      <h2>Länsstyrelsernas uppdrag</h2>
+      <ul class="body">
+        <li>Bedöma vilka livsmiljötyper som finns och deras areal</li>
+        <li>Bedöma tillstånd: gott, inte gott eller okänt — med underlag och datum</li>
+        <li>Där tillståndet är okänt: en plan för hur det ska bli känt</li>
+      </ul>
+    </div>
+
+    <!-- 3 -->
+    <div class="node" data-n="3" style="left:430px; top:1020px; width:380px;">
+      <p class="eyebrow">Omfattning</p>
+      <h2>Vilka områden ingår?</h2>
+      <div class="area-row">
+        <div class="area-card"><b>Natura 2000</b><span>Utpekade enligt art- och habitat­direktivet (SCI/SAC)</span></div>
+        <div class="area-card"><b>Naturreservat</b><span>Alla naturreservat i länet</span></div>
+        <div class="area-card muted"><b>Nationalparker</b><span>Ingår i uppdraget — finns inte i Södermanland</span></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="node" data-n="4" style="left:1360px; top:120px; width:380px;">
+      <p class="eyebrow">Motivering</p>
+      <h2>Varför är det viktigt?</h2>
+      <ul class="body">
+        <li>Samlad bild av vad som finns och hur det mår</li>
+        <li>Grund för restaurering, skydd och uppföljning över tid</li>
+        <li>Underlag för att revidera beslut, skötsel- och bevarandeplaner</li>
+        <li>Sveriges rapportering till EU: Natura 2000 (SDF) och artikel 17 (nästa 2031)</li>
+      </ul>
+    </div>
+
+    <!-- 5: timeline -->
+    <div class="node" data-n="5" style="left:1360px; top:640px; width:640px;">
+      <p class="eyebrow">Leveranser</p>
+      <h2>Tidsplan i tre steg</h2>
+      <div class="tl-row">
+        <div class="tl-col">
+          <div class="yr">2026</div>
+          <ul><li>Areal i gott/inte gott tillstånd (där känt)</li><li>Okänd areal redovisas</li><li>Plan för hur okänt ska bli känt</li></ul>
+        </div>
+        <div class="tl-col">
+          <div class="yr">2027</div>
+          <ul><li>Natura 2000 klart och slutredovisat</li><li>Naturreservat: areal per tillstånd</li><li>Ny SDF ifylld (enligt NV)</li></ul>
+        </div>
+        <div class="tl-col">
+          <div class="yr">2028</div>
+          <ul><li>Allt i NNK</li><li>Åtgärdsområden i IT-stöd för skötsel</li><li>NNK → SDF-rapportering till EU</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6: process -->
+    <div class="node" data-n="6" style="left:2020px; top:120px; width:520px;">
+      <p class="eyebrow">Metod</p>
+      <h2>Hur vi jobbar</h2>
+      <div class="proc-row">
+        <div class="proc-step"><div class="num">1</div><h4>Skrivbords­granskning</h4><p>Utbredning och gränser</p></div>
+        <div class="proc-step"><div class="num">2</div><h4>Registrera tillstånd</h4><p>I NNK där kunskap finns</p></div>
+        <div class="proc-step"><div class="num">3</div><h4>Systematisk genomgång</h4><p>Område för område</p></div>
+        <div class="proc-step"><div class="num">4</div><h4>Kunskapsläge + plan</h4><p>Sammanställning av det okända</p></div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="node" data-n="7" style="left:2130px; top:620px; width:360px;">
+      <p class="eyebrow">Status idag</p>
+      <h2>Var är vi nu?</h2>
+      <ul class="body">
+        <li>Skrivbordsgranskning av utbredning och gränser pågår</li>
+        <li>NNK-attribut för tillstånd driftsatta — registrering pågår</li>
+        <li>Nästa: kunskapsläge + plan för 2027, underlag till årsredovisningen</li>
+      </ul>
+    </div>
+
+    <!-- 8: audience variants, all three stacked in same slot -->
+    <div class="node aud-node" data-n="8" data-aud="led" style="left:1150px; top:1220px; width:420px;">
+      <span class="tag led">För ledningsgruppen</span>
+      <h2>Vad innebär det för er?</h2>
+      <ul class="body">
+        <li>Leveranser till regeringen 2026 och 2027</li>
+        <li>Resursbehov: [komplettera personveckor 2026/2027]</li>
+        <li>Okänt tillstånd kräver fältinventering 2027 — beslut om resurser</li>
+        <li>Risk: stor andel okänt hinner inte bli känt till 2028</li>
+      </ul>
+    </div>
+    <div class="node aud-node" data-n="8" data-aud="gra" style="left:1150px; top:1220px; width:420px; display:none;">
+      <span class="tag gra">För grannenheten</span>
+      <h2>Vad innebär det för er?</h2>
+      <ul class="body">
+        <li>Ni är vår viktigaste kunskapskälla om tillståndet</li>
+        <li>Vi kommer med konkreta frågor per område</li>
+        <li>Ni får en uppdaterad bild i NNK till skötsel- och bevarandeplaner</li>
+        <li>Gemensam rutin för vem som ändrar vad i NNK</li>
+      </ul>
+    </div>
+    <div class="node aud-node" data-n="8" data-aud="ext" style="left:1150px; top:1220px; width:420px; display:none;">
+      <span class="tag ext">För externa aktörer</span>
+      <h2>Vad innebär det för er?</h2>
+      <ul class="body">
+        <li>Kartläggningen ändrar inte reglerna för området</li>
+        <li>Er kunskap om området är värdefull — vi hör av oss</li>
+        <li>Ni får en tydligare bild av naturvärden och tillstånd</li>
+        <li>Bättre underlag för dialog om skötsel och åtgärder</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="zoomctl">
+  <button id="zoomIn" aria-label="Zooma in">+</button>
+  <button id="zoomOut" aria-label="Zooma ut">−</button>
+</div>
+
+<div class="controls">
+  <button class="navbtn" id="prev" aria-label="Föregående">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="navbtn" id="next" aria-label="Nästa">›</button>
+</div>
+
+<div class="hint">Piltangenter · scrolla för att panorera fritt · <kbd>0</kbd> hela kartan</div>
+
+<script>
+(function(){
+  var canvas = document.getElementById('canvas');
+  var viewport = document.querySelector('.viewport');
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.node[data-n]'));
+  // one entry per station index 0..8 (station 8 has 3 variants, only visible one counts)
+  var order = [0,1,2,3,4,5,6,7,8];
+  var current = 0;
+  var audience = 'led';
+
+  function nodeFor(n){
+    if(n === 8){
+      return document.querySelector('.aud-node[data-n="8"][data-aud="'+audience+'"]');
+    }
+    return document.querySelector('.node[data-n="'+n+'"]');
+  }
+
+  function rectFor(n){
+    var el = nodeFor(n);
+    var w = el.offsetWidth, h = el.offsetHeight;
+    var x = parseFloat(el.style.left), y = parseFloat(el.style.top);
+    return {x:x, y:y, w:w, h:h, cx:x+w/2, cy:y+h/2};
+  }
+
+  function viewSize(){
+    return {w: viewport.clientWidth, h: viewport.clientHeight};
+  }
+
+  var manualZoom = null; // when set, overrides auto-fit scale until reset
+
+  function goTo(n, opts){
+    opts = opts || {};
+    current = n;
+    nodes.forEach(function(el){ el.classList.remove('current'); });
+    var active = nodeFor(n);
+    active.classList.add('current');
+
+    var r = rectFor(n);
+    var vp = viewSize();
+    var pad = n === 0 ? 1.0 : 1.9; // hub can fill more of the view
+    var scale = manualZoom !== null ? manualZoom : Math.min(vp.w / (r.w*pad+240), vp.h / (r.h*pad+240), 1.05);
+    scale = Math.max(scale, 0.34);
+    var tx = vp.w/2 - r.cx*scale;
+    var ty = vp.h/2 - r.cy*scale;
+    canvas.style.transform = 'translate('+tx+'px,'+ty+'px) scale('+scale+')';
+    updateDots();
+  }
+
+  function updateDots(){
+    Array.prototype.forEach.call(document.querySelectorAll('.dot'), function(d,i){
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function buildDots(){
+    var wrap = document.getElementById('dots');
+    wrap.innerHTML = '';
+    order.forEach(function(n, i){
+      var b = document.createElement('button');
+      b.className = 'dot' + (n===0 ? ' hub-dot' : '');
+      b.setAttribute('aria-label','Gå till station '+(i+1));
+      b.addEventListener('click', function(){ manualZoom=null; goTo(n); });
+      wrap.appendChild(b);
+    });
+  }
+
+  document.getElementById('prev').addEventListener('click', function(){
+    manualZoom = null;
+    var i = order.indexOf(current);
+    goTo(order[(i-1+order.length)%order.length]);
+  });
+  document.getElementById('next').addEventListener('click', function(){
+    manualZoom = null;
+    var i = order.indexOf(current);
+    goTo(order[(i+1)%order.length]);
+  });
+
+  nodes.forEach(function(el){
+    el.addEventListener('click', function(){
+      manualZoom = null;
+      goTo(parseInt(el.getAttribute('data-n'),10));
+    });
+  });
+
+  document.getElementById('zoomIn').addEventListener('click', function(){
+    var vp = viewSize();
+    var m = /scale\(([-\d.]+)\)/.exec(canvas.style.transform);
+    var s = m ? parseFloat(m[1]) : 1;
+    manualZoom = Math.min(s*1.25, 2.2);
+    goTo(current);
+  });
+  document.getElementById('zoomOut').addEventListener('click', function(){
+    var m = /scale\(([-\d.]+)\)/.exec(canvas.style.transform);
+    var s = m ? parseFloat(m[1]) : 1;
+    manualZoom = Math.max(s*0.8, 0.15);
+    goTo(current);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === 'PageDown'){ manualZoom=null; var i=order.indexOf(current); goTo(order[(i+1)%order.length]); }
+    else if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ manualZoom=null; var i2=order.indexOf(current); goTo(order[(i2-1+order.length)%order.length]); }
+    else if(e.key === '0'){
+      manualZoom = 0.62;
+      canvas.style.transform = 'translate(-40px,-40px) scale(0.62)';
+    }
+    else if(e.key === '+' || e.key === '='){ document.getElementById('zoomIn').click(); }
+    else if(e.key === '-'){ document.getElementById('zoomOut').click(); }
+  });
+
+  // free panning with scroll / trackpad
+  var panX = 0, panY = 0, dragging = false;
+  viewport.addEventListener('wheel', function(e){
+    e.preventDefault();
+    var m = /translate\(([-\d.]+)px,([-\d.]+)px\) scale\(([-\d.]+)\)/.exec(canvas.style.transform);
+    if(!m) return;
+    var x = parseFloat(m[1]) - e.deltaX;
+    var y = parseFloat(m[2]) - e.deltaY;
+    var s = parseFloat(m[3]);
+    canvas.style.transition = 'none';
+    canvas.style.transform = 'translate('+x+'px,'+y+'px) scale('+s+')';
+    clearTimeout(viewport._t);
+    viewport._t = setTimeout(function(){ canvas.style.transition=''; }, 50);
+  }, {passive:false});
+
+  document.querySelectorAll('.audience button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.audience button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      audience = btn.getAttribute('data-aud');
+      document.querySelectorAll('.aud-node').forEach(function(n){
+        n.style.display = (n.getAttribute('data-aud') === audience) ? '' : 'none';
+      });
+      if(current === 8){ manualZoom=null; goTo(8); }
+    });
+  });
+
+  buildDots();
+  window.addEventListener('resize', function(){ goTo(current); });
+  goTo(0);
+})();
+</script>
