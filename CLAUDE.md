@@ -214,7 +214,8 @@ Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
 │   ├── sources_sodermanland.csv
 │   └── templates/
 ├── docs/
-│   ├── projektplan.md
+│   ├── Projektplan_NRF_Sodermanland_2026_v2.docx  ← formell projektplan (Word), v2.0 2026-09-04
+│   ├── arkiv/projektplan.md                       ← v1.1, arkiverad — ersatt av Word-planen ovan
 │   ├── datakallor.md
 │   ├── datamodell.md
 │   └── verktyg.md         ← pekar till natura-2000

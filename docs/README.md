@@ -8,7 +8,8 @@ GitHub Pages använder filerna i den här mappens rot: `nrf-guide.html` och `dat
 
 | Sökväg | Vad som hör hemma här |
 |--------|------------------------|
-| `projektplan.md` | Övergripande projektplan 2026–2027 |
+| `Projektplan_NRF_Sodermanland_2026_v2.docx` | Formell projektplan 2026–2027 (Word, v2.0) |
+| `arkiv/projektplan.md` | Arkiverad projektplan v1.1 (ersatt av Word-planen) |
 | `datakallor.md` | Datakällor och licenser |
 | `datamodell.md` | Bedömningsschema och fältstruktur |
 | `verktyg.md` | Pipeline-dokumentation (privata `natura-2000`-repot) |

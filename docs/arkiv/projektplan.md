@@ -1,3 +1,11 @@
+> **Arkiverad.** Detta dokument (version 1.1, 2026-05-27) är ersatt av den formella projektplanen
+> version 2.0: [`docs/Projektplan_NRF_Sodermanland_2026_v2.docx`](../Projektplan_NRF_Sodermanland_2026_v2.docx)
+> (2026-09-04). Version 1.1 skrevs innan anställningen började och är inaktuell — bland annat är
+> fältarbetet flyttat till 2027 och kontaktpersonen (Stefan Henriksson) har slutat. Behålls här som
+> historik.
+
+---
+
 # Projektplan – Genomförande av naturrestaureringsförordningen (NRF)
 ## Länsstyrelsen i Södermanlands län, Naturskyddsenheten
 
