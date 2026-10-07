@@ -27,7 +27,7 @@ Artobservationer från GBIF hämtas via ett automatiserat FME-arbetsflöde:
 Flödet hanterar automatisk paginering (max 300 poster/anrop), bygger punktgeometri, reprojicerar till SWEREF99 TM och filtrerar mot Södermanlands länsgräns. Output: `artobs_gbif.gpkg` (EPSG:3006).
 
 Output används i:
-- `natura-2000/web/public/data/artobs_gbif.gpkg` (Origo-webbkartan)
+- `natura-2000/archive/web/public/data/artobs_gbif.gpkg` (Origo-webbkartan, arkiverad 2026-10-07)
 - Underlag för NRR-bedömning av artförekomst i Natura 2000-områden
 
 ## Öppna tjänster Natura 2000 (Länsstyrelserna)
