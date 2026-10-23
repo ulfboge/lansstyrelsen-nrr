@@ -203,7 +203,7 @@ Prioriterade källor:
 |-------------|--------|----------|
 | `Länsstyrelsen/` → lansstyrelsen-nrr | Publikt | Denna fil, Pages, plan |
 | `nnk-granskning-2026/` → nnk-granskning-2026 | Publikt | NNK-arbetsdokument och kontrollpanel (Pages) |
-| `natura-2000/` → natura-2000 | Privat | Pipeline, Origo, ArcGIS, rådata, NV-underlag |
+| `natura-2000/` → natura-2000 | Privat | NNK-analys, NV-underlag, KartLits 2027, jobbdatorns skript (Origo och junipaketet arkiverade 2026-10-07) |
 
 ```
 Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
@@ -215,7 +215,9 @@ Länsstyrelsen/               ← lansstyrelsen-nrr (publikt)
 │   └── templates/
 ├── docs/
 │   ├── Projektplan_NRF_Sodermanland_2026_v2.docx  ← formell projektplan (Word), v2.0 2026-09-04
-│   ├── arkiv/projektplan.md                       ← v1.1, arkiverad — ersatt av Word-planen ovan
+│   ├── nrf-presentation-v3.pptx, nrf-talarmanus-och-faktakoll.docx, nrf-karta.html
+│   ├── arkiv/             ← projektplan v1.1, presentation v2, platsannons, jobbmappssanering sep
+│   ├── skyddadnatur/, tuva/  ← index över bevarandeplaner och TUVA-export
 │   ├── datakallor.md
 │   ├── datamodell.md
 │   └── verktyg.md         ← pekar till natura-2000
@@ -230,11 +232,13 @@ nnk-granskning-2026/         ← publikt, GitHub Pages
 └── bygg.py                ← genererar om docs/*.html från docs/*.md
 
 natura-2000/                 ← privat arbetsrepo
-├── docs/underlag/         ← NV:s handledning, kodlista, statistik, naturtypskarta
-├── docs/faltprotokoll/
-├── data/nnk/              ← SITECODE-koppling och nollmätning
-├── scripts/analysis/      ← NNK-analys
-└── scripts/01–11          ← datapipeline
+├── docs/underlag/         ← NV:s handledning, kodlista, statistik, KartLits 2027
+├── docs/nnk/, docs/noteringar/
+├── data/nnk/, data/analysis/  ← NNK-koppling och härledda underlag
+├── scripts/analysis/      ← NNK-analys, uppgifter.py (runbook/kontrollrum)
+├── scripts/01–05          ← baspipeline
+├── deliveries/            ← granskningslagret + jobbdatorns skript 01–07
+└── archive/               ← Origo, junipaketet, exportskript 06–11 (ersatt)
 ```
 
 NNK-analys och pipeline körs i `natura-2000`. Arbetsdokumenten publiceras i `nnk-granskning-2026`.
@@ -246,9 +250,9 @@ Inget publikt repo ska innehålla bedömningsdata, fältprotokoll, Ajourhålla-u
 
 Det finns ett färdigt analysverktyg i det **privata** repot `natura-2000` ([GitHub](https://github.com/ulfboge/natura-2000), lokalt `C:\Users\galag\GitHub\natura-2000`) med:
 
-- **11-stegs pipeline** för Natura 2000 Södermanland (datahämtning → prioritetsanalys → ArcGIS/QGIS-export)
-- **Webbkarta** (Origo) med sök, statistikpanel och klickbara lager
-- **Exportformat**: ArcGIS Pro `.gdb`/`.lyrx`/`.aprx`, QGIS GPKG, GeoJSON
+- **Baspipeline 01–05** för Natura 2000 Södermanland (datahämtning → prioritetsanalys)
+- **NNK-analys** i `scripts/analysis/` (hävd, TUVA, laser, VISS, R7-förslag m.m.) som matar granskningslagret i webbGIS
+- Webbkartan (Origo) och export­stegen 06–11 arkiverades 2026-10-07 (`archive/`)
 
 **Viktigt om prioritetsanalysen:** (uppdaterad 2026-08-12)
 Steg 3 (`03_priority_analysis.py`) läser numera verkliga påverkansvärden från
@@ -281,4 +285,4 @@ När du arbetar i detta projekt, Claude:
 
 ---
 
-*Senast uppdaterad: 2026-08-17*
+*Senast uppdaterad: 2026-10-23*
