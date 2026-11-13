@@ -1,6 +1,6 @@
 # Naturrestaureringsuppdraget – Länsstyrelsen Södermanland
 
-Projektrepo för implementering av EU:s naturrestaureringsförordning (NRR) i Södermanlands län.
+Projektrepo för implementering av EU:s naturrestaureringsförordning (NRF) i Södermanlands län.
 
 ## Hemsida
 
@@ -31,7 +31,7 @@ NNK-arbetsdokumenten ligger publikt i `nnk-granskning-2026` — [öppna kontroll
 ```
 lansstyrelsen-nrr/          ← du är här (publikt)
 ├── index.html              # GitHub Pages
-├── docs/                   # plan, datakällor, NRR-guide, presentation
+├── docs/                   # plan, datakällor, NRF-guide, presentation
 ├── docs/skyddadnatur/      # index över bevarandeplaner
 ├── docs/tuva/              # TUVA-export för länet
 └── scripts/etl/            # lättvikts-ETL

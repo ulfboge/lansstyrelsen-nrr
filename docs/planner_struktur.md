@@ -1,4 +1,4 @@
-# Microsoft Planner – NRR Södermanland 2026–2027
+# Microsoft Planner – NRF Södermanland 2026–2027
 
 > Förberedelse inför tjänststart 10 augusti 2026.
 > Skapa denna plan i Planner via Teams när du har fått åtkomst till Länsstyrelsens M365-miljö.
@@ -9,7 +9,7 @@
 
 | Fält | Värde |
 |------|-------|
-| **Plannamn** | NRR Södermanland 2026–2027 |
+| **Plannamn** | NRF Södermanland 2026–2027 |
 | **Grupp** | Naturskyddsenheten (skapa ny om gruppen saknas) |
 | **Synlighet** | Privat → dela med enhetschef och ev. kollega |
 
@@ -39,7 +39,7 @@ Skapa dessa buckets i ordning – de motsvarar projektets faser:
 |---------|---------------|-----------|-----------|
 | Systemåtkomst: ArcGIS, SharePoint, Teams, SERS | 2026-08-21 | Urgent | ArcGIS Pro-licens; Portal; SERS; LifeWatch; VPN |
 | Introduktionsmöten: Naturskyddsenheten och GIS-enheten | 2026-08-28 | Urgent | Enhetschef; kollegor; GIS-enheten; interna rutiner |
-| Kontakt med Naturvårdsverket om NRR-krav | 2026-09-05 | Hög | NV-samordnare; leveransformat; deldatum |
+| Kontakt med Naturvårdsverket om NRF-krav | 2026-09-05 | Hög | NV-samordnare; leveransformat; deldatum |
 | Genomgång av befintliga Natura 2000-karteringar | 2026-09-10 | Hög | Ladda ned skikt; identifiera luckor; dokumentera |
 
 ### 🗄️ Datainsamling (aug–okt 2026)

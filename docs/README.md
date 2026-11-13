@@ -1,6 +1,6 @@
 # docs/
 
-Dokumentation för naturrestaureringsuppdraget (NRR) i Södermanlands län.
+Dokumentation för naturrestaureringsuppdraget (NRF) i Södermanlands län.
 
 GitHub Pages använder filerna i den här mappens rot: `nrf-guide.html` och `datamodell.md` länkas från `index.html`. Flytta inte dem utan att uppdatera hemsidan.
 
@@ -15,7 +15,7 @@ GitHub Pages använder filerna i den här mappens rot: `nrf-guide.html` och `dat
 | `verktyg.md` | Pipeline-dokumentation (privata `natura-2000`-repot) |
 | `planner_struktur.md` | Microsoft Planner-upplägg vid tjänststart |
 | `Implementering av NRF Sörml.docx` | Enhetens plan för implementering av NRF i Sörmland |
-| `nrf-guide.html` | Publik NRR-guide (GitHub Pages) |
+| `nrf-guide.html` | Publik NRF-guide (GitHub Pages) |
 | `nrf-karta.html` | Karta till presentationen |
 | `nrf-presentation-v3.pptx`, `nrf-talarmanus-och-faktakoll.docx` | Presentation om NRF med talarmanus (v2 i `arkiv/`) |
 | `_VÄS 2024.pdf` | VÄS 2024 (uppladdad 2026-10-15) |

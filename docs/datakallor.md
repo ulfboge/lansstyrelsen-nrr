@@ -28,7 +28,7 @@ Flödet hanterar automatisk paginering (max 300 poster/anrop), bygger punktgeome
 
 Output används i:
 - `natura-2000/archive/web/public/data/artobs_gbif.gpkg` (Origo-webbkartan, arkiverad 2026-10-07)
-- Underlag för NRR-bedömning av artförekomst i Natura 2000-områden
+- Underlag för NRF-bedömning av artförekomst i Natura 2000-områden
 
 ## Öppna tjänster Natura 2000 (Länsstyrelserna)
 - Metadatapost: `https://ext-geodatakatalog-forv.lansstyrelsen.se/PlaneringsKatalogen/GetMetaDataById?id=404DA7DB-9ED4-4B6C-B26C-DA8352817B9C_C`

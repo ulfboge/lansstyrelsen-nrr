@@ -6,7 +6,7 @@
 
 ## 1. Projektkontext
 
-**Uppdrag:** Implementering av EU:s naturrestaureringsförordning (NRR – Nature Restoration Regulation) i Södermanlands län, på uppdrag av Länsstyrelsen i Södermanlands län.
+**Uppdrag:** Implementering av EU:s naturrestaureringsförordning (NRF; på engelska Nature Restoration Regulation, NRR) i Södermanlands län, på uppdrag av Länsstyrelsen i Södermanlands län.
 
 **Tjänst:** Två personer anställs för att genomföra naturrestaureringsuppdraget. Rollen innefattar GIS-analys, fältinventering, databasarbete och rapportering med fokus på Natura 2000-områden och biologisk mångfald i länet.
 
@@ -148,7 +148,7 @@ Prioriterade källor:
 | Länsstyrelsen Södermanland | https://www.lansstyrelsen.se/sodermanland |
 | GIS på länsstyrelserna | https://gis.lansstyrelsen.se |
 | ArcGIS Geoportal (LST) | https://ext-geoportal.lansstyrelsen.se |
-| Naturvårdsverket NRR | https://www.naturvardsverket.se/amnesomraden/mark-och-vattenanvandning/eu-forordning-for-att-restaurera-natur/ |
+| Naturvårdsverket NRF | https://www.naturvardsverket.se/amnesomraden/mark-och-vattenanvandning/eu-forordning-for-att-restaurera-natur/ |
 | Nationell restaureringsplan | https://www.naturvardsverket.se/om-oss/regeringsuppdrag/slutredovisade-regeringsuppdrag/forslag-till-nationell-restaureringsplan/ |
 | Geodatakatalogen LST | https://gis.lansstyrelsen.se/geodata/geodatakatalogen/ |
 | Lantmäteriet öppna data | https://www.lantmateriet.se/oppnadata |
@@ -275,7 +275,7 @@ När du arbetar i detta projekt, Claude:
 
 1. **Skriv alltid på svenska** (med undantag för kod och tekniska termer på engelska)
 2. **Använd ESRI-terminologi** i GIS-relaterade svar, inte enbart QGIS/PostGIS
-3. **Referera till NRR** (naturrestaureringsförordningen) och nationell plan vid strategiska beslut
+3. **Referera till NRF** (naturrestaureringsförordningen) och nationell plan vid strategiska beslut
 4. **Spara leverabler** i rätt undermappar enligt repo-strukturen ovan
 5. **Verifiera datakällor** mot listan i `docs/datakallor.md` innan du föreslår nya
 6. **Synka tidplanen** mot tillträdet 10 augusti 2026 och leverans till Naturvårdsverket (NV ansvarar för EU-rapporteringen)

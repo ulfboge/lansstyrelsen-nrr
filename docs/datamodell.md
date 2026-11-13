@@ -1,4 +1,4 @@
-# Datamodell – NRR Södermanland 2026–2027
+# Datamodell – NRF Södermanland 2026–2027
 
 > Dokumenterar Feature Service-schemat för fältdatainsamling via ArcGIS Survey123/Field Maps,
 > synkroniserat mot `data/templates/assessment_template_sodermanland.csv` och ESRI File GDB.
